@@ -2,6 +2,6 @@
 <scr:component xmlns:scr="http://www.osgi.org/xmlns/scr/v1.1.0" name="de.shashwat.di.services.cmd.cmdgreeting">
    <implementation class="de.shashwat.di.services.cmd.CmdGreetingService"/>
    <service>
-      <provide interface="de.shashwat.di.services.GreetingService"/>
+      <provide interface="de.shashwat.di.services.IGreetingService"/>
    </service>
 </scr:component>

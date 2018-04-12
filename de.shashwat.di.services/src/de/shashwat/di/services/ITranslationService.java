@@ -3,7 +3,7 @@ package de.shashwat.di.services;
 /**
  * The Interface TranslationService.
  */
-public interface TranslationService {
+public interface ITranslationService {
 	
 	/**
 	 * Translate.

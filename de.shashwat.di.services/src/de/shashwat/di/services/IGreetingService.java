@@ -1,9 +1,9 @@
 package de.shashwat.di.services;
 
 /**
- * The Interface GreetingService.
+ * The Interface IGreetingService.
  */
-public interface GreetingService {
+public interface IGreetingService {
 	
 	/**
 	 * Greet.

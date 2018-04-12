@@ -1,11 +1,11 @@
 package de.shashwat.di.services.impl;
 
-import de.shashwat.di.services.TranslationService;
+import de.shashwat.di.services.ITranslationService;
 
 /**
  * The Class DummyTranslationService.
  */
-public class DummyTranslationService implements TranslationService {
+public class DummyTranslationService implements ITranslationService {
 
 	/**
 	 * Translate.

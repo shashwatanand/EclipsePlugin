@@ -3,7 +3,7 @@ package de.shashwat.di.services;
 /**
  * The Interface LanguageProviderService.
  */
-public interface LanguageProviderService {
+public interface ILanguageProviderService {
 	
 	/**
 	 * Gets the language.
