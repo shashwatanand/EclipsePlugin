@@ -4,3 +4,5 @@ Bundle-Name: Cmd
 Bundle-SymbolicName: de.shashwat.di.services.cmd
 Bundle-Version: 1.0.0.qualifier
 Bundle-RequiredExecutionEnvironment: JavaSE-1.8
+Require-Bundle: de.shashwat.di.services;bundle-version="1.0.0"
+Service-Component: OSGI-INF/services/cmdgreeting.xml
