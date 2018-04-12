@@ -1,5 +1,23 @@
 package de.shashwat.di.services;
 
-public class TranslationService {
-
+/**
+ * The Interface TranslationService.
+ */
+public interface TranslationService {
+	
+	/**
+	 * Translate.
+	 *
+	 * @param language the language
+	 * @param term the term
+	 * @return the string[]
+	 */
+	public String[] translate(String language, String... term);
+	
+	/**
+	 * Gets the locales.
+	 *
+	 * @return the locales
+	 */
+	public String[] getLocales();
 }
