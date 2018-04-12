@@ -4,3 +4,4 @@ Bundle-Name: Services
 Bundle-SymbolicName: de.shashwat.di.services
 Bundle-Version: 1.0.0.qualifier
 Bundle-RequiredExecutionEnvironment: JavaSE-1.8
+Service-Component: OSGI-INF/services/dummytranslation.xml
