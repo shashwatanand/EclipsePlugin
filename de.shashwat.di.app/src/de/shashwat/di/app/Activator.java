@@ -3,7 +3,6 @@ package de.shashwat.di.app;
 import org.osgi.framework.BundleActivator;
 import org.osgi.framework.BundleContext;
 
-// TODO: Auto-generated Javadoc
 /**
  * The Class Activator.
  */
