@@ -2,7 +2,7 @@ Manifest-Version: 1.0
 Bundle-ManifestVersion: 2
 Bundle-Name: App
 Bundle-SymbolicName: com.nashtech.hw.shashwat.app;singleton:=true
-Bundle-Version: 1.0.0.qualifier
+Bundle-Version: 1.0.0.0
 Bundle-Activator: com.nashtech.hw.shashwat.app.Activator
 Bundle-Vendor: NASHTECH
 Require-Bundle: javax.inject;bundle-version="0.0.0",
