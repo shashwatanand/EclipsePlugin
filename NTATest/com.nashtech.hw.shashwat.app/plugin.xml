@@ -16,6 +16,10 @@
                name="applicationCSS"
                value="platform:/plugin/com.nashtech.hw.shashwat.app/css/default.css">
          </property>
+         <property
+               name="appName"
+               value="com.nashtech.hw.shashwat.app">
+         </property>
       </product>
    </extension>
 

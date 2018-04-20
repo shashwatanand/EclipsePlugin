@@ -16,11 +16,16 @@
 
 	<developers>
 		<developer>
-			<email>shashwat.anand@piterion.com</email>
+			<email>shashwat.anand@gmail.com</email>
 			<name>Shashwat Anand</name>
 			<id>shashwat</id>
 		</developer>
 	</developers>
+
+	<modules>
+		<module>../com.nashtech.hw.shashwat.app</module>
+		<module>../com.nashtech.hw.shashwat.product</module>
+	</modules>
 
 	<build>
 		<plugins>
