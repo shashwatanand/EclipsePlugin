@@ -15,7 +15,7 @@
 
    <windowImages/>
 
-   <launcher name="NashTechHW">
+   <launcher name="nashtechhw">
       <solaris/>
       <win useIco="false">
          <bmp/>
