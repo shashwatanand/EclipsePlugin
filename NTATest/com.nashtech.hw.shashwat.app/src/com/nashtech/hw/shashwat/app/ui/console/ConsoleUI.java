@@ -54,14 +54,14 @@ public class ConsoleUI extends Composite {
 	@PostConstruct
 	private void createUI() {
 		final GridLayout gridLayout = new GridLayout(1, false);
-		gridLayout.marginHeight = 0;
+		/*gridLayout.marginHeight = 0;
 		gridLayout.marginBottom = 0;
 		gridLayout.marginLeft = 0;
 		gridLayout.marginRight = 0;
 		gridLayout.marginTop = 0;
 		gridLayout.horizontalSpacing = 0;
 		gridLayout.verticalSpacing = 0;
-		gridLayout.marginWidth = 0;
+		gridLayout.marginWidth = 0;*/
 		this.setLayout(gridLayout);
 		this.setLayoutData(new GridData(SWT.FILL, SWT.FILL, true, true));
 		initUI();
@@ -108,7 +108,7 @@ public class ConsoleUI extends Composite {
 	 * Method for Inits the UI.
 	 */
 	private void initUI() {
-		this.styleText = new StyledText(this, SWT.WRAP | SWT.V_SCROLL | SWT.MULTI);
+		this.styleText = new StyledText(this, SWT.WRAP | SWT.V_SCROLL | SWT.MULTI | SWT.BORDER);
 		this.styleText.setTextLimit(10);
 		styleText.setBounds(10, 10, 100, 100);
 		GridDataFactory.fillDefaults().grab(true, true).align(SWT.FILL, SWT.FILL).applyTo(styleText);

@@ -1,8 +1,9 @@
 package com.nashtech.hw.shashwat.app.model;
 
-// TODO: Auto-generated Javadoc
 /**
  * The Class Tuple.
+ * 
+ * @author shashwat.anand
  */
 public class Tuple {
 	

@@ -10,7 +10,7 @@
       </children>
     </children>
     <trimBars xmi:id="_HQJq8EUuEei9KZNN_87-tA" elementId="com.nashtech.hw.shashwat.app.trimbar.statusbar" side="Bottom">
-      <children xsi:type="menu:ToolControl" xmi:id="_JGIVIEUuEei9KZNN_87-tA" elementId="com.nashtech.hw.shashwat.app.toolcontrol" contributionURI="bundleclass://com.nashtech.hw.shashwat.app/com.nashtech.hw.shashwat.app.ui.statusbar.StatusBar"/>
+      <children xsi:type="menu:ToolControl" xmi:id="_JGIVIEUuEei9KZNN_87-tA" elementId="com.nashtech.hw.shashwat.app.toolcontrol" contributionURI="bundleclass://com.nashtech.hw.shashwat.app/com.nashtech.hw.shashwat.app.ui.statusbar.StatusBarToolControl"/>
     </trimBars>
   </children>
   <rootContext xmi:id="_c3AF2cjYEeSyMNYR5xypkQ" elementId="org.eclipse.ui.contexts.dialogAndWindow" name="In Dialog and Windows">

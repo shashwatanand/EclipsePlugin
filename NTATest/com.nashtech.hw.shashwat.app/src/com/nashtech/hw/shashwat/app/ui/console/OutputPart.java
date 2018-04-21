@@ -37,15 +37,6 @@ public class OutputPart {
 	public void postConstruct(final Composite parent) {
 		try {
 			final GridLayout gridLayout = new GridLayout(1, false);
-			gridLayout.marginHeight = 0;
-			gridLayout.marginBottom = 0;
-			gridLayout.marginLeft = 0;
-			gridLayout.marginRight = 0;
-			gridLayout.marginTop = 0;
-			gridLayout.horizontalSpacing = 0;
-			gridLayout.verticalSpacing = 0;
-			gridLayout.marginWidth = 0;
-
 			parent.setLayout(gridLayout);
 			parent.setLayoutData(new GridData(SWT.FILL, SWT.FILL, true, true));
 			buildComponents(parent);

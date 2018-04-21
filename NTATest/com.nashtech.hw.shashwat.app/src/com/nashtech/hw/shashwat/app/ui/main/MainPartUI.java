@@ -13,10 +13,10 @@ import org.eclipse.swt.widgets.Text;
 
 public abstract class MainPartUI extends Composite {
 
-	private Composite topComposite;
-	private Text txtFile;
-	private Button btnSelectFile;
-	private Button btnLoadFile;
+	protected Composite topComposite;
+	protected Text txtFile;
+	protected Button btnSelectFile;
+	protected Button btnLoadFile;
 
 	public MainPartUI(final Composite parent, final int style) {
 		super(parent, style);
@@ -25,7 +25,6 @@ public abstract class MainPartUI extends Composite {
 	protected void createUI(final IEclipseContext eclipseContext) {
 		GridLayoutFactory.fillDefaults().numColumns(1).applyTo(this);
 		this.setLayoutData(new GridData(SWT.FILL, SWT.FILL, true, true));
-		
 		createTopComp();
 	}
 
@@ -39,6 +38,7 @@ public abstract class MainPartUI extends Composite {
 		
 		this.txtFile = new Text(this.topComposite, SWT.BORDER);
 		GridDataFactory.fillDefaults().grab(true, false).span(2, 1).align(SWT.FILL, SWT.CENTER).applyTo(this.txtFile);
+		this.txtFile.setEditable(false);
 		
 		this.btnSelectFile = new Button(this.topComposite, SWT.PUSH);
 		this.btnSelectFile.setText("Select File");
