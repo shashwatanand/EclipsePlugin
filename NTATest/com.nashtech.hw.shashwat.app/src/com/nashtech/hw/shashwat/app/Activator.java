@@ -3,10 +3,19 @@ package com.nashtech.hw.shashwat.app;
 import org.osgi.framework.BundleActivator;
 import org.osgi.framework.BundleContext;
 
+/**
+ * The Class Activator.
+ */
 public class Activator implements BundleActivator {
 
+	/** The context. */
 	private static BundleContext context;
 
+	/**
+	 * Gets the context.
+	 *
+	 * @return the context
+	 */
 	static BundleContext getContext() {
 		return context;
 	}

@@ -1,14 +1,17 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<application:Application xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:advanced="http://www.eclipse.org/ui/2010/UIModel/application/ui/advanced" xmlns:application="http://www.eclipse.org/ui/2010/UIModel/application" xmlns:basic="http://www.eclipse.org/ui/2010/UIModel/application/ui/basic" xmi:id="_c3AF0MjYEeSyMNYR5xypkQ" elementId="org.eclipse.e4.application" bindingContexts="_c3AF2cjYEeSyMNYR5xypkQ">
+<application:Application xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:advanced="http://www.eclipse.org/ui/2010/UIModel/application/ui/advanced" xmlns:application="http://www.eclipse.org/ui/2010/UIModel/application" xmlns:basic="http://www.eclipse.org/ui/2010/UIModel/application/ui/basic" xmlns:menu="http://www.eclipse.org/ui/2010/UIModel/application/ui/menu" xmi:id="_c3AF0MjYEeSyMNYR5xypkQ" elementId="org.eclipse.e4.application" bindingContexts="_c3AF2cjYEeSyMNYR5xypkQ">
   <children xsi:type="basic:TrimmedWindow" xmi:id="_c3AF0cjYEeSyMNYR5xypkQ" elementId="org.eclipse.e4.window.main" label="%windowTitleLabel" width="500" height="600">
     <children xsi:type="advanced:PerspectiveStack" xmi:id="_EwWRAETIEeiliL5MTzpDfg" elementId="com.nashtech.hw.shashwat.app.perspectivestack">
       <children xsi:type="advanced:Perspective" xmi:id="_bBIygETIEeiliL5MTzpDfg" elementId="com.nashtech.hw.shashwat.app.perspective">
         <children xsi:type="basic:PartSashContainer" xmi:id="_e1Vc4ETIEeiliL5MTzpDfg" elementId="com.nashtech.hw.shashwat.app.partsashcontainer">
-          <children xsi:type="basic:Part" xmi:id="_gO-wYETIEeiliL5MTzpDfg" elementId="com.nashtech.hw.shashwat.app.mainpart" containerData="50" label="%mainpart"/>
-          <children xsi:type="basic:Part" xmi:id="_g3Bn0ETIEeiliL5MTzpDfg" elementId="com.nashtech.hw.shashwat.app.outputpart" containerData="50" label="%outputpart"/>
+          <children xsi:type="basic:Part" xmi:id="_gO-wYETIEeiliL5MTzpDfg" elementId="com.nashtech.hw.shashwat.app.mainpart" containerData="50" contributionURI="bundleclass://com.nashtech.hw.shashwat.app/com.nashtech.hw.shashwat.app.ui.main.MainPart" label="%mainpart"/>
+          <children xsi:type="basic:Part" xmi:id="_g3Bn0ETIEeiliL5MTzpDfg" elementId="com.nashtech.hw.shashwat.app.outputpart" containerData="50" contributionURI="bundleclass://com.nashtech.hw.shashwat.app/com.nashtech.hw.shashwat.app.ui.console.OutputPart" label="%outputpart"/>
         </children>
       </children>
     </children>
+    <trimBars xmi:id="_HQJq8EUuEei9KZNN_87-tA" elementId="com.nashtech.hw.shashwat.app.trimbar.statusbar" side="Bottom">
+      <children xsi:type="menu:ToolControl" xmi:id="_JGIVIEUuEei9KZNN_87-tA" elementId="com.nashtech.hw.shashwat.app.toolcontrol" contributionURI="bundleclass://com.nashtech.hw.shashwat.app/com.nashtech.hw.shashwat.app.ui.statusbar.StatusBar"/>
+    </trimBars>
   </children>
   <rootContext xmi:id="_c3AF2cjYEeSyMNYR5xypkQ" elementId="org.eclipse.ui.contexts.dialogAndWindow" name="In Dialog and Windows">
     <children xmi:id="_c3AF2sjYEeSyMNYR5xypkQ" elementId="org.eclipse.ui.contexts.window" name="In Windows"/>
