@@ -5,6 +5,10 @@ import java.io.File;
 import javax.annotation.PostConstruct;
 import javax.inject.Inject;
 
+import org.eclipse.core.runtime.IProgressMonitor;
+import org.eclipse.core.runtime.IStatus;
+import org.eclipse.core.runtime.Status;
+import org.eclipse.core.runtime.jobs.Job;
 import org.eclipse.e4.core.contexts.IEclipseContext;
 import org.eclipse.jface.dialogs.MessageDialog;
 import org.eclipse.swt.SWT;
@@ -14,7 +18,10 @@ import org.eclipse.swt.widgets.Composite;
 import org.eclipse.swt.widgets.FileDialog;
 import org.eclipse.swt.widgets.Shell;
 
+import com.nashtech.hw.shashwat.app.exceptions.TupleNotInFormatException;
+import com.nashtech.hw.shashwat.app.exceptions.TupleNotUniqueException;
 import com.nashtech.hw.shashwat.app.provider.TupleProvider;
+import com.nashtech.hw.shashwat.app.ui.console.MessageType;
 import com.nashtech.hw.shashwat.app.util.Constants;
 import com.nashtech.hw.shashwat.app.util.Util;
 
@@ -80,7 +87,25 @@ public class MainPartAction extends MainPartUI {
 			String fileStr = txtFile.getText().trim();
 			if (!Util.isEmpty(fileStr)) {
 				TupleProvider provider = new TupleProvider();
-				provider.getTuples(fileStr);
+				Job loadTuplesJob = new Job("Load Tuple From File....") {
+					
+					@Override
+					protected IStatus run(IProgressMonitor monitor) {
+						if (monitor.isCanceled()) {
+							return Status.CANCEL_STATUS;
+						}
+						try {
+							provider.loadTuplesForFile(fileStr, monitor);
+						} catch (TupleNotInFormatException e) {
+							Util.getInstance().updateLogFile(e.getMessage(), MessageType.FAILURE);
+						} catch (TupleNotUniqueException e) {
+							Util.getInstance().updateLogFile(e.getMessage(), MessageType.FAILURE);
+						}
+						return Status.OK_STATUS;
+					}
+				};
+				loadTuplesJob.setUser(true);
+				loadTuplesJob.schedule();
 			}
 		});
 	}

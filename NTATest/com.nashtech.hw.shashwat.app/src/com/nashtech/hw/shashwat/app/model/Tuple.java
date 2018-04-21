@@ -8,7 +8,7 @@ package com.nashtech.hw.shashwat.app.model;
 public class Tuple {
 	
 	/** The id. */
-	private int id;
+	private Integer id;
 	
 	/** The name. */
 	private String name;
@@ -27,8 +27,7 @@ public class Tuple {
 	 * @param pattern the pattern
 	 * @param flag the flag
 	 */
-	public Tuple(int id, String name, String pattern, boolean flag) {
-		super();
+	public Tuple(Integer id, String name, String pattern, boolean flag) {
 		this.id = id;
 		this.name = name;
 		this.pattern = pattern;
@@ -40,7 +39,7 @@ public class Tuple {
 	 *
 	 * @return the id
 	 */
-	public int getId() {
+	public Integer getId() {
 		return id;
 	}
 	

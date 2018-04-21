@@ -1,8 +1,17 @@
 package com.nashtech.hw.shashwat.app.util;
 
 import java.io.File;
+import java.util.LinkedHashMap;
+import java.util.Map;
+
+import javax.inject.Inject;
 
 import org.eclipse.core.runtime.Platform;
+import org.eclipse.e4.core.services.events.IEventBroker;
+
+import com.nashtech.hw.shashwat.app.model.Tuple;
+import com.nashtech.hw.shashwat.app.ui.console.ConsoleLogObj;
+import com.nashtech.hw.shashwat.app.ui.console.MessageType;
 
 /**
  * The Class Util.
@@ -12,10 +21,20 @@ public class Util {
 	/** The this ref. */
 	private static Util thisRef;
 	
-	private Util() {
-		thisRef = this;
+	private Map<Integer, Tuple> inMemTuples;
+	
+	/** The event broker. */
+	@Inject
+	private IEventBroker eventBroker;
+	
+	public Util() {
+		this.inMemTuples = new LinkedHashMap<>();
+		setInstance(this);
 	}
 
+	private void setInstance(Util util) {
+		thisRef = this;
+	}
 
 	/**
 	 * Gets the single instance of Util.
@@ -65,6 +84,19 @@ public class Util {
 	    return true;
 	}
 	
+	/**
+	 * @return the inMemTuples
+	 */
+	public Map<Integer, Tuple> getInMemTuples() {
+		return inMemTuples;
+	}
+	
+	public void updateLogFile(String message, final MessageType messageType) {
+		this.eventBroker.send(Constants.CONSOLE_MESSAGE, 
+				new ConsoleLogObj(messageType, message));
+	}
+
+
 	public String getInstalledFileLocationStr() {
 		return Platform.getInstallLocation().getURL().getFile();
 	}

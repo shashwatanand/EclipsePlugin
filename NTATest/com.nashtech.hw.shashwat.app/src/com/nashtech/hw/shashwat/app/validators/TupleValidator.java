@@ -19,6 +19,6 @@ public class TupleValidator {
 	
 	private boolean isTupleLastPartIsBoolean(final String tupleLine) {
 		final String lastPart = tupleLine.split(",")[3].trim();
-		return Util.isInteger(lastPart);
+		return Util.isBoolean(lastPart);
 	}
 }

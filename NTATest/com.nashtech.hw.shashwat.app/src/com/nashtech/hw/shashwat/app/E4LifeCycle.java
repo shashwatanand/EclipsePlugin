@@ -6,6 +6,7 @@ import java.util.logging.Logger;
 import javax.inject.Inject;
 import javax.inject.Named;
 
+import org.eclipse.e4.core.contexts.ContextInjectionFactory;
 import org.eclipse.e4.core.contexts.IEclipseContext;
 import org.eclipse.e4.core.di.annotations.Optional;
 import org.eclipse.e4.ui.services.IServiceConstants;
@@ -19,6 +20,8 @@ import org.eclipse.swt.widgets.Display;
 import org.eclipse.swt.widgets.Monitor;
 import org.eclipse.swt.widgets.Shell;
 
+import com.nashtech.hw.shashwat.app.util.Util;
+
 /**
  * This is a stub implementation containing e4 LifeCycle annotated methods.<br />
  * There is a corresponding entry in <em>plugin.xml</em> (under the
@@ -29,6 +32,12 @@ import org.eclipse.swt.widgets.Shell;
 public class E4LifeCycle {
 	/** The logger. */
 	private final Logger logger = Logger.getLogger(E4LifeCycle.class.getSimpleName());
+	
+	/**
+	 * Inject {@link IEclipseContext}
+	 */
+	@Inject
+	private IEclipseContext eclipseContext;
 
 	/**
 	 * Member to store default location of shell
@@ -42,6 +51,7 @@ public class E4LifeCycle {
 	 */
 	@PostContextCreate
 	void postContextCreate(IEclipseContext workbenchContext) {
+		initUtil();
 	}
 
 	/**
@@ -69,6 +79,14 @@ public class E4LifeCycle {
 	 */
 	@ProcessRemovals
 	void processRemovals(IEclipseContext workbenchContext) {
+	}
+	
+	/**
+	 * Inits the util.
+	 */
+	private void initUtil() {
+		Util util = ContextInjectionFactory.make(Util.class, eclipseContext);
+		eclipseContext.set(Util.class, util);
 	}
 	
 	@Inject
