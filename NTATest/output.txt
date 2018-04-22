@@ -1,0 +1,16 @@
+Query - list tuple based on flag - Entered flag : false
+1, "myPattern", src/patterns/Functional1.pat, false
+2, "myPattern", src/patterns/Functional2.pat, false
+3, "myPattern", src/patterns/Functional3.pat, false
+4, "myPattern", src/patterns/Functional4.pat, false
+5, "myPattern", src/patterns/Functional5.pat, false
+6, "myPattern", src/patterns/Functional6.pat, false
+Query - list tuple based on Name - Entered Name : "myPattern"
+1, "myPattern", src/patterns/Functional1.pat, false
+2, "myPattern", src/patterns/Functional2.pat, false
+3, "myPattern", src/patterns/Functional3.pat, false
+4, "myPattern", src/patterns/Functional4.pat, false
+5, "myPattern", src/patterns/Functional5.pat, false
+6, "myPattern", src/patterns/Functional6.pat, false
+Query - list tuple based on Id - Entered Id : 1
+1, "myPattern", src/patterns/Functional1.pat, false
