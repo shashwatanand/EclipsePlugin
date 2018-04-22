@@ -38,6 +38,7 @@ public class ConsoleUI extends Composite {
 	/** The style text. */
 	private StyledText styleText;
 	
+	/** The success message builder. */
 	private StringBuilder successMessageBuilder;
 
 	/**
@@ -142,6 +143,11 @@ public class ConsoleUI extends Composite {
 		
 	}
 	
+	/**
+	 * Gets the all success messages.
+	 *
+	 * @return the all success messages
+	 */
 	public String getAllSuccessMessages() {
 		return this.successMessageBuilder.toString();
 	}

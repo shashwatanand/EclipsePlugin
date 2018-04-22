@@ -36,6 +36,11 @@ import com.nashtech.hw.shashwat.app.util.Constants;
 import com.nashtech.hw.shashwat.app.util.Query;
 import com.nashtech.hw.shashwat.app.util.Util;
 
+/**
+ * The Class MainPartAction.
+ * 
+ * @author shashwat.anand
+ */
 public class MainPartAction extends MainPartUI {
 	/** The logger. */
 	private final Logger logger = Logger.getLogger(MainPartAction.class.getSimpleName());
@@ -49,17 +54,28 @@ public class MainPartAction extends MainPartUI {
 	@Inject
 	private IEclipseContext eclipseContext;
 	
+	/**
+	 * Instantiates a new main part action.
+	 *
+	 * @param parent the parent
+	 */
 	@Inject
 	public MainPartAction(final Composite parent) {
 		super(parent, SWT.NONE);
 	}
 	
+	/**
+	 * Creates the UI.
+	 */
 	@PostConstruct
 	private void createUI() {
 		super.createUI(this.eclipseContext);
 		init();
 	}
 
+	/**
+	 * Inits the.
+	 */
 	private void init() {
 		initTopComp();
 		initBottomComp();
@@ -67,6 +83,9 @@ public class MainPartAction extends MainPartUI {
 		showQueryPanel(false);
 	}
 
+	/**
+	 * Inits the bottom comp.
+	 */
 	private void initBottomComp() {
 		final Query[] values = Query.values();
 		final List<String> itemsList = new ArrayList<>();
@@ -76,6 +95,9 @@ public class MainPartAction extends MainPartUI {
 		this.comboQuery.setItems(itemsList.toArray(new String[itemsList.size()]));
 	}
 
+	/**
+	 * Inits the top comp.
+	 */
 	private void initTopComp() {
 		this.btnLoadFile.setEnabled(false);
 		final String inputFileStr = Util.getInstance().getInputFile();
@@ -93,6 +115,9 @@ public class MainPartAction extends MainPartUI {
 		}
 	}
 	
+	/**
+	 * Inits the listeners.
+	 */
 	private void initListeners() {
 		this.btnSelectFile.addListener(SWT.Selection, event -> {
 			final Shell shell = this.getShell();
@@ -168,18 +193,22 @@ public class MainPartAction extends MainPartUI {
 				case SEARCH_BY_ID:
 					queryCompositeLayout.topControl = queryResultByIdComp;
 					queryComposite.layout();
+					txtQueryById.setText("");
 					break;
 				case SEARCH_BY_NAME:
 					queryCompositeLayout.topControl = queryResultByNameComp;
 					queryComposite.layout();
+					txtQueryByName.setText("");
 					break;
 				case SEARCH_BY_PATTERN:
 					queryCompositeLayout.topControl = queryResultByPatternComp;
 					queryComposite.layout();
+					txtQueryByPattern.setText("");
 					break;
 				case SEARCH_BY_FLAG:
 					queryCompositeLayout.topControl = queryResultByFlagComp;
 					queryComposite.layout();
+					btnFlag.setSelection(false);
 					break;
 				default:
 					break;
@@ -247,9 +276,11 @@ public class MainPartAction extends MainPartUI {
 	}
 
 	/**
-	 * @param instance
-	 * @param provider
-	 * @throws NumberFormatException
+	 * Search by id.
+	 *
+	 * @param instance the instance
+	 * @param provider the provider
+	 * @throws NumberFormatException the number format exception
 	 */
 	private void searchById(final Util instance, SearchResultProvider provider) throws NumberFormatException {
 		String searchText = txtQueryById.getText().trim();
@@ -268,6 +299,12 @@ public class MainPartAction extends MainPartUI {
 		}
 	}
 	
+	/**
+	 * Search by name.
+	 *
+	 * @param instance the instance
+	 * @param provider the provider
+	 */
 	private void searchByName(final Util instance, SearchResultProvider provider) {
 		String searchText = "\"" + txtQueryByName.getText().trim() + "\"" ;
 		List<Tuple> results = provider.searchBasedOnName(searchText);
@@ -281,6 +318,12 @@ public class MainPartAction extends MainPartUI {
 		}
 	}
 	
+	/**
+	 * Search by pattern.
+	 *
+	 * @param instance the instance
+	 * @param provider the provider
+	 */
 	private void searchByPattern(final Util instance, SearchResultProvider provider) {
 		String searchText = txtQueryByPattern.getText().trim();
 		List<Tuple> results = provider.searchBasedOnPattern(searchText);
@@ -294,6 +337,12 @@ public class MainPartAction extends MainPartUI {
 		}
 	}
 	
+	/**
+	 * Search by flag.
+	 *
+	 * @param instance the instance
+	 * @param provider the provider
+	 */
 	private void searchByFlag(final Util instance, SearchResultProvider provider) {
 		final boolean searchFlag = btnFlag.getSelection();
 		List<Tuple> results = provider.searchBasedOnFlag(searchFlag);

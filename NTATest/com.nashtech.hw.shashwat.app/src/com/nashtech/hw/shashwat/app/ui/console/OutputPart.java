@@ -28,6 +28,7 @@ public class OutputPart {
 	@Inject
 	private IEclipseContext eclipseContext;
 
+	/** The console UI. */
 	private ConsoleUI consoleUI;
 
 	/**
@@ -59,6 +60,8 @@ public class OutputPart {
 	}
 
 	/**
+	 * Gets the console UI.
+	 *
 	 * @return the consoleUI
 	 */
 	public ConsoleUI getConsoleUI() {

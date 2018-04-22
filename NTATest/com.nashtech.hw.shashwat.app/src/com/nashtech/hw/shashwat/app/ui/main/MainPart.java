@@ -16,6 +16,11 @@ import org.eclipse.swt.layout.GridLayout;
 import org.eclipse.swt.widgets.Composite;
 
 
+/**
+ * The Class MainPart.
+ * 
+ * @author shashwat.anand
+ */
 public class MainPart {
 	
 	/** The logger. */
@@ -25,9 +30,15 @@ public class MainPart {
 	@Inject
 	private IEclipseContext eclipseContext;
 
+	/** The main part action. */
 	private MainPartAction mainPartAction;
 	
 	
+	/**
+	 * Post construct.
+	 *
+	 * @param parent the parent
+	 */
 	@PostConstruct
 	public void postConstruct(final Composite parent) {
 		try {
@@ -40,6 +51,11 @@ public class MainPart {
 	}
 
 
+	/**
+	 * Builds the components.
+	 *
+	 * @param parent the parent
+	 */
 	private void buildComponents(Composite parent) {
 		eclipseContext.set(Composite.class, parent);
 		this.mainPartAction = ContextInjectionFactory.make(MainPartAction.class, eclipseContext);
@@ -47,6 +63,8 @@ public class MainPart {
 
 
 	/**
+	 * Gets the main part action.
+	 *
 	 * @return the mainPartAction
 	 */
 	public MainPartAction getMainPartAction() {
