@@ -90,6 +90,7 @@ public abstract class MainPartUI extends Composite {
 		this.setLayoutData(new GridData(SWT.FILL, SWT.FILL, true, true));
 		createTopComp();
 		createBottomComposite();
+		this.getShell().setDefaultButton(this.btnSearch);
 	}
 
 	/**
