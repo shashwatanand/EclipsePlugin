@@ -19,7 +19,6 @@ import org.eclipse.core.runtime.Status;
 import org.eclipse.core.runtime.jobs.Job;
 import org.eclipse.e4.core.contexts.IEclipseContext;
 import org.eclipse.e4.ui.di.UISynchronize;
-import org.eclipse.jface.dialogs.MessageDialog;
 import org.eclipse.swt.SWT;
 import org.eclipse.swt.widgets.Composite;
 import org.eclipse.swt.widgets.FileDialog;
@@ -128,7 +127,7 @@ public class MainPartAction extends MainPartUI {
 			dialog.setFilterExtensions(Constants.FILTER_EXT);
 			String selectedFileStr = dialog.open();
 			if (Util.isEmpty(selectedFileStr)) {
-				MessageDialog.openError(shell, "Error", "Please select the valid text file which contains the tuples");
+				Util.getInstance().updateLogFile("Please select the valid text file which contains the tuples", MessageType.FAILURE);
 				this.btnLoadFile.setEnabled(false);
 				this.btnSelectFile.setFocus();
 				return;
@@ -262,7 +261,7 @@ public class MainPartAction extends MainPartUI {
 				dialog.setFilterExtensions(Constants.FILTER_EXT);
 				String selectedFileStr = dialog.open();
 				if (Util.isEmpty(selectedFileStr)) {
-					MessageDialog.openError(shell, "Error", "Please select the valid file in you want to dump queries");
+					Util.getInstance().updateLogFile("Please select the valid file in you want to dump queries", MessageType.FAILURE);
 					this.btnExport.setEnabled(true);
 					return;
 				}
