@@ -7,7 +7,6 @@ import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.util.List;
 import java.util.Map;
-import java.util.function.Supplier;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import java.util.stream.Collectors;
@@ -21,10 +20,23 @@ import com.nashtech.hw.shashwat.app.model.Tuple;
 import com.nashtech.hw.shashwat.app.util.Util;
 import com.nashtech.hw.shashwat.app.validators.TupleValidator;
 
+/**
+ * The Class TupleProvider.
+ * 
+ * @author shashwat.anand
+ */
 public class TupleProvider {
 	/** The logger. */
 	private final Logger logger = Logger.getLogger(TupleProvider.class.getSimpleName());
 
+	/**
+	 * Load tuples for file.
+	 *
+	 * @param fileStr the file str
+	 * @param monitor the monitor
+	 * @throws TupleNotInFormatException the tuple not in format exception
+	 * @throws TupleNotUniqueException the tuple not unique exception
+	 */
 	public void loadTuplesForFile(final String fileStr, final IProgressMonitor monitor) throws TupleNotInFormatException, TupleNotUniqueException {
 		try {
 			final File tupleFile = new File(fileStr);

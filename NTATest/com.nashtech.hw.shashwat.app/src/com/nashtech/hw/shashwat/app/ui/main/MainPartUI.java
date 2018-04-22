@@ -33,6 +33,7 @@ public abstract class MainPartUI extends Composite {
 	protected Button btnSearch;
 	protected Button btnExport;
 	protected Button btnFlag;
+	private Composite bottomComp;
 
 	public MainPartUI(final Composite parent, final int style) {
 		super(parent, style);
@@ -64,14 +65,14 @@ public abstract class MainPartUI extends Composite {
 	}
 	
 	private void createBottomComposite() {
-		final Composite bottomComp = new Composite(this, SWT.NONE);
+		this.bottomComp = new Composite(this, SWT.NONE);
 		GridLayoutFactory.fillDefaults().numColumns(2).applyTo(bottomComp);
 		GridDataFactory.fillDefaults().grab(true, true).align(SWT.FILL, SWT.FILL).applyTo(bottomComp);
 		
-		Label lblSelectQuery = new Label(bottomComp, SWT.NONE);
+		Label lblSelectQuery = new Label(this.bottomComp, SWT.NONE);
 		GridDataFactory.fillDefaults().grab(true, false).align(SWT.RIGHT, SWT.CENTER).applyTo(lblSelectQuery);
 		lblSelectQuery.setText("Select query");
-		this.comboQuery = new Combo(bottomComp, SWT.BORDER);
+		this.comboQuery = new Combo(this.bottomComp, SWT.BORDER);
 		GridDataFactory.fillDefaults().grab(true, false).align(SWT.LEFT, SWT.CENTER).applyTo(this.comboQuery);
 		
 		createQueryPanel(bottomComp);
@@ -102,7 +103,7 @@ public abstract class MainPartUI extends Composite {
 		this.btnSearch.setText("Search");
 		GridDataFactory.fillDefaults().grab(true, false).align(SWT.RIGHT, SWT.CENTER).applyTo(this.btnSearch);
 		this.btnExport = new Button(buttonBarComp, SWT.PUSH);
-		this.btnExport.setText("Export the results to file");
+		this.btnExport.setText("Dump results to file");
 		GridDataFactory.fillDefaults().grab(true, false).align(SWT.LEFT, SWT.CENTER).applyTo(this.btnExport);
 	}
 
@@ -115,7 +116,7 @@ public abstract class MainPartUI extends Composite {
 		GridDataFactory.fillDefaults().grab(true, true).align(SWT.FILL, SWT.FILL).applyTo(this.queryResultByFlagComp);
 		
 		final Label lblQueryByFlag = new Label(this.queryResultByFlagComp, SWT.NONE);
-		lblQueryByFlag.setText("Search by Flag");
+		lblQueryByFlag.setText("list all pattern calls which are skipped/not skipped");
 		GridDataFactory.fillDefaults().grab(true, false).align(SWT.RIGHT, SWT.CENTER).applyTo(lblQueryByFlag);
 		
 		this.btnFlag = new Button(this.queryResultByFlagComp, SWT.CHECK);
@@ -132,7 +133,7 @@ public abstract class MainPartUI extends Composite {
 		addEmptyFillingLabel(this.queryResultByPatternComp);
 		
 		final Label lblQueryByPattern = new Label(this.queryResultByPatternComp, SWT.NONE);
-		lblQueryByPattern.setText("Search by Pattern");
+		lblQueryByPattern.setText("List all pattern calls with a specified path");
 		GridDataFactory.fillDefaults().grab(true, false).align(SWT.RIGHT, SWT.CENTER).applyTo(lblQueryByPattern);
 		
 		this.txtQueryByPattern = new Text(this.queryResultByPatternComp, SWT.BORDER);
@@ -151,7 +152,7 @@ public abstract class MainPartUI extends Composite {
 		addEmptyFillingLabel(this.queryResultByNameComp);
 		
 		final Label lblQueryByName = new Label(this.queryResultByNameComp, SWT.NONE);
-		lblQueryByName.setText("Search by Name");
+		lblQueryByName.setText("List all pattern calls with a specified name");
 		GridDataFactory.fillDefaults().grab(true, false).align(SWT.RIGHT, SWT.CENTER).applyTo(lblQueryByName);
 		
 		this.txtQueryByName = new Text(this.queryResultByNameComp, SWT.BORDER);
@@ -159,9 +160,6 @@ public abstract class MainPartUI extends Composite {
 		addEmptyFillingLabel(this.queryResultByNameComp);
 	}
 
-	/**
-	 * 
-	 */
 	private void createQueryByIdComp() {
 		this.queryResultByIdComp = new Composite(this.queryComposite, SWT.NONE);
 		GridLayoutFactory.fillDefaults().numColumns(4).equalWidth(true).applyTo(this.queryResultByIdComp);
@@ -169,7 +167,7 @@ public abstract class MainPartUI extends Composite {
 		addEmptyFillingLabel(this.queryResultByIdComp);
 		
 		final Label lblQueryById = new Label(this.queryResultByIdComp, SWT.NONE);
-		lblQueryById.setText("Search by ID");
+		lblQueryById.setText("List all pattern calls with a specified Id");
 		GridDataFactory.fillDefaults().grab(true, false).align(SWT.RIGHT, SWT.CENTER).applyTo(lblQueryById);
 		
 		this.txtQueryById = new Text(this.queryResultByIdComp, SWT.BORDER);
@@ -190,7 +188,7 @@ public abstract class MainPartUI extends Composite {
 		return queryCompositeLayout;
 	}
 
-	protected void showQueryPanel() {
-		// TODO Auto-generated method stub
+	protected void showQueryPanel(final boolean isVisible) {
+		this.bottomComp.setVisible(isVisible);
 	}
 }

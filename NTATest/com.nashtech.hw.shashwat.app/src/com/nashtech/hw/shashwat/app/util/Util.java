@@ -21,17 +21,26 @@ public class Util {
 	/** The this ref. */
 	private static Util thisRef;
 	
+	/** The in mem tuples. */
 	private Map<Integer, Tuple> inMemTuples;
 	
 	/** The event broker. */
 	@Inject
 	private IEventBroker eventBroker;
 	
+	/**
+	 * Instantiates a new util.
+	 */
 	public Util() {
 		this.inMemTuples = new LinkedHashMap<>();
 		setInstance(this);
 	}
 
+	/**
+	 * Sets the instance.
+	 *
+	 * @param util the new instance
+	 */
 	private void setInstance(Util util) {
 		thisRef = this;
 	}
@@ -62,6 +71,12 @@ public class Util {
 		return true;
 	}
 	
+	/**
+	 * Checks if is integer.
+	 *
+	 * @param input the input
+	 * @return true, if is integer
+	 */
 	public static boolean isInteger(final String input) {
 	    try { 
 	        Integer.parseInt(input); 
@@ -73,30 +88,45 @@ public class Util {
 	    return true;
 	}
 	
+	/**
+	 * Checks if is boolean.
+	 *
+	 * @param input the input
+	 * @return true, if is boolean
+	 */
 	public static boolean isBoolean(final String input) {
-	    try { 
-	        Boolean.parseBoolean(input);
-	    } catch(NumberFormatException e) { 
-	        return false; 
-	    } catch(NullPointerException e) {
-	        return false;
-	    }
-	    return true;
+		if (input.equalsIgnoreCase("true") || input.equalsIgnoreCase("false")) {
+			return true;
+		}
+		return false;
 	}
 	
 	/**
+	 * Gets the in mem tuples.
+	 *
 	 * @return the inMemTuples
 	 */
 	public Map<Integer, Tuple> getInMemTuples() {
 		return inMemTuples;
 	}
 	
+	/**
+	 * Update log file.
+	 *
+	 * @param message the message
+	 * @param messageType the message type
+	 */
 	public void updateLogFile(String message, final MessageType messageType) {
 		this.eventBroker.send(Constants.CONSOLE_MESSAGE, 
-				new ConsoleLogObj(messageType, message));
+				new ConsoleLogObj(messageType, message + "\n"));
 	}
 
 
+	/**
+	 * Gets the installed file location str.
+	 *
+	 * @return the installed file location str
+	 */
 	public String getInstalledFileLocationStr() {
 		return Platform.getInstallLocation().getURL().getFile();
 	}
@@ -114,6 +144,11 @@ public class Util {
 		return null;
 	}
 	
+	/**
+	 * Gets the input file.
+	 *
+	 * @return the input file
+	 */
 	public String getInputFile() {
 		final String installedFilePath = getInstalledFileLocationStr();
 		if (isEmpty(installedFilePath)) {

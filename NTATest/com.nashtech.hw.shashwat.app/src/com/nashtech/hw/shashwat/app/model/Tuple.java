@@ -105,4 +105,13 @@ public class Tuple {
 	public void setFlag(boolean flag) {
 		this.flag = flag;
 	}
+
+	/* (non-Javadoc)
+	 * @see java.lang.Object#toString()
+	 */
+	@Override
+	public String toString() {
+		return id + ", " + name + ", " + pattern + ", " + flag;
+	}
+	
 }

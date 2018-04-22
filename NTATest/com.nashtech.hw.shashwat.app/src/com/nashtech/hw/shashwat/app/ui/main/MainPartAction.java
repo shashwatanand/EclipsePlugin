@@ -3,6 +3,7 @@ package com.nashtech.hw.shashwat.app.ui.main;
 import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 
 import javax.annotation.PostConstruct;
 import javax.inject.Inject;
@@ -12,6 +13,7 @@ import org.eclipse.core.runtime.IStatus;
 import org.eclipse.core.runtime.Status;
 import org.eclipse.core.runtime.jobs.Job;
 import org.eclipse.e4.core.contexts.IEclipseContext;
+import org.eclipse.e4.ui.di.UISynchronize;
 import org.eclipse.jface.dialogs.MessageDialog;
 import org.eclipse.swt.SWT;
 import org.eclipse.swt.widgets.Composite;
@@ -20,13 +22,21 @@ import org.eclipse.swt.widgets.Shell;
 
 import com.nashtech.hw.shashwat.app.exceptions.TupleNotInFormatException;
 import com.nashtech.hw.shashwat.app.exceptions.TupleNotUniqueException;
+import com.nashtech.hw.shashwat.app.model.Tuple;
 import com.nashtech.hw.shashwat.app.provider.TupleProvider;
+import com.nashtech.hw.shashwat.app.provider.SearchResultProvider;
 import com.nashtech.hw.shashwat.app.ui.console.MessageType;
 import com.nashtech.hw.shashwat.app.util.Constants;
 import com.nashtech.hw.shashwat.app.util.Query;
 import com.nashtech.hw.shashwat.app.util.Util;
 
 public class MainPartAction extends MainPartUI {
+	
+	/** {@link UISynchronize} instance. */
+	@Inject
+	private UISynchronize uiSynchronize;
+	
+	
 	/** Member variable 'eclipse context' for {@link IEclipseContext}. */
 	@Inject
 	private IEclipseContext eclipseContext;
@@ -46,6 +56,7 @@ public class MainPartAction extends MainPartUI {
 		initTopComp();
 		initBottomComp();
 		initListeners();
+		showQueryPanel(false);
 	}
 
 	private void initBottomComp() {
@@ -105,15 +116,33 @@ public class MainPartAction extends MainPartUI {
 						if (monitor.isCanceled()) {
 							return Status.CANCEL_STATUS;
 						}
+						final Util instance = Util.getInstance();
 						try {
+							instance.getInMemTuples().clear();
 							provider.loadTuplesForFile(fileStr, monitor);
-							if (Util.getInstance().getInMemTuples().size() > 0) {
-								showQueryPanel();
+							if (instance.getInMemTuples().size() > 0) {
+								if (uiSynchronize != null) {
+									uiSynchronize.asyncExec(new Runnable() {
+										public void run() {
+											showQueryPanel(true);
+										}
+									});
+								}
 							}
 						} catch (TupleNotInFormatException e) {
-							Util.getInstance().updateLogFile(e.getMessage(), MessageType.FAILURE);
+							uiSynchronize.syncExec(new Runnable() {
+								public void run() {
+									showQueryPanel(false);
+								}
+							});
+							instance.updateLogFile(e.getMessage(), MessageType.FAILURE);
 						} catch (TupleNotUniqueException e) {
-							Util.getInstance().updateLogFile(e.getMessage(), MessageType.FAILURE);
+							uiSynchronize.syncExec(new Runnable() {
+								public void run() {
+									showQueryPanel(false);
+								}
+							});
+							instance.updateLogFile(e.getMessage(), MessageType.FAILURE);
 						}
 						return Status.OK_STATUS;
 					}
@@ -150,5 +179,96 @@ public class MainPartAction extends MainPartUI {
 				queryComposite.getParent().update();
 			}
 		});
+		
+		btnSearch.addListener(SWT.Selection, event -> {
+			final Util instance = Util.getInstance();
+			Map<Integer, Tuple> inMemTuples = instance.getInMemTuples();
+			if (inMemTuples.isEmpty()) {
+				instance.updateLogFile("No tuples in memory", MessageType.SUCCESS);
+				return;
+			}
+			final String selectedText = this.comboQuery.getText();
+			Query queryEnum = Query.getQueryEnum(selectedText);
+			if (queryEnum != null) {
+				SearchResultProvider provider = new SearchResultProvider();
+				switch (queryEnum) {
+				case SEARCH_BY_ID:
+					searchById(instance, provider);
+					break;
+				case SEARCH_BY_NAME:
+					searchByName(instance, provider);
+					break;
+				case SEARCH_BY_PATTERN:
+					searchByPattern(instance, provider);
+					break;
+				case SEARCH_BY_FLAG:
+					searchByFlag(instance, provider);
+					break;
+				default:
+					break;
+				}
+			}
+		});
+	}
+
+	/**
+	 * @param instance
+	 * @param provider
+	 * @throws NumberFormatException
+	 */
+	private void searchById(final Util instance, SearchResultProvider provider) throws NumberFormatException {
+		String searchText = txtQueryById.getText().trim();
+		if (!Util.isInteger(searchText)) {
+			instance.updateLogFile("Not valid integer", MessageType.FAILURE);
+			return;
+		}
+		List<Tuple> results = provider.searchBasedOnId(Integer.parseInt(searchText));
+		if (results.isEmpty()) {
+			instance.updateLogFile("Query - list tuple based on Id - No tuple found - Entered Id : " + searchText, MessageType.FAILURE);
+			return;
+		}
+		instance.updateLogFile("Query - list tuple based on Id - Entered Id : " + searchText, MessageType.SUCCESS);
+		for (Tuple tuple : results) {
+			instance.updateLogFile(tuple.toString(), MessageType.SUCCESS);
+		}
+	}
+	
+	private void searchByName(final Util instance, SearchResultProvider provider) {
+		String searchText = "\"" + txtQueryByName.getText().trim() + "\"" ;
+		List<Tuple> results = provider.searchBasedOnName(searchText);
+		if (results.isEmpty()) {
+			instance.updateLogFile("Query - list tuple based on Name - No tuple found - Entered Name : " + searchText, MessageType.FAILURE);
+			return;
+		}
+		instance.updateLogFile("Query - list tuple based on Name - Entered Name : " + searchText, MessageType.SUCCESS);
+		for (Tuple tuple : results) {
+			instance.updateLogFile(tuple.toString(), MessageType.SUCCESS);
+		}
+	}
+	
+	private void searchByPattern(final Util instance, SearchResultProvider provider) {
+		String searchText = txtQueryByPattern.getText().trim();
+		List<Tuple> results = provider.searchBasedOnPattern(searchText);
+		if (results.isEmpty()) {
+			instance.updateLogFile("Query - list tuple based on Pattern - No tuple found - Entered Pattern : " + searchText, MessageType.FAILURE);
+			return;
+		}
+		instance.updateLogFile("Query - list tuple based on Pattern - Entered Pattern : " + searchText, MessageType.SUCCESS);
+		for (Tuple tuple : results) {
+			instance.updateLogFile(tuple.toString(), MessageType.SUCCESS);
+		}
+	}
+	
+	private void searchByFlag(final Util instance, SearchResultProvider provider) {
+		final boolean searchFlag = btnFlag.getSelection();
+		List<Tuple> results = provider.searchBasedOnFlag(searchFlag);
+		if (results.isEmpty()) {
+			instance.updateLogFile("Query - list tuple based on flag - No tuple found - Entered flag : " + searchFlag, MessageType.FAILURE);
+			return;
+		}
+		instance.updateLogFile("Query - list tuple based on flag - Entered flag : " + searchFlag, MessageType.SUCCESS);
+		for (Tuple tuple : results) {
+			instance.updateLogFile(tuple.toString(), MessageType.SUCCESS);
+		}
 	}
 }
