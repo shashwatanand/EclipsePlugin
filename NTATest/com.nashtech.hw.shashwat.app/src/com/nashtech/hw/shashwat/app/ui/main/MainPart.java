@@ -44,4 +44,12 @@ public class MainPart {
 		eclipseContext.set(Composite.class, parent);
 		this.mainPartAction = ContextInjectionFactory.make(MainPartAction.class, eclipseContext);
 	}
+
+
+	/**
+	 * @return the mainPartAction
+	 */
+	public MainPartAction getMainPartAction() {
+		return mainPartAction;
+	}
 }

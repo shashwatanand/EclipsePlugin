@@ -4,8 +4,8 @@
     <children xsi:type="advanced:PerspectiveStack" xmi:id="_EwWRAETIEeiliL5MTzpDfg" elementId="com.nashtech.hw.shashwat.app.perspectivestack">
       <children xsi:type="advanced:Perspective" xmi:id="_bBIygETIEeiliL5MTzpDfg" elementId="com.nashtech.hw.shashwat.app.perspective">
         <children xsi:type="basic:PartSashContainer" xmi:id="_e1Vc4ETIEeiliL5MTzpDfg" elementId="com.nashtech.hw.shashwat.app.partsashcontainer">
-          <children xsi:type="basic:Part" xmi:id="_gO-wYETIEeiliL5MTzpDfg" elementId="com.nashtech.hw.shashwat.app.mainpart" containerData="50" contributionURI="bundleclass://com.nashtech.hw.shashwat.app/com.nashtech.hw.shashwat.app.ui.main.MainPart" label="%mainpart"/>
-          <children xsi:type="basic:Part" xmi:id="_g3Bn0ETIEeiliL5MTzpDfg" elementId="com.nashtech.hw.shashwat.app.outputpart" containerData="50" contributionURI="bundleclass://com.nashtech.hw.shashwat.app/com.nashtech.hw.shashwat.app.ui.console.OutputPart" label="%outputpart"/>
+          <children xsi:type="basic:Part" xmi:id="_gO-wYETIEeiliL5MTzpDfg" elementId="com.nashtech.hw.shashwat.app.mainpart" containerData="25" contributionURI="bundleclass://com.nashtech.hw.shashwat.app/com.nashtech.hw.shashwat.app.ui.main.MainPart" label="%mainpart"/>
+          <children xsi:type="basic:Part" xmi:id="_g3Bn0ETIEeiliL5MTzpDfg" elementId="com.nashtech.hw.shashwat.app.outputpart" containerData="75" contributionURI="bundleclass://com.nashtech.hw.shashwat.app/com.nashtech.hw.shashwat.app.ui.console.OutputPart" label="%outputpart"/>
         </children>
       </children>
     </children>

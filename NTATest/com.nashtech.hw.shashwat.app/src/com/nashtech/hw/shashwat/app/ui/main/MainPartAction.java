@@ -1,6 +1,8 @@
 package com.nashtech.hw.shashwat.app.ui.main;
 
 import java.io.File;
+import java.util.ArrayList;
+import java.util.List;
 
 import javax.annotation.PostConstruct;
 import javax.inject.Inject;
@@ -12,8 +14,6 @@ import org.eclipse.core.runtime.jobs.Job;
 import org.eclipse.e4.core.contexts.IEclipseContext;
 import org.eclipse.jface.dialogs.MessageDialog;
 import org.eclipse.swt.SWT;
-import org.eclipse.swt.events.SelectionAdapter;
-import org.eclipse.swt.events.SelectionEvent;
 import org.eclipse.swt.widgets.Composite;
 import org.eclipse.swt.widgets.FileDialog;
 import org.eclipse.swt.widgets.Shell;
@@ -23,6 +23,7 @@ import com.nashtech.hw.shashwat.app.exceptions.TupleNotUniqueException;
 import com.nashtech.hw.shashwat.app.provider.TupleProvider;
 import com.nashtech.hw.shashwat.app.ui.console.MessageType;
 import com.nashtech.hw.shashwat.app.util.Constants;
+import com.nashtech.hw.shashwat.app.util.Query;
 import com.nashtech.hw.shashwat.app.util.Util;
 
 public class MainPartAction extends MainPartUI {
@@ -43,7 +44,17 @@ public class MainPartAction extends MainPartUI {
 
 	private void init() {
 		initTopComp();
+		initBottomComp();
 		initListeners();
+	}
+
+	private void initBottomComp() {
+		final Query[] values = Query.values();
+		final List<String> itemsList = new ArrayList<>();
+		for (Query query : values) {
+			itemsList.add(query.toString());
+		}
+		this.comboQuery.setItems(itemsList.toArray(new String[itemsList.size()]));
 	}
 
 	private void initTopComp() {
@@ -96,6 +107,9 @@ public class MainPartAction extends MainPartUI {
 						}
 						try {
 							provider.loadTuplesForFile(fileStr, monitor);
+							if (Util.getInstance().getInMemTuples().size() > 0) {
+								showQueryPanel();
+							}
 						} catch (TupleNotInFormatException e) {
 							Util.getInstance().updateLogFile(e.getMessage(), MessageType.FAILURE);
 						} catch (TupleNotUniqueException e) {
@@ -106,6 +120,34 @@ public class MainPartAction extends MainPartUI {
 				};
 				loadTuplesJob.setUser(true);
 				loadTuplesJob.schedule();
+			}
+		});
+		
+		this.comboQuery.addListener(SWT.Selection, event -> {
+			final String selectedText = this.comboQuery.getText();
+			Query queryEnum = Query.getQueryEnum(selectedText);
+			if (queryEnum != null) {
+				switch (queryEnum) {
+				case SEARCH_BY_ID:
+					queryCompositeLayout.topControl = queryResultByIdComp;
+					queryComposite.layout();
+					break;
+				case SEARCH_BY_NAME:
+					queryCompositeLayout.topControl = queryResultByNameComp;
+					queryComposite.layout();
+					break;
+				case SEARCH_BY_PATTERN:
+					queryCompositeLayout.topControl = queryResultByPatternComp;
+					queryComposite.layout();
+					break;
+				case SEARCH_BY_FLAG:
+					queryCompositeLayout.topControl = queryResultByFlagComp;
+					queryComposite.layout();
+					break;
+				default:
+					break;
+				}
+				queryComposite.getParent().update();
 			}
 		});
 	}
