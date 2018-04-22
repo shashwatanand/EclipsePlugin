@@ -28,6 +28,8 @@ public class OutputPart {
 	@Inject
 	private IEclipseContext eclipseContext;
 
+	private ConsoleUI consoleUI;
+
 	/**
 	 * Method for Post construct.
 	 *
@@ -53,6 +55,13 @@ public class OutputPart {
 	 */
 	private void buildComponents(final Composite parent) {
 		eclipseContext.set(Composite.class, parent);
-		ContextInjectionFactory.make(ConsoleUI.class, eclipseContext);
+		this.consoleUI = ContextInjectionFactory.make(ConsoleUI.class, eclipseContext);
+	}
+
+	/**
+	 * @return the consoleUI
+	 */
+	public ConsoleUI getConsoleUI() {
+		return consoleUI;
 	}
 }

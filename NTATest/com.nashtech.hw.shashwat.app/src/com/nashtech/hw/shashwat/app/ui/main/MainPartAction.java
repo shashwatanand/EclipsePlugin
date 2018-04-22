@@ -1,9 +1,14 @@
 package com.nashtech.hw.shashwat.app.ui.main;
 
 import java.io.File;
+import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 import javax.annotation.PostConstruct;
 import javax.inject.Inject;
@@ -23,14 +28,17 @@ import org.eclipse.swt.widgets.Shell;
 import com.nashtech.hw.shashwat.app.exceptions.TupleNotInFormatException;
 import com.nashtech.hw.shashwat.app.exceptions.TupleNotUniqueException;
 import com.nashtech.hw.shashwat.app.model.Tuple;
-import com.nashtech.hw.shashwat.app.provider.TupleProvider;
 import com.nashtech.hw.shashwat.app.provider.SearchResultProvider;
+import com.nashtech.hw.shashwat.app.provider.TupleProvider;
+import com.nashtech.hw.shashwat.app.ui.console.ConsoleUI;
 import com.nashtech.hw.shashwat.app.ui.console.MessageType;
 import com.nashtech.hw.shashwat.app.util.Constants;
 import com.nashtech.hw.shashwat.app.util.Query;
 import com.nashtech.hw.shashwat.app.util.Util;
 
 public class MainPartAction extends MainPartUI {
+	/** The logger. */
+	private final Logger logger = Logger.getLogger(MainPartAction.class.getSimpleName());
 	
 	/** {@link UISynchronize} instance. */
 	@Inject
@@ -206,6 +214,33 @@ public class MainPartAction extends MainPartUI {
 					break;
 				default:
 					break;
+				}
+			}
+		});
+		
+		this.btnExport.addListener(SWT.Selection, event -> {
+			Util instance = Util.getInstance();
+			ConsoleUI consolePart;
+			if ((consolePart = instance.getConsolePart()) != null) {
+				final String messages = consolePart.getAllSuccessMessages();
+				if (Util.isEmpty(messages)) {
+					instance.updateLogFile("Unable to dump the queries as no success message are present", MessageType.FAILURE);
+					return;
+				}
+				final Shell shell = this.getShell();
+				final FileDialog dialog = new FileDialog(shell, SWT.SAVE);
+				dialog.setText("Select file to dump queries");
+				dialog.setFilterExtensions(Constants.FILTER_EXT);
+				String selectedFileStr = dialog.open();
+				if (Util.isEmpty(selectedFileStr)) {
+					MessageDialog.openError(shell, "Error", "Please select the valid file in you want to dump queries");
+					this.btnExport.setEnabled(true);
+					return;
+				}
+				try {
+					Files.write(Paths.get(selectedFileStr), messages.getBytes());
+				} catch (IOException e) {
+					logger.log(Level.SEVERE, "IOException occured while dumping queries in file ! " + e);
 				}
 			}
 		});

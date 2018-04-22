@@ -37,6 +37,8 @@ public class ConsoleUI extends Composite {
 
 	/** The style text. */
 	private StyledText styleText;
+	
+	private StringBuilder successMessageBuilder;
 
 	/**
 	 * Constructor.
@@ -46,6 +48,7 @@ public class ConsoleUI extends Composite {
 	@Inject
 	public ConsoleUI(final Composite parent) {
 		super(parent, SWT.NONE);
+		this.successMessageBuilder = new StringBuilder();
 	}
 
 	/**
@@ -54,14 +57,6 @@ public class ConsoleUI extends Composite {
 	@PostConstruct
 	private void createUI() {
 		final GridLayout gridLayout = new GridLayout(1, false);
-		/*gridLayout.marginHeight = 0;
-		gridLayout.marginBottom = 0;
-		gridLayout.marginLeft = 0;
-		gridLayout.marginRight = 0;
-		gridLayout.marginTop = 0;
-		gridLayout.horizontalSpacing = 0;
-		gridLayout.verticalSpacing = 0;
-		gridLayout.marginWidth = 0;*/
 		this.setLayout(gridLayout);
 		this.setLayoutData(new GridData(SWT.FILL, SWT.FILL, true, true));
 		initUI();
@@ -139,9 +134,15 @@ public class ConsoleUI extends Composite {
 		styleRange.length = logStr.length();
 		if (log.getMessageType() == MessageType.SUCCESS) {
 			styleRange.foreground = successCol;
+			this.successMessageBuilder.append(logStr);
 		} else if (log.getMessageType() == MessageType.FAILURE) {
 			styleRange.foreground = failureCol;
 		}
 		this.styleText.setStyleRange(styleRange);
+		
+	}
+	
+	public String getAllSuccessMessages() {
+		return this.successMessageBuilder.toString();
 	}
 }

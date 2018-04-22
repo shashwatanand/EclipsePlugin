@@ -7,11 +7,17 @@ import java.util.Map;
 import javax.inject.Inject;
 
 import org.eclipse.core.runtime.Platform;
+import org.eclipse.e4.core.di.annotations.Optional;
 import org.eclipse.e4.core.services.events.IEventBroker;
+import org.eclipse.e4.ui.model.application.MApplication;
+import org.eclipse.e4.ui.model.application.ui.basic.MPart;
+import org.eclipse.e4.ui.workbench.modeling.EModelService;
 
 import com.nashtech.hw.shashwat.app.model.Tuple;
 import com.nashtech.hw.shashwat.app.ui.console.ConsoleLogObj;
+import com.nashtech.hw.shashwat.app.ui.console.ConsoleUI;
 import com.nashtech.hw.shashwat.app.ui.console.MessageType;
+import com.nashtech.hw.shashwat.app.ui.console.OutputPart;
 
 /**
  * The Class Util.
@@ -27,6 +33,15 @@ public class Util {
 	/** The event broker. */
 	@Inject
 	private IEventBroker eventBroker;
+	
+	/** Member variable 'application' for {@link MApplication}. */
+	@Optional
+	@Inject
+	private MApplication application;
+	
+	/** Member variable 'model service' for {@link EModelService}. */
+	@Inject
+	private EModelService modelService;
 	
 	/**
 	 * Instantiates a new util.
@@ -153,6 +168,25 @@ public class Util {
 		final String installedFilePath = getInstalledFileLocationStr();
 		if (isEmpty(installedFilePath)) {
 			return installedFilePath + File.separator + "input.txt";
+		}
+		return null;
+	}
+	
+	public MPart getOutputPart() {
+		MPart part = (MPart) modelService.find("com.nashtech.hw.shashwat.app.outputpart", application); //$NON-NLS-1$
+		if (part != null) {
+			return part;
+		}
+		return null;
+	}
+	
+	public ConsoleUI getConsolePart() {
+		MPart part;
+		if ((part = getOutputPart()) != null) {
+			Object object = part.getObject();
+			if (object != null && object instanceof OutputPart) {
+				return ((OutputPart) object).getConsoleUI();
+			}
 		}
 		return null;
 	}

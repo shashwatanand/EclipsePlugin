@@ -24,6 +24,7 @@
 
 	<modules>
 		<module>../com.nashtech.hw.shashwat.app</module>
+		<module>../com.nashtech.hw.shashwat.app.test</module>
 		<module>../com.nashtech.hw.shashwat.product</module>
 	</modules>
 
