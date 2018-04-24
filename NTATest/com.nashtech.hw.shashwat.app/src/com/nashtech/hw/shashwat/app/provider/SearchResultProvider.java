@@ -30,7 +30,7 @@ public class SearchResultProvider {
 	 *
 	 * @return true, if successful
 	 */
-	boolean useParallelStream() {
+	private boolean useParallelStream() {
 		int cores = Runtime.getRuntime().availableProcessors();
 		if (cores > 1 && this.inMemTuples.size() > 1000) {
 			return true;
