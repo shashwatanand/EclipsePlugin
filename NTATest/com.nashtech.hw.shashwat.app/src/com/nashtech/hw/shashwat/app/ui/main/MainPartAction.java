@@ -226,24 +226,28 @@ public class MainPartAction extends MainPartUI {
 			}
 			final String selectedText = this.comboQuery.getText();
 			Query queryEnum = Query.getQueryEnum(selectedText);
-			if (queryEnum != null) {
-				SearchResultProvider provider = new SearchResultProvider();
-				switch (queryEnum) {
-				case SEARCH_BY_ID:
-					searchById(instance, provider);
-					break;
-				case SEARCH_BY_NAME:
-					searchByName(instance, provider);
-					break;
-				case SEARCH_BY_PATTERN:
-					searchByPattern(instance, provider);
-					break;
-				case SEARCH_BY_FLAG:
-					searchByFlag(instance, provider);
-					break;
-				default:
-					break;
+			try {
+				if (queryEnum != null) {
+					SearchResultProvider provider = new SearchResultProvider();
+					switch (queryEnum) {
+					case SEARCH_BY_ID:
+						searchById(instance, provider);
+						break;
+					case SEARCH_BY_NAME:
+						searchByName(instance, provider);
+						break;
+					case SEARCH_BY_PATTERN:
+						searchByPattern(instance, provider);
+						break;
+					case SEARCH_BY_FLAG:
+						searchByFlag(instance, provider);
+						break;
+					default:
+						break;
+					}
 				}
+			} catch (Exception e) {
+				instance.updateLogFile("Exception occured while searching ! " + e, MessageType.FAILURE);
 			}
 		});
 		
