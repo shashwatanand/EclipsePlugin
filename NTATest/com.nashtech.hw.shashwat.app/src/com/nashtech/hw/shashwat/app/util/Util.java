@@ -133,7 +133,7 @@ public class Util {
 	 */
 	public void updateLogFile(String message, final MessageType messageType) {
 		this.eventBroker.send(Constants.CONSOLE_MESSAGE, 
-				new ConsoleLogObj(messageType, message + "\n"));
+				new ConsoleLogObj(messageType, message + "\r\n"));
 	}
 
 

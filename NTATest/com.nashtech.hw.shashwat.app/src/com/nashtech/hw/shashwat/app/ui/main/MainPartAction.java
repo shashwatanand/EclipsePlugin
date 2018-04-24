@@ -20,6 +20,7 @@ import org.eclipse.core.runtime.jobs.Job;
 import org.eclipse.e4.core.contexts.IEclipseContext;
 import org.eclipse.e4.ui.di.UISynchronize;
 import org.eclipse.swt.SWT;
+import org.eclipse.swt.program.Program;
 import org.eclipse.swt.widgets.Composite;
 import org.eclipse.swt.widgets.FileDialog;
 import org.eclipse.swt.widgets.Shell;
@@ -267,6 +268,7 @@ public class MainPartAction extends MainPartUI {
 				}
 				try {
 					Files.write(Paths.get(selectedFileStr), messages.getBytes());
+					Program.launch(selectedFileStr);
 				} catch (IOException e) {
 					logger.log(Level.SEVERE, "IOException occured while dumping queries in file ! " + e);
 				}

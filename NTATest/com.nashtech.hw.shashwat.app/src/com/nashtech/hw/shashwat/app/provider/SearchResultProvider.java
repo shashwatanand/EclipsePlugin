@@ -22,7 +22,7 @@ public class SearchResultProvider {
 	 */
 	public List<Tuple> searchBasedOnId(final int searchId) {
 		final Map<Integer, Tuple> inMemTuples = Util.getInstance().getInMemTuples();
-		return inMemTuples.values().stream().filter(t -> t.getId() == searchId).collect(Collectors.toList());
+		return inMemTuples.values().parallelStream().filter(t -> t.getId() == searchId).collect(Collectors.toList());
 	}
 
 	/**
@@ -33,7 +33,7 @@ public class SearchResultProvider {
 	 */
 	public List<Tuple> searchBasedOnName(final String searchText) {
 		final Map<Integer, Tuple> inMemTuples = Util.getInstance().getInMemTuples();
-		return inMemTuples.values().stream().filter(t -> t.getName().equals(searchText)).collect(Collectors.toList());
+		return inMemTuples.values().parallelStream().filter(t -> t.getName().equals(searchText)).collect(Collectors.toList());
 	}
 	
 	/**
@@ -44,7 +44,7 @@ public class SearchResultProvider {
 	 */
 	public List<Tuple> searchBasedOnPattern(final String searchText) {
 		final Map<Integer, Tuple> inMemTuples = Util.getInstance().getInMemTuples();
-		return inMemTuples.values().stream().filter(t -> t.getPattern().equals(searchText)).collect(Collectors.toList());
+		return inMemTuples.values().parallelStream().filter(t -> t.getPattern().equals(searchText)).collect(Collectors.toList());
 	}
 	
 	/**
@@ -55,6 +55,6 @@ public class SearchResultProvider {
 	 */
 	public List<Tuple> searchBasedOnFlag(final boolean searchFlag) {
 		final Map<Integer, Tuple> inMemTuples = Util.getInstance().getInMemTuples();
-		return inMemTuples.values().stream().filter(t -> t.isFlag() == searchFlag).collect(Collectors.toList());
+		return inMemTuples.values().parallelStream().filter(t -> t.isFlag() == searchFlag).collect(Collectors.toList());
 	}
 }
