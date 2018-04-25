@@ -20,3 +20,6 @@ Bundle-RequiredExecutionEnvironment: JavaSE-1.8
 Import-Package: javax.annotation;version="1.0.0";resolution:=optional,
  javax.inject;version="1.0.0"
 Bundle-ActivationPolicy: lazy
+Export-Package: com.nashtech.hw.shashwat.app.model,
+ com.nashtech.hw.shashwat.app.provider,
+ com.nashtech.hw.shashwat.app.util
