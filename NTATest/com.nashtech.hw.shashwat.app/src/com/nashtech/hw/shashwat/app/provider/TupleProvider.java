@@ -43,10 +43,13 @@ public class TupleProvider {
 			if (tupleFile.exists()) {
 				final TupleValidator validator = new TupleValidator();
 				Map<Integer, Tuple> tuplesMap = Util.getInstance().getInMemTuples();
-				Stream<String> lines = Files.lines(Paths.get(fileStr), StandardCharsets.UTF_8);
+				long startLoadFile = System.currentTimeMillis();
+				final Stream<String> lines = Files.lines(Paths.get(fileStr), StandardCharsets.UTF_8);
 				List<String> tupleList = lines.collect(Collectors.toList());
 				lines.close();
 				final long count = tupleList.size();
+				long endLoadFile = System.currentTimeMillis();
+				logger.log(Level.INFO, "Time take to load file : " + (endLoadFile - startLoadFile));
 				monitor.beginTask("Processing tuple", (int) count);
 				tupleList.forEach(tupleLine -> {
 					monitor.worked(1);
