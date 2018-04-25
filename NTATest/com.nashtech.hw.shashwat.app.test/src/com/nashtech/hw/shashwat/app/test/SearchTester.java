@@ -1,6 +1,7 @@
 package com.nashtech.hw.shashwat.app.test;
 
 import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertTrue;
 
 import java.util.List;
 import java.util.Map;
@@ -53,7 +54,7 @@ public class SearchTester {
 	public void searchNegId() {
 		SearchResultProvider provider = new SearchResultProvider();
 		List<Tuple> result = provider.searchBasedOnId(6);
-		assertFalse(!result.isEmpty());
+		assertTrue(result.isEmpty());
 	}
 	
 	/**
@@ -73,7 +74,7 @@ public class SearchTester {
 	public void searchNegName() {
 		SearchResultProvider provider = new SearchResultProvider();
 		List<Tuple> result = provider.searchBasedOnName("myPattern");
-		assertFalse(!result.isEmpty());
+		assertTrue(result.isEmpty());
 	}
 	
 	/**
@@ -93,7 +94,7 @@ public class SearchTester {
 	public void searchNegPattern() {
 		SearchResultProvider provider = new SearchResultProvider();
 		List<Tuple> result = provider.searchBasedOnPattern("myPattern");
-		assertFalse(!result.isEmpty());
+		assertTrue(result.isEmpty());
 	}
 	
 	/**
@@ -113,7 +114,7 @@ public class SearchTester {
 	public void searchNegFlag() {
 		SearchResultProvider provider = new SearchResultProvider();
 		List<Tuple> result = provider.searchBasedOnFlag(true);
-		assertFalse(!result.isEmpty());
+		assertTrue(result.isEmpty());
 	}
 
 }
