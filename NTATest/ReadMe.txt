@@ -16,3 +16,12 @@ Launching the application :
 12) When you want to dump the results to file then click on Dump results to file
 13) Then file dialog will be opened where you need to select file where you want to dump the result. Only GREEN color output will be dumped in file.
 14) If file is of know type like .txt then application will try to lanuch the configured windows application (like notepad) for output file
+
+
+Source structure:
+
+In NTA Test folder you will find code folder where there are 4 plugins
+1) com.nashtech.hw.shashwat.parent - This contains pom for packging eclipse plugins used maven tycho.
+2) com.nashtech.hw.shashwat.app - This plugin in the main eclipse plugin of application.
+3) com.nashtech.hw.shashwat.app.test - This plugin is test plugin which has Junit tests.
+4) com.nashtech.hw.shashwat.product - This plugin is having eclipse product file which is used to gererate application.exe
