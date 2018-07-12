@@ -1,4 +1,4 @@
-# EclipsePlugin
+# Eclipse Plugins
 
 Some plugins are inspired from BestSolution-at/javaone-2014-di
 
