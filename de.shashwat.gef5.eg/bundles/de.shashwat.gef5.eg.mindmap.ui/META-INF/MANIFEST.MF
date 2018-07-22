@@ -1,0 +1,7 @@
+Manifest-Version: 1.0
+Bundle-ManifestVersion: 2
+Bundle-Name: Ui
+Bundle-SymbolicName: de.shashwat.gef5.eg.mindmap.ui
+Bundle-Version: 1.0.0.qualifier
+Automatic-Module-Name: de.shashwat.gef5.eg.mindmap.ui
+Bundle-RequiredExecutionEnvironment: JavaSE-1.8
