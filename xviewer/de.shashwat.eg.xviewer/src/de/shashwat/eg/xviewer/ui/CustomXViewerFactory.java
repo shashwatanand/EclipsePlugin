@@ -4,8 +4,8 @@ import org.eclipse.nebula.widgets.xviewer.XViewerFactory;
 
 public class CustomXViewerFactory extends XViewerFactory {
 
-	public CustomXViewerFactory(String namespace) {
-		super(namespace);
+	public CustomXViewerFactory() {
+		super("Shashwat.XViewer");
 	}
 
 	@Override
