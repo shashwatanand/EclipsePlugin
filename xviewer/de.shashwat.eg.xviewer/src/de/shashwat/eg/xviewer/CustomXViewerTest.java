@@ -1,6 +1,8 @@
 package de.shashwat.eg.xviewer;
 
 import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Date;
 import java.util.List;
 
 import org.eclipse.jface.action.Action;
@@ -19,7 +21,11 @@ import org.eclipse.swt.widgets.ToolItem;
 
 import de.shashwat.eg.xviewer.images.XViewerImageCache;
 import de.shashwat.eg.xviewer.model.ITask;
+import de.shashwat.eg.xviewer.model.ITask.RunDatabase;
+import de.shashwat.eg.xviewer.model.ITask.TaskType;
+import de.shashwat.eg.xviewer.model.Task;
 import de.shashwat.eg.xviewer.ui.CustomXViewer;
+import de.shashwat.eg.xviewer.ui.CustomXViewerFactory;
 import de.shashwat.eg.xviewer.ui.DefaultCustomizations;
 
 public class CustomXViewerTest {
@@ -82,9 +88,78 @@ public class CustomXViewerTest {
 			xviewer.getCustomizeMgr().loadCustomization(DefaultCustomizations.getDescriptionCustomization());
 			xviewer.refresh();
 		});
-	}
+		
+		ToolItem completion = new ToolItem(toolBar, SWT.PUSH);
+		completion.setImage(XViewerImageCache.getImage("completionView.gif"));
+		completion.setToolTipText("Completion View");
+		
+		completion.addListener(SWT.Selection, e -> {
+			xviewer.getCustomizeMgr().loadCustomization(DefaultCustomizations.getCompletionCustomization());
+			xviewer.refresh();
+		});
 
+		ToolItem refreshSingleColumn = new ToolItem(toolBar, SWT.PUSH);
+		refreshSingleColumn.setImage(XViewerImageCache.getImage("columnRefresh.gif"));
+		refreshSingleColumn.setToolTipText("Example of Refreshing a Single Column");
+		
+		refreshSingleColumn.addListener(SWT.Selection, e -> {
+			List<Object> items = (List<Object>) xviewer.getInput();
+			for (Object item : items) {
+				Task task = (Task) item;
+				task.setTaskType(TaskType.Refreshed);
+			}
+			
+			String colId = CustomXViewerFactory.Task_Type.getId();
+			xviewer.refreshColumn(colId);
+		});
+	}
+	
 	private static List<ITask> getSampleTasks() {
-		return null;
+		 List<ITask> tasks = new ArrayList<ITask>();
+	      Task task =
+	         new Task(RunDatabase.Test_Database, TaskType.Backup, new Date(), "org.eclipse.osee.test1", "10:03", "run to test this",
+	            "Suite A", "mark@eclipse.com", 50, 50000);
+	      tasks.add(task);
+
+	      for (int x = 0; x < 5; x++) {
+	         task.addChild(new Task(RunDatabase.Test_Database, TaskType.Backup, new Date(), "org.eclipse.osee.test33", "10:03",
+	            "run to test isit this - child " + x, "Suite A", "mark@eclipse.com", 50, 9223336854775807L));
+	      }
+
+	      tasks.add(new Task(RunDatabase.Production_Database, TaskType.Data_Exchange, new Date(), "org.eclipse.osee.test2", "9:22",
+	         "run to test that", "Suite B", "john@eclipse.com", 0, 50000L));
+	      tasks.add(new Task(RunDatabase.Production_Database, TaskType.Backup, new Date(), "org.eclipse.osee.test4", "8:23",
+	         "in this world", "Suite A", "john@eclipse.com", 50, 50000L));
+	      tasks.add(new Task(RunDatabase.Test_Database, TaskType.Backup, new Date(), "org.eclipse.osee.test3", "23:01",
+	         "now is the time", "Suite B", "mike@eclipse.com", 30, 9223372036854775807L));
+	      tasks.add(new Task(RunDatabase.Production_Database, TaskType.Database_Health, new Date(), "org.eclipse.osee.test5", "7:32",
+	         "may be never", "Suite A", "steve@eclipse.com", 10, 50000L));
+	      tasks.add(new Task(RunDatabase.Test_Database, TaskType.Data_Exchange, new Date(), "org.eclipse.osee.test14", "6:11", "",
+	         "Suite A", "steve@eclipse.com", 95, 50000L));
+	      tasks.add(new Task(RunDatabase.Production_Database, TaskType.Backup, new Date(), "org.eclipse.osee.test6", "5:13",
+	         "run to test this", "Suite B", "john@eclipse.com", 80, 50000L));
+	      tasks.add(new Task(RunDatabase.Test_Database, TaskType.Database_Health, new Date(), "org.eclipse.osee.test12", "23:15", "",
+	         "Suite A", "mike@eclipse.com", 90, 50000L));
+	      tasks.add(new Task(RunDatabase.Production_Database, TaskType.Backup, new Date(), "org.eclipse.osee.test13", "4:01",
+	         "run to test this", "Suite B", "steve@eclipse.com", 100, 50000L));
+	      tasks.add(new Task(RunDatabase.Production_Database, TaskType.Data_Exchange, new Date(), "org.eclipse.osee.test11", "3:16",
+	         "run to test this", "Suite A", "steve@eclipse.com", 53, 50000000000L));
+	      tasks.add(new Task(RunDatabase.Test_Database, TaskType.Backup, new Date(), "org.eclipse.osee.test10", "5:01",
+	         "run to test this", "Suite C", "mike@eclipse.com", 0, 50000L));
+	      tasks.add(new Task(RunDatabase.Production_Database, TaskType.Data_Exchange, new Date(), "org.eclipse.osee.test9", "4:27",
+	         "run to test this", "Suite C", "steve@eclipse.com", 90, 50000L));
+	      tasks.add(new Task(RunDatabase.Production_Database, TaskType.Regression, new Date(), "org.eclipse.osee.test7", "2:37",
+	         "run to test this", "Suite C", "john@eclipse.com", 20, 50000L));
+	      int num = 10;
+	      for (String str : Arrays.asList("Now", "Cat", "Dog", "Tree", "Bike", "Sun", "Moon", "Grass", "Can", "Car",
+	         "Truck", "Block", "Earth", "Mars", "Venus", "Requirements visualization", "Requirements management",
+	         "Feature management", "Modeling", "Design", "Project Management", "Change management",
+	         "Configuration Management", "Software Information Management", "Build management", "Testing",
+	         "Release Management", "Software Deployment", "Issue management", "Monitoring and reporting", "Workflow")) {
+	         tasks.add(new Task(RunDatabase.Test_Database, TaskType.Database_Health, new Date(), "org.eclipse.osee." + str, "24:" + num++,
+	            str + " will run to test this", "Suite C" + num++, str.toLowerCase().replaceAll(" ", ".") + "@eclipse.com",
+	            20, 340000));
+	      }
+	      return tasks;
 	}
 }
