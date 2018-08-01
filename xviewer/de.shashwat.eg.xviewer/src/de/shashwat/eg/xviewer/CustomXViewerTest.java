@@ -9,6 +9,10 @@ import org.eclipse.jface.action.Action;
 import org.eclipse.jface.action.ActionContributionItem;
 import org.eclipse.jface.layout.GridDataFactory;
 import org.eclipse.jface.layout.GridLayoutFactory;
+import org.eclipse.nebula.widgets.xviewer.edit.DefaultXViewerControlFactory;
+import org.eclipse.nebula.widgets.xviewer.edit.XViewerControlFactory;
+import org.eclipse.nebula.widgets.xviewer.edit.XViewerConverter;
+import org.eclipse.nebula.widgets.xviewer.edit.XViewerMultiEditAdapter;
 import org.eclipse.nebula.widgets.xviewer.util.XViewerDisplay;
 import org.eclipse.swt.SWT;
 import org.eclipse.swt.layout.GridData;
@@ -25,12 +29,25 @@ import de.shashwat.eg.xviewer.model.ITask.RunDatabase;
 import de.shashwat.eg.xviewer.model.ITask.TaskType;
 import de.shashwat.eg.xviewer.model.Task;
 import de.shashwat.eg.xviewer.ui.CustomXViewer;
+import de.shashwat.eg.xviewer.ui.CustomXViewerContentProvider;
+import de.shashwat.eg.xviewer.ui.CustomXViewerConverter;
 import de.shashwat.eg.xviewer.ui.CustomXViewerFactory;
+import de.shashwat.eg.xviewer.ui.CustomXViewerLabelProvider;
 import de.shashwat.eg.xviewer.ui.DefaultCustomizations;
 
+/**
+ * The Class CustomXViewerTest.
+ */
 public class CustomXViewerTest {
+	
+	/** The xviewer. */
 	static CustomXViewer xviewer;
 
+	/**
+	 * The main method.
+	 *
+	 * @param args the arguments
+	 */
 	public static void main(String[] args) {
 		final Display display = Display.getDefault();
 		final Shell shell = new Shell(display, SWT.SHELL_TRIM);
@@ -48,7 +65,19 @@ public class CustomXViewerTest {
 		xviewer = new CustomXViewer(shell, SWT.MULTI | SWT.BORDER | SWT.FULL_SELECTION);
 		xviewer.getTree().setLayoutData(new GridData(GridData.FILL_BOTH));
 		
+		xviewer.setContentProvider(new CustomXViewerContentProvider());
+		xviewer.setLabelProvider(new CustomXViewerLabelProvider(xviewer));
+		
+		XViewerControlFactory controlFactory = new DefaultXViewerControlFactory();
+		XViewerConverter converter = new CustomXViewerConverter();
+		xviewer.setXViewerEditAdapter(new XViewerMultiEditAdapter(controlFactory, converter));
+
 		createToolBar(toolBarComp);
+
+		List<Object> tasks = new ArrayList<Object>();
+		for (int x = 0; x < 1; x++) {
+			tasks.addAll(getSampleTasks());
+		}
 
 		shell.open();
 		while (!shell.isDisposed()) {
@@ -58,6 +87,12 @@ public class CustomXViewerTest {
 		}
 	}
 
+	/**
+	 * Creates the tool bar.
+	 *
+	 * @param toolBarComp the tool bar comp
+	 */
+	@SuppressWarnings("unchecked")
 	private static void createToolBar(final Composite toolBarComp) {
 		Composite comp = new Composite(toolBarComp, SWT.NONE);
 		comp.setLayout(new GridLayout());
@@ -114,6 +149,11 @@ public class CustomXViewerTest {
 		});
 	}
 	
+	/**
+	 * Gets the sample tasks.
+	 *
+	 * @return the sample tasks
+	 */
 	private static List<ITask> getSampleTasks() {
 		 List<ITask> tasks = new ArrayList<ITask>();
 	      Task task =

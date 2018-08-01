@@ -212,4 +212,13 @@ public class Task implements ITask {
 	public long getLongValue() {
 		return this.longValue;
 	}
+
+	/**
+	 * Sets the percent complete.
+	 *
+	 * @param percentComplete the new percent complete
+	 */
+	public void setPercentComplete(Integer percentComplete) {
+		this.percentComplete = percentComplete;
+	}
 }
