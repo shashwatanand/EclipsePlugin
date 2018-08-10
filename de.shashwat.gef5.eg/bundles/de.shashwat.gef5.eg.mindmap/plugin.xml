@@ -16,6 +16,10 @@
                name="applicationCSS"
                value="platform:/plugin/de.shashwat.gef5.eg.mindmap/css/default.css">
          </property>
+         <property
+               name="appName"
+               value="de.shashwat.gef5.eg.mindmap">
+         </property>
       </product>
    </extension>
 
