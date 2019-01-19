@@ -34,7 +34,7 @@ public class SampleAppMain {
 		});*/
 		router.get("/getStudent").produces("*/json").handler(rContext -> {
 			HttpServerResponse response = rContext.response();
-			response.setChunked(true).end(Json.encodePrettily(new Student()));
+			response.setChunked(true).end(Json.encodePrettily(new Student("22", "Shashwat")));
 		});
 		server.requestHandler(router::accept).listen(8081);
 	}
