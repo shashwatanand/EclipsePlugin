@@ -14,12 +14,22 @@ import io.reactivex.Single;
  * The Class StudentServiceImpl.
  */
 public class StudentServiceImpl implements IStudentService {
+	
+	/** The students. */
 	private List<StudentModel> students;
 
+	/**
+	 * Instantiates a new student service impl.
+	 */
 	public StudentServiceImpl() {
 		this.students = createStudents();
 	}
 	
+	/**
+	 * Creates the students.
+	 *
+	 * @return the list
+	 */
 	private List<StudentModel> createStudents() {
 		List<StudentModel> returnList = new ArrayList<>();
 		
@@ -36,6 +46,15 @@ public class StudentServiceImpl implements IStudentService {
 		return returnList;
 	}
 
+	/**
+	 * Creates the student.
+	 *
+	 * @param id the id
+	 * @param name the name
+	 * @param department the department
+	 * @param collegeName the college name
+	 * @return the student model
+	 */
 	private StudentModel createStudent(String id, String name, String department, String collegeName) {
 		return new StudentModel(id, name, department, collegeName);
 	}
