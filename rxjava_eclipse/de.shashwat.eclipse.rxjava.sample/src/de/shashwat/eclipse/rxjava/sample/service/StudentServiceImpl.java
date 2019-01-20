@@ -13,6 +13,7 @@ import io.reactivex.Single;
 /**
  * The Class StudentServiceImpl.
  */
+//@Component(service=IStudentService.class)
 public class StudentServiceImpl implements IStudentService {
 	
 	/** The students. */
