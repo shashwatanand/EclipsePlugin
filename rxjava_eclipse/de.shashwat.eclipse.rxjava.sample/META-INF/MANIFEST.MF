@@ -18,3 +18,4 @@ Require-Bundle: javax.inject;bundle-version="0.0.0",
  org.reactivestreams.reactive-streams;bundle-version="1.0.0"
 Import-Package: javax.annotation;version="0.0.0"
 Automatic-Module-Name: de.shashwat.eclipse.rxjava.sample
+Service-Component: student_service.xml
