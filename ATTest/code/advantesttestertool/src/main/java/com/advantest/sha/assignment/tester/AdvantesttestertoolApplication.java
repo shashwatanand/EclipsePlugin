@@ -7,8 +7,8 @@ import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
-import static java.lang.System.exit;
-
+import com.advantest.sha.assignment.tester.data.TestSuites;
+import com.advantest.sha.assignment.tester.data.TestSystems;
 
 @SpringBootApplication
 public class AdvantesttestertoolApplication implements CommandLineRunner {
@@ -24,11 +24,17 @@ public class AdvantesttestertoolApplication implements CommandLineRunner {
 
 	@Override
 	public void run(String... args) throws Exception {
+		initTestSystemAndSuitesModel();
 		LOG.info("EXECUTING : command line runner");
 
 		for (int i = 0; i < args.length; ++i) {
 			LOG.info("args[{}]: {}", i, args[i]);
 		}
+	}
+
+	private void initTestSystemAndSuitesModel() {
+		TestSystems.getInstance().createTextSystems();
+		TestSuites.getInstance();
 	}
 
 }
