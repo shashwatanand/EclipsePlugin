@@ -6,14 +6,14 @@ import java.util.UUID;
 
 import com.advantest.sha.assignment.tester.utils.SupportedOS;
 
-public class TestSystem {
+public class TestSystemModel {
 	private String id;
 	private String name;
 	private SupportedOS supportedOS;
 	private boolean isBusy;
-	private List<Device> devices;
+	private List<DeviceModel> devices;
 	
-	private TestSystem() {
+	private TestSystemModel() {
 	}
 	
 	public String getId() {
@@ -36,7 +36,7 @@ public class TestSystem {
 		this.isBusy = isBusy;
 	}
 
-	public List<Device> getDevices() {
+	public List<DeviceModel> getDevices() {
 		return devices;
 	}
 
@@ -44,7 +44,7 @@ public class TestSystem {
 		private String id;
 		private String name;
 		private SupportedOS supportedOS;
-		private List<Device> devices;
+		private List<DeviceModel> devices;
         
         public Builder(final SupportedOS supportedOS) {
             this.id = UUID.randomUUID().toString();
@@ -57,13 +57,13 @@ public class TestSystem {
             return this;
         }
         
-        public Builder addDevice(final Device device){
+        public Builder addDevice(final DeviceModel device){
             this.devices.add(device);
             return this;
         }
         
-        public TestSystem build(){
-        	TestSystem testSystem = new TestSystem();
+        public TestSystemModel build(){
+        	TestSystemModel testSystem = new TestSystemModel();
         	testSystem.id = this.id;
             testSystem.name = this.name;
             testSystem.supportedOS = this.supportedOS;

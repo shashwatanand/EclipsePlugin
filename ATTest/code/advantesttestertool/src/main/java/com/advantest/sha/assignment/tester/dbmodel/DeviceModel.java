@@ -2,7 +2,7 @@ package com.advantest.sha.assignment.tester.dbmodel;
 
 import java.util.UUID;
 
-public class Device {
+public class DeviceModel {
 	private String id;
 	private String name;
 
@@ -10,7 +10,7 @@ public class Device {
 	 * @param id
 	 * @param name
 	 */
-	public Device(String name) {
+	public DeviceModel(String name) {
 		super();
 		this.id = UUID.randomUUID().toString();
 		this.name = name;
