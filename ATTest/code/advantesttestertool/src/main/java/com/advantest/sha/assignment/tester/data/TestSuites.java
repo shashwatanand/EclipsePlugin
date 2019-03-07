@@ -2,8 +2,8 @@ package com.advantest.sha.assignment.tester.data;
 
 import java.io.File;
 import java.io.IOException;
-import java.util.HashMap;
 import java.util.Map;
+import java.util.concurrent.ConcurrentHashMap;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -20,7 +20,7 @@ public class TestSuites {
 	private TestSuites() {
 		File folderRes;
 		try {
-			this.avaiableTestSuites = new HashMap<>();
+			this.avaiableTestSuites = new ConcurrentHashMap<>();
 			folderRes = new ClassPathResource("testsuites").getFile();
 			if (folderRes.isDirectory()) {
 				initTestSuite(folderRes.list());
@@ -43,5 +43,9 @@ public class TestSuites {
 			TestSuiteModel testSuiteModel = TesterUtil.getTestSuiteModel(fileName);
 			this.avaiableTestSuites.put(testSuiteModel.getName(), testSuiteModel);
 		}
+	}
+	
+	public Map<String, TestSuiteModel> getAvaiableTestSuites() {
+		return avaiableTestSuites;
 	}
 }

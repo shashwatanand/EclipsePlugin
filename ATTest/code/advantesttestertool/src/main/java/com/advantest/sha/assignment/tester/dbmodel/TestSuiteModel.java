@@ -2,16 +2,16 @@ package com.advantest.sha.assignment.tester.dbmodel;
 
 import java.util.List;
 
-import com.advantest.sha.assignment.tester.utils.SupportedOS;
+import com.advantest.sha.assignment.tester.utils.OS_Enum;
 
 public class TestSuiteModel {
 
 	private String name;
-	private SupportedOS suportedOS;
+	private OS_Enum suportedOS;
 	private List<DeviceModel> deviceList;
 	private long exceutionTime;
 
-	public TestSuiteModel(String name, SupportedOS suportedOS, List<DeviceModel> deviceList, long exceutionTime) {
+	public TestSuiteModel(String name, OS_Enum suportedOS, List<DeviceModel> deviceList, long exceutionTime) {
 		super();
 		this.name = name;
 		this.suportedOS = suportedOS;
@@ -27,11 +27,11 @@ public class TestSuiteModel {
 		this.name = name;
 	}
 
-	public SupportedOS getSuportedOS() {
+	public OS_Enum getSuportedOS() {
 		return suportedOS;
 	}
 
-	public void setSuportedOS(SupportedOS suportedOS) {
+	public void setSuportedOS(OS_Enum suportedOS) {
 		this.suportedOS = suportedOS;
 	}
 

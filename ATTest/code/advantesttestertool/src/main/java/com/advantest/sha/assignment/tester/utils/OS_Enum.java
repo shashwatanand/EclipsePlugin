@@ -1,6 +1,6 @@
 package com.advantest.sha.assignment.tester.utils;
 
-public enum SupportedOS {
+public enum OS_Enum {
 	WIN7,
 	WIN10,
 	MAC;

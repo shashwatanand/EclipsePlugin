@@ -4,12 +4,12 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.UUID;
 
-import com.advantest.sha.assignment.tester.utils.SupportedOS;
+import com.advantest.sha.assignment.tester.utils.OS_Enum;
 
 public class TestSystemModel {
 	private String id;
 	private String name;
-	private SupportedOS supportedOS;
+	private OS_Enum supportedOS;
 	private boolean isBusy;
 	private Map<String, DeviceModel> devices;
 
@@ -24,7 +24,7 @@ public class TestSystemModel {
 		return name;
 	}
 
-	public SupportedOS getSupportedOS() {
+	public OS_Enum getSupportedOS() {
 		return supportedOS;
 	}
 
@@ -43,10 +43,10 @@ public class TestSystemModel {
 	public static class Builder {
 		private String id;
 		private String name;
-		private SupportedOS supportedOS;
+		private OS_Enum supportedOS;
 		private Map<String, DeviceModel> devices;
 
-		public Builder(final SupportedOS supportedOS) {
+		public Builder(final OS_Enum supportedOS) {
 			this.id = UUID.randomUUID().toString();
 			this.supportedOS = supportedOS;
 			this.devices = new HashMap<>();

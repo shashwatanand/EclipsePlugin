@@ -18,7 +18,7 @@ public class TesterUtil {
 		long exceutionTime = 0;
 		List<DeviceModel> deviceList = new ArrayList<>();
 		String[] variables = fileName.split("_");
-		SupportedOS supportedOS = getSupportedOs(variables[1]);
+		OS_Enum supportedOS = getSupportedOs(variables[1]);
 		for (int index = 2; index < variables.length; index++) {
 			if (index == variables.length - 1) {
 				exceutionTime = Long.valueOf(variables[index]);
@@ -30,14 +30,14 @@ public class TesterUtil {
 		return new TestSuiteModel(name, supportedOS, deviceList, exceutionTime);
 	}
 	
-	public static SupportedOS getSupportedOs(String osStr) {
+	public static OS_Enum getSupportedOs(String osStr) {
 		switch (osStr) {
 		case "win7":
-			return SupportedOS.WIN7;
+			return OS_Enum.WIN7;
 		case "win10":
-			return SupportedOS.WIN10;
+			return OS_Enum.WIN10;
 		case "mac":
-			return SupportedOS.MAC;
+			return OS_Enum.MAC;
 		}
 		return null;
 	}
