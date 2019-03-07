@@ -9,6 +9,7 @@ import org.slf4j.LoggerFactory;
 import com.advantest.sha.assignment.tester.controller.ITesterToolController;
 import com.advantest.sha.assignment.tester.data.TestSuites;
 import com.advantest.sha.assignment.tester.data.TestSystems;
+import com.advantest.sha.assignment.tester.utils.TesterExecTask;
 
 public class TesterToolControllerImpl implements ITesterToolController {
 	private static Logger LOG = LoggerFactory.getLogger(TesterToolControllerImpl.class);

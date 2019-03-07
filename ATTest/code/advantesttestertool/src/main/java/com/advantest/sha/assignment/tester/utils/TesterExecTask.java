@@ -1,4 +1,4 @@
-package com.advantest.sha.assignment.tester.controller.impl;
+package com.advantest.sha.assignment.tester.utils;
 
 import java.util.List;
 import java.util.Map;
@@ -14,12 +14,18 @@ import com.advantest.sha.assignment.tester.dbmodel.TestSuiteModel;
 import com.advantest.sha.assignment.tester.dbmodel.TestSystemModel;
 
 public class TesterExecTask implements Runnable {
+	
 	private static Logger LOG = LoggerFactory.getLogger(TesterExecTask.class);
+	
+	private SendMail mailHelper;
+	
 	private String testSuiteName;
 	private Map<String, TestSuiteModel> avaibleTestSuites;
 	private boolean isRunning;
+	private String engineer;
 
 	public TesterExecTask(String testSuiteName) {
+		this.engineer = System.getProperty("user.name");
 		this.isRunning = false;
 		this.testSuiteName = testSuiteName;
 		this.avaibleTestSuites = TestSuites.getInstance().getAvaiableTestSuites();
@@ -36,35 +42,55 @@ public class TesterExecTask implements Runnable {
 	@Override
 	public void run() {
 		this.isRunning = true;
-		LOG.info("Starting processing testsuite name : " + this.testSuiteName);
-		if (!isEnteredTestSuiteNameIsValid(this.testSuiteName)) {
+		LOG.info("Starting processing testsuite filename : " + this.testSuiteName);
+		TestSuiteModel testSuite = TesterUtil.getTestSuiteModel(this.testSuiteName);
+		if (!isEnteredTestSuiteNameIsValid(testSuite.getName())) {
 			String msg = "Entered testsuite name is invalid";
 			LOG.error(msg);
+			return;
 		}
-		TestSuiteModel testSuite = this.avaibleTestSuites.get(this.testSuiteName);
-		
 		List<TestSystemModel> foundTestSystem = TestSystems.getInstance().findAvailableTestSystem(testSuite);
 		if (foundTestSystem.isEmpty()) {
 			String msg = "Unable to find test system with required OS and devices";
 			LOG.error(msg);
+			return;
 		}
 
-		while (!testSuite.isExceuted()) {
-			List<TestSystemModel> freeTestSystem = foundTestSystem.stream().filter(t -> !t.isBusy())
-					.collect(Collectors.toList());
-			if (freeTestSystem.isEmpty()) {
-				sleep(1, TimeUnit.SECONDS);
+		boolean successFlag = false;
+		try {
+			while (!testSuite.isExceuted()) {
+				List<TestSystemModel> freeTestSystem = foundTestSystem.stream().filter(t -> !t.isBusy())
+						.collect(Collectors.toList());
+				if (freeTestSystem.isEmpty()) {
+					sleep(1, TimeUnit.SECONDS);
+				}
+				TestSystemModel system = freeTestSystem.get(0);
+				startExecution(system, testSuite);
+				successFlag = true;
 			}
-			TestSystemModel system = freeTestSystem.get(0);
-			startExecution(system, testSuite);
+		} catch (Exception e) {
+			successFlag = false;
 		}
-		sendReport();
+		sendReport(testSuite, successFlag);
 
 		this.isRunning = false;
 	}
 	
-	private void sendReport() {
-		// TODO Auto-generated method stub
+	private void sendReport(TestSuiteModel testSuite, boolean successFlag) {
+		try {
+			SendMail mailHelper = new SendMail();
+			// Here ideally we should call LDAP get find the proper email address
+			String toEmailAdd = this.engineer + "@advantest.com";
+			String subject = "Execution report of " + testSuite.getName();
+			String message = "Test Suite " + testSuite.getName() + " executed sucessfully";
+			if (!successFlag) {
+				message = "Test Suite " + testSuite.getName()
+						+ " executed not sucessfully. Please see logs for more information";
+			}
+			mailHelper.sendEmail(toEmailAdd, subject, message);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
 	}
 
 	private void startExecution(TestSystemModel system, TestSuiteModel testSuite) {

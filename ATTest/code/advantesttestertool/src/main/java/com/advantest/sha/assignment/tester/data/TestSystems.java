@@ -29,7 +29,7 @@ public class TestSystems {
 	}
 
 	public void createTextSystems() {
-		this.inMemTestSystem.put("TestSystem1", new TestSystemModel.Builder(OS_Enum.WIN7).withName("TestSystem1")
+		this.inMemTestSystem.put("TestSystem1", new TestSystemModel.Builder(OS_Enum.MAC).withName("TestSystem1")
 				.addDevice(new DeviceModel("D1")).build());
 		this.inMemTestSystem.put("TestSystem2", new TestSystemModel.Builder(OS_Enum.WIN7).withName("TestSystem2")
 				.addDevice(new DeviceModel("D1")).addDevice(new DeviceModel("D2")).build());
@@ -38,6 +38,9 @@ public class TestSystems {
 						.addDevice(new DeviceModel("D2")).addDevice(new DeviceModel("D3")).build());
 		this.inMemTestSystem.put("TestSystem4", new TestSystemModel.Builder(OS_Enum.WIN7).withName("TestSystem4")
 				.addDevice(new DeviceModel("D1")).build());
+		this.inMemTestSystem.put("TestSystem5",
+				new TestSystemModel.Builder(OS_Enum.WIN10).withName("TestSystem5").addDevice(new DeviceModel("D1"))
+						.addDevice(new DeviceModel("D2")).addDevice(new DeviceModel("D3")).build());
 	}
 	
 	public Map<String, TestSystemModel> getInMemTestSystem() {
