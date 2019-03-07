@@ -10,6 +10,7 @@ public class TestSuiteModel {
 	private OS_Enum suportedOS;
 	private List<DeviceModel> deviceList;
 	private long exceutionTime;
+	private boolean isExceuted;
 
 	public TestSuiteModel(String name, OS_Enum suportedOS, List<DeviceModel> deviceList, long exceutionTime) {
 		super();
@@ -17,6 +18,7 @@ public class TestSuiteModel {
 		this.suportedOS = suportedOS;
 		this.deviceList = deviceList;
 		this.exceutionTime = exceutionTime;
+		this.isExceuted = false;
 	}
 
 	public String getName() {
@@ -49,6 +51,14 @@ public class TestSuiteModel {
 
 	public void setExceutionTime(long exceutionTime) {
 		this.exceutionTime = exceutionTime;
+	}
+
+	public boolean isExceuted() {
+		return isExceuted;
+	}
+
+	public void setExceuted(boolean isExceuted) {
+		this.isExceuted = isExceuted;
 	}
 
 }

@@ -68,6 +68,7 @@ public class TestSystemModel {
 			testSystem.name = this.name;
 			testSystem.supportedOS = this.supportedOS;
 			testSystem.devices = this.devices;
+			testSystem.isBusy = false;
 			return testSystem;
 		}
 	}

@@ -28,5 +28,4 @@ public class TesterToolControllerImpl implements ITesterToolController {
 			executorService.submit(new TesterExecTask(arg));
 		}
 	}
-
 }
