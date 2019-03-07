@@ -27,8 +27,5 @@ public class AdvantesttestertoolApplication implements CommandLineRunner {
 		LOG.info("EXECUTING : command line runner");
 		ITesterToolController controller = new TesterToolControllerImpl();
 		controller.processArguments(args);
-//		for (int i = 0; i < args.length; ++i) {
-//			LOG.info("args[{}]: {}", i, args[i]);
-//		}
 	}
 }
