@@ -17,8 +17,6 @@ public class TesterExecTask implements Runnable {
 	
 	private static Logger LOG = LoggerFactory.getLogger(TesterExecTask.class);
 	
-	private SendMail mailHelper;
-	
 	private String testSuiteName;
 	private Map<String, TestSuiteModel> avaibleTestSuites;
 	private boolean isRunning;

@@ -10,7 +10,7 @@ import com.advantest.sha.assignment.tester.dbmodel.TestSuiteModel;
 import com.advantest.sha.assignment.tester.dbmodel.TestSystemModel;
 import com.advantest.sha.assignment.tester.utils.OS_Enum;
 
-public class TestSystems {
+public class TestSystems implements ITestSystem {
 	private static TestSystems INSTANCE;
 	private Map<String, TestSystemModel> inMemTestSystem;
 
@@ -28,6 +28,7 @@ public class TestSystems {
 		return INSTANCE;
 	}
 
+	@Override
 	public void createTextSystems() {
 		this.inMemTestSystem.put("TestSystem1", new TestSystemModel.Builder(OS_Enum.MAC).withName("TestSystem1")
 				.addDevice(new DeviceModel("D1")).build());
@@ -43,10 +44,12 @@ public class TestSystems {
 						.addDevice(new DeviceModel("D2")).addDevice(new DeviceModel("D3")).build());
 	}
 	
+	@Override
 	public Map<String, TestSystemModel> getInMemTestSystem() {
 		return inMemTestSystem;
 	}
 	
+	@Override
 	public List<TestSystemModel> findAvailableTestSystem(TestSuiteModel testSuiteModel) {
 		OS_Enum requiredOs = testSuiteModel.getSuportedOS();
 		List<DeviceModel> neededDevices = testSuiteModel.getDeviceList();
