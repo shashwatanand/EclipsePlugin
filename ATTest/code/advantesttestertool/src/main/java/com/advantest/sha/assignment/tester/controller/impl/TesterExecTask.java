@@ -1,4 +1,4 @@
-package com.advantest.sha.assignment.tester.utils;
+package com.advantest.sha.assignment.tester.controller.impl;
 
 import java.util.List;
 import java.util.Map;
@@ -8,12 +8,15 @@ import java.util.stream.Collectors;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import com.advantest.sha.assignment.tester.controller.ITesterTestSuiteExecJob;
 import com.advantest.sha.assignment.tester.data.TestSuites;
 import com.advantest.sha.assignment.tester.data.TestSystems;
 import com.advantest.sha.assignment.tester.dbmodel.TestSuiteModel;
 import com.advantest.sha.assignment.tester.dbmodel.TestSystemModel;
+import com.advantest.sha.assignment.tester.utils.SendMail;
+import com.advantest.sha.assignment.tester.utils.TesterUtil;
 
-public class TesterExecTask implements Runnable {
+public class TesterExecTask implements ITesterTestSuiteExecJob {
 	
 	private static Logger LOG = LoggerFactory.getLogger(TesterExecTask.class);
 	
@@ -29,6 +32,7 @@ public class TesterExecTask implements Runnable {
 		this.avaibleTestSuites = TestSuites.getInstance().getAvaiableTestSuites();
 	}
 
+	@Override
 	public boolean isRunning() {
 		return this.isRunning;
 	}
@@ -74,7 +78,8 @@ public class TesterExecTask implements Runnable {
 		this.isRunning = false;
 	}
 	
-	private void sendReport(TestSuiteModel testSuite, boolean successFlag) {
+	@Override
+	public void sendReport(TestSuiteModel testSuite, boolean successFlag) {
 		try {
 			SendMail mailHelper = new SendMail();
 			// Here ideally we should call LDAP get find the proper email address
@@ -91,7 +96,8 @@ public class TesterExecTask implements Runnable {
 		}
 	}
 
-	private void startExecution(TestSystemModel system, TestSuiteModel testSuite) {
+	@Override
+	public void startExecution(TestSystemModel system, TestSuiteModel testSuite) {
 		system.setBusy(true);
 		long executionTime = testSuite.getExceutionTime();
 		LOG.info("Executing " + testSuite.getName() + " on " + system.getName() + " it will take " + executionTime + "minutes to complete");
