@@ -1,34 +1,15 @@
 package com.advantest.sha.assignment.tester.data;
 
-import java.io.File;
-import java.io.IOException;
-import java.util.Map;
-import java.util.concurrent.ConcurrentHashMap;
-
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.core.io.ClassPathResource;
 
-import com.advantest.sha.assignment.tester.dbmodel.TestSuiteModel;
-import com.advantest.sha.assignment.tester.utils.TesterUtil;
-
 public class TestSuites {
-	private static Logger LOG = LoggerFactory.getLogger(TestSuiteModel.class);
-	private Map<String, TestSuiteModel> avaiableTestSuites;
+	private static Logger LOG = LoggerFactory.getLogger(TestSuites.class);
 	private static TestSuites INSTANCE;
-
+	
 	private TestSuites() {
-		File folderRes;
-		try {
-			this.avaiableTestSuites = new ConcurrentHashMap<>();
-			folderRes = new ClassPathResource("testsuites").getFile();
-			if (folderRes.isDirectory()) {
-				initTestSuite(folderRes.list());
-			}
-			INSTANCE = this;
-		} catch (IOException e) {
-			LOG.debug("Error: {}", e);
-		}
+		INSTANCE = this;
 	}
 
 	public static TestSuites getInstance() {
@@ -38,14 +19,14 @@ public class TestSuites {
 		return INSTANCE;
 	}
 
-	private void initTestSuite(String[] fileNames) {
-		for (String fileName : fileNames) {
-			TestSuiteModel testSuiteModel = TesterUtil.getTestSuiteModel(fileName);
-			this.avaiableTestSuites.put(testSuiteModel.getName(), testSuiteModel);
+	public boolean isTestSuiteValid(String fileName) {
+		try {
+			new ClassPathResource("testsuites/" + fileName).getInputStream();
+			LOG.info("Test suite exists");
+			return true;
+		} catch (Exception e) {
+			LOG.debug("Unable to test suite in resource folder");
 		}
-	}
-	
-	public Map<String, TestSuiteModel> getAvaiableTestSuites() {
-		return avaiableTestSuites;
+		return false;
 	}
 }

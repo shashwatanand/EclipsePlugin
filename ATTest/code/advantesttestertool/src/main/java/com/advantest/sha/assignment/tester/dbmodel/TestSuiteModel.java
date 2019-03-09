@@ -61,4 +61,10 @@ public class TestSuiteModel {
 		this.isExceuted = isExceuted;
 	}
 
+	@Override
+	public String toString() {
+		return "TestSuiteModel [name=" + name + ", suportedOS=" + suportedOS + ", deviceList=" + deviceList
+				+ ", exceutionTime=" + exceutionTime + ", isExceuted=" + isExceuted + "]";
+	}
+
 }

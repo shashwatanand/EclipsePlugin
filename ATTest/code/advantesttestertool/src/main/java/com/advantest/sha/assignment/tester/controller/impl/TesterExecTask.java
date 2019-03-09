@@ -1,7 +1,6 @@
 package com.advantest.sha.assignment.tester.controller.impl;
 
 import java.util.List;
-import java.util.Map;
 import java.util.concurrent.TimeUnit;
 import java.util.stream.Collectors;
 
@@ -21,7 +20,6 @@ public class TesterExecTask implements ITesterTestSuiteExecJob {
 	private static Logger LOG = LoggerFactory.getLogger(TesterExecTask.class);
 	
 	private String testSuiteName;
-	private Map<String, TestSuiteModel> avaibleTestSuites;
 	private boolean isRunning;
 	private String engineer;
 
@@ -29,7 +27,6 @@ public class TesterExecTask implements ITesterTestSuiteExecJob {
 		this.engineer = System.getProperty("user.name");
 		this.isRunning = false;
 		this.testSuiteName = testSuiteName;
-		this.avaibleTestSuites = TestSuites.getInstance().getAvaiableTestSuites();
 	}
 
 	@Override
@@ -38,7 +35,7 @@ public class TesterExecTask implements ITesterTestSuiteExecJob {
 	}
 
 	private boolean isEnteredTestSuiteNameIsValid(String testSuiteName) {
-		return this.avaibleTestSuites.containsKey(testSuiteName);
+		return TestSuites.getInstance().isTestSuiteValid(testSuiteName);
 	}
 
 	@Override
@@ -46,7 +43,7 @@ public class TesterExecTask implements ITesterTestSuiteExecJob {
 		this.isRunning = true;
 		LOG.info("Starting processing testsuite filename : " + this.testSuiteName);
 		TestSuiteModel testSuite = TesterUtil.getTestSuiteModel(this.testSuiteName);
-		if (!isEnteredTestSuiteNameIsValid(testSuite.getName())) {
+		if (!isEnteredTestSuiteNameIsValid(this.testSuiteName)) {
 			String msg = "Entered testsuite name is invalid";
 			LOG.error(msg);
 			return;
@@ -92,6 +89,7 @@ public class TesterExecTask implements ITesterTestSuiteExecJob {
 			}
 			mailHelper.sendEmail(toEmailAdd, subject, message);
 		} catch (Exception e) {
+			
 			e.printStackTrace();
 		}
 	}
@@ -100,8 +98,9 @@ public class TesterExecTask implements ITesterTestSuiteExecJob {
 	public void startExecution(TestSystemModel system, TestSuiteModel testSuite) {
 		system.setBusy(true);
 		long executionTime = testSuite.getExceutionTime();
-		LOG.info("Executing " + testSuite.getName() + " on " + system.getName() + " it will take " + executionTime + "minutes to complete");
+		LOG.info("Executing " + testSuite.getName() + " on " + system.getName() + " it will take " + executionTime + " minutes to complete");
 		sleep(executionTime, TimeUnit.MINUTES);
+		testSuite.setExceuted(true);
 		system.setBusy(false);
 	}
 

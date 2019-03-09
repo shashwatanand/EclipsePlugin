@@ -17,13 +17,12 @@ public class TestSystems implements ITestSystem {
 	private TestSystems() {
 		if (INSTANCE == null) {
 			this.inMemTestSystem = new ConcurrentHashMap<>();
-			INSTANCE = this;
 		}
 	}
 
 	public static TestSystems getInstance() {
 		if (INSTANCE == null) {
-			new TestSystems();
+			INSTANCE = new TestSystems();
 		}
 		return INSTANCE;
 	}
@@ -59,6 +58,8 @@ public class TestSystems implements ITestSystem {
 			for (DeviceModel deviceModel : neededDevices) {
 				if (systemDevices.containsKey(deviceModel.getName())) {
 					isAllRequiredDevicesExists = true;
+				} else {
+					isAllRequiredDevicesExists = false;
 				}
 			}
 			return isAllRequiredDevicesExists;

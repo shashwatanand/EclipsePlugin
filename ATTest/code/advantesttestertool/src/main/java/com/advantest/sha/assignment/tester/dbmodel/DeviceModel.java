@@ -32,4 +32,9 @@ public class DeviceModel {
 		this.name = name;
 	}
 
+	@Override
+	public String toString() {
+		return "DeviceModel [id=" + id + ", name=" + name + "]";
+	}
+
 }

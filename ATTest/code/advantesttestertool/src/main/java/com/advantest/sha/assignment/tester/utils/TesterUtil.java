@@ -3,10 +3,14 @@ package com.advantest.sha.assignment.tester.utils;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 import com.advantest.sha.assignment.tester.dbmodel.DeviceModel;
 import com.advantest.sha.assignment.tester.dbmodel.TestSuiteModel;
 
 public class TesterUtil {
+	private static Logger LOG = LoggerFactory.getLogger(TesterUtil.class);
 	public static boolean isEmpty(final String inputStr) {
 		if (inputStr != null && !inputStr.isEmpty()) {
 			return false;
@@ -15,6 +19,7 @@ public class TesterUtil {
 	}
 
 	public static TestSuiteModel getTestSuiteModel(String fileName) {
+		LOG.info("Inside TesterUtil.getTestSuiteModel() with filename : " + fileName);
 		long exceutionTime = 0;
 		List<DeviceModel> deviceList = new ArrayList<>();
 		String[] variables = fileName.split("_");
@@ -40,5 +45,12 @@ public class TesterUtil {
 			return OS_Enum.MAC;
 		}
 		return null;
+	}
+	
+	public static long findExecutionTime(String fileName) {
+		if (fileName.contains("_")) {
+			return Long.valueOf(fileName.substring(fileName.lastIndexOf("_") + 1));
+		}
+		return 0;
 	}
 }

@@ -72,4 +72,10 @@ public class TestSystemModel {
 			return testSystem;
 		}
 	}
+
+	@Override
+	public String toString() {
+		return "TestSystemModel [id=" + id + ", name=" + name + ", supportedOS=" + supportedOS + ", isBusy=" + isBusy
+				+ ", devices=" + devices + "]";
+	}
 }

@@ -1,14 +1,13 @@
 
 package com.advantest.sha.assignment.tester.utils;
 
-import java.io.File;
-import java.io.FileInputStream;
-import java.io.IOException;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
 import java.util.Properties;
 
 import javax.mail.Address;
 import javax.mail.Message;
-import javax.mail.MessagingException;
 import javax.mail.PasswordAuthentication;
 import javax.mail.Session;
 import javax.mail.Transport;
@@ -22,16 +21,13 @@ import org.springframework.core.io.ClassPathResource;
 public class SendMail {
     private static final Logger LOG = LoggerFactory.getLogger(SendMail.class);
     
-	private static Properties appProp;
+	private static Properties appProp = new Properties();
 	
 	static {
-		File appProFile;
 		try {
-			appProFile = new ClassPathResource("application.properties").getFile();
-			appProp = new Properties();
-			appProp.load(new FileInputStream(appProFile));
-		} catch (IOException e) {
-			e.printStackTrace();
+			appProp.load(new ClassPathResource("application.properties").getInputStream());
+		} catch (Exception e) {
+			LOG.error("Unable to properties file");
 		}
 	}
     
@@ -67,8 +63,13 @@ public class SendMail {
 			Message message = new MimeMessage(session);
 			message.setFrom(new InternetAddress(fromMailId));
 			if (toMail != null) {
-				String[] emails = toMail.split(";");
-				Address[] to = new Address[emails.length];
+				List<String> emails = new ArrayList<>();
+				if (toMail.contains(";")) {
+					emails.addAll(Arrays.asList(toMail.split(";")));
+				} else {
+					emails.add(toMail);
+				}
+				Address[] to = new Address[emails.size()];
 				int counter = 0;
 				for(String email : emails) {
 					to[counter] = new InternetAddress(email.trim());
@@ -84,10 +85,10 @@ public class SendMail {
 			transport.connect();
 			Transport.send(message);
 
-			LOG.debug("Sent message successfully....");
+			LOG.info("Sent message successfully....");
 
-		} catch (MessagingException e) {
-			LOG.error("Unable to send email. Please see log {} ", e);
+		} catch (Exception e) {
+			LOG.info("Unable to send email. Please see log : {} ", e.getLocalizedMessage());
         }
 		LOG.info(txtMsg);
 
