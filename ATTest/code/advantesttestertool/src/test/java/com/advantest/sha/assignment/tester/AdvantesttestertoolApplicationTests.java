@@ -1,5 +1,8 @@
 package com.advantest.sha.assignment.tester;
 
+import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertTrue;
+
 import java.io.File;
 import java.io.IOException;
 import java.util.List;
@@ -11,6 +14,7 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.core.io.ClassPathResource;
 import org.springframework.test.context.junit4.SpringRunner;
 
+import com.advantest.sha.assignment.tester.data.TestSuites;
 import com.advantest.sha.assignment.tester.data.TestSystems;
 import com.advantest.sha.assignment.tester.dbmodel.TestSuiteModel;
 import com.advantest.sha.assignment.tester.dbmodel.TestSystemModel;
@@ -41,6 +45,16 @@ public class AdvantesttestertoolApplicationTests {
 				System.out.println(foundTestSystem.size() + " test system found for " + fileName);
 			}
 		}
+	}
+	
+	@Test
+	public void isTestSuiteExist() {
+		assertTrue(TestSuites.getInstance().isTestSuiteValid("TSuite_win7_D1_D2_D3_2"));
+	}
+	
+	@Test
+	public void isTestSuiteNotExist() {
+		assertFalse(TestSuites.getInstance().isTestSuiteValid("TSuite_win10_D1_D2_D3"));
 	}
 
 }
