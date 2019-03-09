@@ -21,9 +21,7 @@ public class TestSuites {
 
 	public boolean isTestSuiteValid(String fileName) {
 		try {
-			new ClassPathResource("testsuites/" + fileName).getInputStream();
-			LOG.info("Test suite exists");
-			return true;
+			return new ClassPathResource("testsuites/" + fileName).exists();
 		} catch (Exception e) {
 			LOG.debug("Unable to test suite in resource folder");
 		}
