@@ -14,4 +14,3 @@
 * Here `TSuite_mac_D1_D2_D3_3` require mac os and 3 devices name D1, D2 and D3 and will take **3 minutes to execute**.
 * After modifying the `application.properties` file. Please come back to `advantesttestertool` folder where pom file is present. You can open command prompt and run `mvn clean package` command.
 * $ `java -jar -debug target/advantesttestertool-1.0.jar TSuite_win7_D1_D2_D3_2 TSuite_win10_D1_D2_D3_12` will start the execution of 2 test suites.
-
