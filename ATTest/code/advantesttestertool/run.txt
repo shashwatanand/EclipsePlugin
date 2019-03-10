@@ -1,1 +1,1 @@
-java -jar target/advantesttestertool-1.0.jar TSuite_win7_D1_D2_D3_2 TSuite_win10_D1_D2_D3_12
+java -jar target/advantesttestertool-1.0.jar TSuite_win7_D1_D2_D3_2 TSuite_win7_D1_D2_D3_1
