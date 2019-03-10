@@ -18,9 +18,15 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.core.io.ClassPathResource;
 
+/**
+ * The Class SendMail.
+ */
 public class SendMail {
+    
+    /** The Constant LOG. */
     private static final Logger LOG = LoggerFactory.getLogger(SendMail.class);
     
+	/** The app prop. */
 	private static Properties appProp = new Properties();
 	
 	static {
@@ -31,6 +37,14 @@ public class SendMail {
 		}
 	}
     
+    /**
+     * Send email.
+     *
+     * @param toMail the to mail
+     * @param subject the subject
+     * @param txtMsg the txt msg
+     * @throws Exception the exception
+     */
     public void sendEmail(String toMail, String subject, String txtMsg) throws Exception {
         LOG.info(">>> sendEmail >>>");
         

@@ -20,6 +20,9 @@ import com.advantest.sha.assignment.tester.dbmodel.TestSuiteModel;
 import com.advantest.sha.assignment.tester.dbmodel.TestSystemModel;
 import com.advantest.sha.assignment.tester.utils.TesterUtil;
 
+/**
+ * The Class AdvantesttestertoolApplicationTests.
+ */
 @RunWith(SpringRunner.class)
 @SpringBootTest
 public class AdvantesttestertoolApplicationTests {
@@ -27,13 +30,19 @@ public class AdvantesttestertoolApplicationTests {
 
 	/**
 	 * Setup.
-	 * @throws IOException 
+	 *
+	 * @throws IOException Signals that an I/O exception has occurred.
 	 */
 	@BeforeClass
 	public static void setup() throws IOException {
 		TestSystems.getInstance().createTextSystems();
 	}
 
+	/**
+	 * Checks if is test system exists for test suite.
+	 *
+	 * @throws IOException Signals that an I/O exception has occurred.
+	 */
 	@Test
 	public void isTestSystemExistsForTestSuite() throws IOException {
 		File folderRes = new ClassPathResource("testsuites").getFile();
@@ -47,11 +56,17 @@ public class AdvantesttestertoolApplicationTests {
 		}
 	}
 	
+	/**
+	 * Checks if is test suite exist.
+	 */
 	@Test
 	public void isTestSuiteExist() {
 		assertTrue(TestSuites.getInstance().isTestSuiteValid("TSuite_win7_D1_D2_D3_2"));
 	}
 	
+	/**
+	 * Checks if is test suite not exist.
+	 */
 	@Test
 	public void isTestSuiteNotExist() {
 		assertFalse(TestSuites.getInstance().isTestSuiteValid("TSuite_win10_D1_D2_D3"));

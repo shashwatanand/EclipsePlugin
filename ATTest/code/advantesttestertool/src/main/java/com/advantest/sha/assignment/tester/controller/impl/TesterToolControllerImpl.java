@@ -12,9 +12,17 @@ import com.advantest.sha.assignment.tester.data.TestSuites;
 import com.advantest.sha.assignment.tester.data.TestSystems;
 import com.advantest.sha.assignment.tester.utils.TesterUtil;
 
+/**
+ * The Class TesterToolControllerImpl.
+ */
 public class TesterToolControllerImpl implements ITesterToolController {
+	
+	/** The log. */
 	private static Logger LOG = LoggerFactory.getLogger(TesterToolControllerImpl.class);
 	
+	/**
+	 * Instantiates a new tester tool controller impl.
+	 */
 	public TesterToolControllerImpl() {
 		TestSystems testSystemInstance = TestSystems.getInstance();
 		testSystemInstance.createTextSystems();
@@ -22,6 +30,9 @@ public class TesterToolControllerImpl implements ITesterToolController {
 		LOG.debug("In memory model initialized");
 	}
 
+	/* (non-Javadoc)
+	 * @see com.advantest.sha.assignment.tester.controller.ITesterToolController#processArguments(java.lang.String[])
+	 */
 	@Override
 	public void processArguments(String[] args) {
 		LOG.info("Inside processArguments");

@@ -15,29 +15,55 @@ import com.advantest.sha.assignment.tester.dbmodel.TestSystemModel;
 import com.advantest.sha.assignment.tester.utils.SendMail;
 import com.advantest.sha.assignment.tester.utils.TesterUtil;
 
+/**
+ * The Class TesterExecTask.
+ */
 public class TesterExecTask implements ITesterTestSuiteExecJob {
 	
+	/** The log. */
 	private static Logger LOG = LoggerFactory.getLogger(TesterExecTask.class);
 	
+	/** The test suite name. */
 	private String testSuiteName;
+	
+	/** The is running. */
 	private boolean isRunning;
+	
+	/** The engineer. */
 	private String engineer;
 
+	/**
+	 * Instantiates a new tester exec task.
+	 *
+	 * @param testSuiteName the test suite name
+	 */
 	public TesterExecTask(String testSuiteName) {
 		this.engineer = System.getProperty("user.name");
 		this.isRunning = false;
 		this.testSuiteName = testSuiteName;
 	}
 
+	/* (non-Javadoc)
+	 * @see com.advantest.sha.assignment.tester.controller.ITesterTestSuiteExecJob#isRunning()
+	 */
 	@Override
 	public boolean isRunning() {
 		return this.isRunning;
 	}
 
+	/**
+	 * Checks if is entered test suite name is valid.
+	 *
+	 * @param testSuiteName the test suite name
+	 * @return true, if is entered test suite name is valid
+	 */
 	private boolean isEnteredTestSuiteNameIsValid(String testSuiteName) {
 		return TestSuites.getInstance().isTestSuiteValid(testSuiteName);
 	}
 
+	/* (non-Javadoc)
+	 * @see java.lang.Runnable#run()
+	 */
 	@Override
 	public void run() {
 		this.isRunning = true;
@@ -75,6 +101,9 @@ public class TesterExecTask implements ITesterTestSuiteExecJob {
 		this.isRunning = false;
 	}
 	
+	/* (non-Javadoc)
+	 * @see com.advantest.sha.assignment.tester.controller.ITesterTestSuiteExecJob#sendReport(com.advantest.sha.assignment.tester.dbmodel.TestSuiteModel, boolean)
+	 */
 	@Override
 	public void sendReport(TestSuiteModel testSuite, boolean successFlag) {
 		try {
@@ -94,6 +123,9 @@ public class TesterExecTask implements ITesterTestSuiteExecJob {
 		}
 	}
 
+	/* (non-Javadoc)
+	 * @see com.advantest.sha.assignment.tester.controller.ITesterTestSuiteExecJob#startExecution(com.advantest.sha.assignment.tester.dbmodel.TestSystemModel, com.advantest.sha.assignment.tester.dbmodel.TestSuiteModel)
+	 */
 	@Override
 	public void startExecution(TestSystemModel system, TestSuiteModel testSuite) {
 		system.setBusy(true);
@@ -104,6 +136,12 @@ public class TesterExecTask implements ITesterTestSuiteExecJob {
 		system.setBusy(false);
 	}
 
+	/**
+	 * Sleep.
+	 *
+	 * @param sleepValue the sleep value
+	 * @param unit the unit
+	 */
 	private void sleep(final long sleepValue, final TimeUnit unit) {
 		try {
 			unit.sleep(sleepValue);
