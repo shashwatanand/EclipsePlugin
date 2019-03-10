@@ -114,7 +114,7 @@ public class TesterExecTask implements ITesterTestSuiteExecJob {
 			String message = "Test Suite " + testSuite.getName() + " executed sucessfully";
 			if (!successFlag) {
 				message = "Test Suite " + testSuite.getName()
-						+ " executed not sucessfully. Please see logs for more information";
+						+ " executed not successfully. Please see logs for more information";
 			}
 			mailHelper.sendEmail(toEmailAdd, subject, message);
 		} catch (Exception e) {
