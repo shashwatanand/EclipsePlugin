@@ -15,4 +15,4 @@
 * After modifying the `application.properties` file. Please come back to `advantesttestertool` folder where pom file is present. You can open command prompt and run `mvn clean package` command.
 * Following is example to start the application. I will start the execution of 2 test suites.
 	Example:
-    `$ java -jar -debug target/advantesttestertool-1.0.jar TSuite_win7_D1_D2_D3_2 TSuite_win10_D1_D2_D3_12`
+    `$ java -jar target/advantesttestertool-1.0.jar TSuite_win7_D1_D2_D3_2 TSuite_win7_D1_D2_D3_1`

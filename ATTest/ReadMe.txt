@@ -18,28 +18,27 @@ Steps to be followed
 6) After modifying the application.properties file. Please come back to advantesttestertool folder where pom file is present. You can open command prompt and run mvn clean package command.
 7) Following is example to start the application. I will start the execution of 2 test suites.
 	Example:
-	$ java -jar -debug target/advantesttestertool-1.0.jar TSuite_win7_D1_D2_D3_2 TSuite_win10_D1_D2_D3_12
-		19:22:06.137 [main] INFO com.advantest.sha.assignment.tester.AdvantesttestertoolApplication - STARTING THE APPLICATION
-		2019-03-10 19:22:06.437  INFO 22132 --- [           main] c.a.s.a.t.AdvantesttestertoolApplication : Starting AdvantesttestertoolApplication v1.0 on PIT01NB320 with PID 22132 (D:\Personal\Projects\code\EclipseDi\ATTest\code\advantesttestertool\target\advantesttestertool-1.0.jar started by shashwat.anand in D:\Personal\Projects\code\EclipseDi\ATTest\code\advantesttestertool)
-		2019-03-10 19:22:06.437  INFO 22132 --- [           main] c.a.s.a.t.AdvantesttestertoolApplication : No active profile set, falling back to default profiles: default
-		2019-03-10 19:22:06.807  INFO 22132 --- [           main] c.a.s.a.t.AdvantesttestertoolApplication : Started AdvantesttestertoolApplication in 0.599 seconds (JVM running for 0.887)
-		2019-03-10 19:22:06.807  INFO 22132 --- [           main] c.a.s.a.t.AdvantesttestertoolApplication : EXECUTING : command line runner
-		2019-03-10 19:22:06.807  INFO 22132 --- [           main] c.a.s.a.t.c.i.TesterToolControllerImpl   : Inside processArguments
-		2019-03-10 19:22:06.807  INFO 22132 --- [pool-1-thread-1] c.a.s.a.t.c.impl.TesterExecTask          : Starting processing testsuite filename : TSuite_win7_D1_D2_D3_2
-		2019-03-10 19:22:06.807  INFO 22132 --- [pool-1-thread-2] c.a.s.a.t.c.impl.TesterExecTask          : Starting processing testsuite filename : TSuite_win10_D1_D2_D3_12
-		2019-03-10 19:22:06.807  INFO 22132 --- [pool-1-thread-2] c.a.s.a.tester.utils.TesterUtil          : Inside TesterUtil.getTestSuiteModel() with filename : TSuite_win10_D1_D2_D3_12
-		2019-03-10 19:22:06.807  INFO 22132 --- [pool-1-thread-1] c.a.s.a.tester.utils.TesterUtil          : Inside TesterUtil.getTestSuiteModel() with filename : TSuite_win7_D1_D2_D3_2
-		2019-03-10 19:22:06.807  INFO 22132 --- [pool-1-thread-2] c.a.s.assignment.tester.data.TestSuites  : Test suite exists
-		2019-03-10 19:22:06.807  INFO 22132 --- [pool-1-thread-1] c.a.s.assignment.tester.data.TestSuites  : Test suite exists
-		2019-03-10 19:22:06.807  INFO 22132 --- [pool-1-thread-1] c.a.s.a.t.c.impl.TesterExecTask          : Executing TSuite2 on TestSystem3 it will take 2 minutes to complete
-		2019-03-10 19:22:06.807  INFO 22132 --- [pool-1-thread-2] c.a.s.a.t.c.impl.TesterExecTask          : Executing TSuite12 on TestSystem5 it will take 12 minutes to complete
-		2019-03-10 19:22:08.817  INFO 22132 --- [pool-1-thread-1] c.a.s.assignment.tester.utils.SendMail   : >>> sendEmail >>>
-		2019-03-10 19:22:08.832  INFO 22132 --- [pool-1-thread-1] c.a.s.assignment.tester.utils.SendMail   : Unable to send email. Please see log : Local address contains control or whitespace
-		2019-03-10 19:22:08.832  INFO 22132 --- [pool-1-thread-1] c.a.s.assignment.tester.utils.SendMail   : Test Suite TSuite2 executed successfully
-		2019-03-10 19:22:08.832  INFO 22132 --- [pool-1-thread-1] c.a.s.assignment.tester.utils.SendMail   : <<< sendEmail <<<
-		2019-03-10 19:22:18.823  INFO 22132 --- [pool-1-thread-2] c.a.s.assignment.tester.utils.SendMail   : >>> sendEmail >>>
-		2019-03-10 19:22:18.823  INFO 22132 --- [           main] c.a.s.a.t.AdvantesttestertoolApplication : APPLICATION FINISHED
-		2019-03-10 19:22:18.823  INFO 22132 --- [pool-1-thread-2] c.a.s.assignment.tester.utils.SendMail   : Unable to send email. Please see log : Local address contains control or whitespace
-		2019-03-10 19:22:18.823  INFO 22132 --- [pool-1-thread-2] c.a.s.assignment.tester.utils.SendMail   : Test Suite TSuite12 executed successfully
-		2019-03-10 19:22:18.823  INFO 22132 --- [pool-1-thread-2] c.a.s.assignment.tester.utils.SendMail   : <<< sendEmail <<<
+	shashwat.anand@PIT01NB320 MINGW64 /d/Personal/Projects/code/EclipseDi/ATTest/code/advantesttestertool (master)
+	$ java -jar target/advantesttestertool-1.0.jar TSuite_win7_D1_D2_D3_2 TSuite_win7_D1_D2_D3_1
+	19:06:12.260 [main] INFO com.advantest.sha.assignment.tester.AdvantesttestertoolApplication - STARTING THE APPLICATION
+	2019-03-10 19:06:12.578  INFO 21612 --- [           main] c.a.s.a.t.AdvantesttestertoolApplication : Starting AdvantesttestertoolApplication v1.0 on PIT01NB320 with PID 21612 (D:\Personal\Projects\code\EclipseDi\ATTest\code\advantesttestertool\target\advantesttestertool-1.0.jar started by shashwat.anand in D:\Personal\Projects\code\EclipseDi\ATTest\code\advantesttestertool)
+	2019-03-10 19:06:12.579  INFO 21612 --- [           main] c.a.s.a.t.AdvantesttestertoolApplication : No active profile set, falling back to default profiles: default
+	2019-03-10 19:06:12.962  INFO 21612 --- [           main] c.a.s.a.t.AdvantesttestertoolApplication : Started AdvantesttestertoolApplication in 0.628 seconds (JVM running for 0.919)
+	2019-03-10 19:06:12.963  INFO 21612 --- [           main] c.a.s.a.t.AdvantesttestertoolApplication : EXECUTING : command line runner
+	2019-03-10 19:06:13.105  INFO 21612 --- [           main] c.a.s.a.t.c.i.TesterToolControllerImpl   : Inside processArguments
+	2019-03-10 19:06:13.107  INFO 21612 --- [pool-1-thread-2] c.a.s.a.t.c.impl.TesterExecTask          : Starting processing testsuite filename : TSuite_win7_D1_D2_D3_1
+	2019-03-10 19:06:13.107  INFO 21612 --- [pool-1-thread-1] c.a.s.a.t.c.impl.TesterExecTask          : Starting processing testsuite filename : TSuite_win7_D1_D2_D3_2
+	2019-03-10 19:06:13.107  INFO 21612 --- [pool-1-thread-2] c.a.s.a.tester.utils.TesterUtil          : Inside TesterUtil.getTestSuiteModel() with filename : TSuite_win7_D1_D2_D3_1
+	2019-03-10 19:06:13.107  INFO 21612 --- [pool-1-thread-1] c.a.s.a.tester.utils.TesterUtil          : Inside TesterUtil.getTestSuiteModel() with filename : TSuite_win7_D1_D2_D3_2
+	2019-03-10 19:06:13.109  INFO 21612 --- [pool-1-thread-1] c.a.s.a.t.c.impl.TesterExecTask          : Executing TSuite2 on TestSystem3 it will take 2 minutes to complete
+	2019-03-10 19:06:13.109  INFO 21612 --- [pool-1-thread-2] c.a.s.a.t.c.impl.TesterExecTask          : Executing TSuite1 on TestSystem3 it will take 1 minutes to complete
+	2019-03-10 19:07:13.114  INFO 21612 --- [pool-1-thread-2] c.a.s.assignment.tester.utils.SendMail   : >>> sendEmail >>>
+	2019-03-10 19:07:13.128  INFO 21612 --- [pool-1-thread-2] c.a.s.assignment.tester.utils.SendMail   : Unable to send email. Please see log : Local address contains control or whitespace
+	2019-03-10 19:07:13.130  INFO 21612 --- [pool-1-thread-2] c.a.s.assignment.tester.utils.SendMail   : Test Suite TSuite1 executed sucessfully
+	2019-03-10 19:07:13.130  INFO 21612 --- [pool-1-thread-2] c.a.s.assignment.tester.utils.SendMail   : <<< sendEmail <<<
+	2019-03-10 19:08:13.110  INFO 21612 --- [pool-1-thread-1] c.a.s.assignment.tester.utils.SendMail   : >>> sendEmail >>>
+	2019-03-10 19:08:13.110  INFO 21612 --- [pool-1-thread-1] c.a.s.assignment.tester.utils.SendMail   : Unable to send email. Please see log : Local address contains control or whitespace
+	2019-03-10 19:08:13.110  INFO 21612 --- [pool-1-thread-1] c.a.s.assignment.tester.utils.SendMail   : Test Suite TSuite2 executed sucessfully
+	2019-03-10 19:08:13.110  INFO 21612 --- [pool-1-thread-1] c.a.s.assignment.tester.utils.SendMail   : <<< sendEmail <<<
+	2019-03-10 19:09:13.108  INFO 21612 --- [           main] c.a.s.a.t.AdvantesttestertoolApplication : APPLICATION FINISHED
 

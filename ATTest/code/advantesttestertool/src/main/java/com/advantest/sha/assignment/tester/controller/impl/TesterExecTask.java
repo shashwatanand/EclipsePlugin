@@ -88,10 +88,11 @@ public class TesterExecTask implements ITesterTestSuiteExecJob {
 						.collect(Collectors.toList());
 				if (freeTestSystem.isEmpty()) {
 					sleep(1, TimeUnit.SECONDS);
+				} else {
+					TestSystemModel system = freeTestSystem.get(0);
+					startExecution(system, testSuite);
+					successFlag = true;
 				}
-				TestSystemModel system = freeTestSystem.get(0);
-				startExecution(system, testSuite);
-				successFlag = true;
 			}
 		} catch (Exception e) {
 			successFlag = false;

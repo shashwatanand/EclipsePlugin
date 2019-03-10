@@ -38,10 +38,7 @@ public class TesterToolControllerImpl implements ITesterToolController {
 		LOG.info("Inside processArguments");
 		long timeout = 0;
 		for (String arg : args) {
-			long exceTime = TesterUtil.findExecutionTime(arg);
-			if (exceTime >= timeout) {
-				timeout = exceTime;
-			}
+			timeout += TesterUtil.findExecutionTime(arg);
 		}
 		ExecutorService executorService = Executors.newFixedThreadPool(TestSystems.getInstance().getInMemTestSystem().size());
 		for (String arg : args) {
