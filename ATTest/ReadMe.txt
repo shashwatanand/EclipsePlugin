@@ -1,35 +1,45 @@
 Readme - Adavntest Assignment
 ====================================================================
 
-Pre-resiste :
-1) Minimum Java 8 to complile
-2)
+Prerequisite
 
+1) Mimimum JDK 8 is required to compile the source code
+2) Maven is need to compile
 
-Launching the application :
---------------------------------------------------------------------
+Steps to be followed
 
-1) Extract the ATTest.zip 
-2) Goto ATTest\code folder
-3) You will find nashtechhw.exe, which is used to lanuch the application.
-4) Once the application is launched, then click on select file button to select the input file (I kept input.txt at NTATest folder which I used for my testing).
-5) Once the file is selected, you can click on Load File Button which will load the file.
-6) If there is any error in pattern or duplicate tuples are present, then application will show error at the bottom part in RED color.
-7) If the file is loaded without any issue, application will display 3 widgets  1) Select Query combo, 2) Search, 3) Dump result to file. 
-8) You can select 4 kinds of search query, by ID, by Name, by Pattern and by Flag.
-9) Once you select the type of query, then you can write your search item and click Search button.
-10) On success, application will show output in GREEN color and for failuer it will show output in RED color.
-11) For search by flag, checkbox can be used to pass true and false value for searching. Check box needs to be checked for true and unchecked for false.
-12) When you want to dump the results to file then click on Dump results to file.
-13) Then file dialog will open, where you need to select the file where you want to dump the result. Only GREEN color output will be dumped in file.
-14) If file is of known type like .txt, the application will try to lanuch the configured windows application (like notepad) for output file. (Tested on Windows 7)
+1) Extract ATTest.zip
+2) You will find code folder and ATTest.docx file which contains application, database and testcase design and other informations.
+3) Please navigate to advantesttestertool\src\main\resources's application.properties file where you can modify SMTP details which is need to send email. If it is not set, then application will log error while sending email and output the execution status on console
+4) In advantesttestertool\src\main\resources's you can will find testsuites folder which contains the supported testsuite. Some test suite names are:
+		TSuite_mac_D1_D2_D3_3
+		TSuite_win7_D1_D2_D3_1
+5) Here TSuite_mac_D1_D2_D3_3 require mac os and 3 devices name D1, D2 and D3 and will take 3 minutes to execute.
+6) After modifying the application.properties file. Please come back to advantesttestertool folder where pom file is present. You can open command prompt and run mvn clean package command.
+7) $ java -jar -debug target/advantesttestertool-1.0.jar TSuite_win7_D1_D2_D3_2 TSuite_win10_D1_D2_D3_12 will start the execution of 2 test suites.
+	Output:
+	$ java -jar -debug target/advantesttestertool-1.0.jar TSuite_win7_D1_D2_D3_2 TSuite_win10_D1_D2_D3_12
+		19:22:06.137 [main] INFO com.advantest.sha.assignment.tester.AdvantesttestertoolApplication - STARTING THE APPLICATION
+		2019-03-10 19:22:06.437  INFO 22132 --- [           main] c.a.s.a.t.AdvantesttestertoolApplication : Starting AdvantesttestertoolApplication v1.0 on PIT01NB320 with PID 22132 (D:\Personal\Projects\code\EclipseDi\ATTest\code\advantesttestertool\target\advantesttestertool-1.0.jar started by shashwat.anand in D:\Personal\Projects\code\EclipseDi\ATTest\code\advantesttestertool)
+		2019-03-10 19:22:06.437  INFO 22132 --- [           main] c.a.s.a.t.AdvantesttestertoolApplication : No active profile set, falling back to default profiles: default
+		2019-03-10 19:22:06.807  INFO 22132 --- [           main] c.a.s.a.t.AdvantesttestertoolApplication : Started AdvantesttestertoolApplication in 0.599 seconds (JVM running for 0.887)
+		2019-03-10 19:22:06.807  INFO 22132 --- [           main] c.a.s.a.t.AdvantesttestertoolApplication : EXECUTING : command line runner
+		2019-03-10 19:22:06.807  INFO 22132 --- [           main] c.a.s.a.t.c.i.TesterToolControllerImpl   : Inside processArguments
+		2019-03-10 19:22:06.807  INFO 22132 --- [pool-1-thread-1] c.a.s.a.t.c.impl.TesterExecTask          : Starting processing testsuite filename : TSuite_win7_D1_D2_D3_2
+		2019-03-10 19:22:06.807  INFO 22132 --- [pool-1-thread-2] c.a.s.a.t.c.impl.TesterExecTask          : Starting processing testsuite filename : TSuite_win10_D1_D2_D3_12
+		2019-03-10 19:22:06.807  INFO 22132 --- [pool-1-thread-2] c.a.s.a.tester.utils.TesterUtil          : Inside TesterUtil.getTestSuiteModel() with filename : TSuite_win10_D1_D2_D3_12
+		2019-03-10 19:22:06.807  INFO 22132 --- [pool-1-thread-1] c.a.s.a.tester.utils.TesterUtil          : Inside TesterUtil.getTestSuiteModel() with filename : TSuite_win7_D1_D2_D3_2
+		2019-03-10 19:22:06.807  INFO 22132 --- [pool-1-thread-2] c.a.s.assignment.tester.data.TestSuites  : Test suite exists
+		2019-03-10 19:22:06.807  INFO 22132 --- [pool-1-thread-1] c.a.s.assignment.tester.data.TestSuites  : Test suite exists
+		2019-03-10 19:22:06.807  INFO 22132 --- [pool-1-thread-1] c.a.s.a.t.c.impl.TesterExecTask          : Executing TSuite2 on TestSystem3 it will take 2 minutes to complete
+		2019-03-10 19:22:06.807  INFO 22132 --- [pool-1-thread-2] c.a.s.a.t.c.impl.TesterExecTask          : Executing TSuite12 on TestSystem5 it will take 12 minutes to complete
+		2019-03-10 19:22:08.817  INFO 22132 --- [pool-1-thread-1] c.a.s.assignment.tester.utils.SendMail   : >>> sendEmail >>>
+		2019-03-10 19:22:08.832  INFO 22132 --- [pool-1-thread-1] c.a.s.assignment.tester.utils.SendMail   : Unable to send email. Please see log : Local address contains control or whitespace
+		2019-03-10 19:22:08.832  INFO 22132 --- [pool-1-thread-1] c.a.s.assignment.tester.utils.SendMail   : Test Suite TSuite2 executed sucessfully
+		2019-03-10 19:22:08.832  INFO 22132 --- [pool-1-thread-1] c.a.s.assignment.tester.utils.SendMail   : <<< sendEmail <<<
+		2019-03-10 19:22:18.823  INFO 22132 --- [pool-1-thread-2] c.a.s.assignment.tester.utils.SendMail   : >>> sendEmail >>>
+		2019-03-10 19:22:18.823  INFO 22132 --- [           main] c.a.s.a.t.AdvantesttestertoolApplication : APPLICATION FINISHED
+		2019-03-10 19:22:18.823  INFO 22132 --- [pool-1-thread-2] c.a.s.assignment.tester.utils.SendMail   : Unable to send email. Please see log : Local address contains control or whitespace
+		2019-03-10 19:22:18.823  INFO 22132 --- [pool-1-thread-2] c.a.s.assignment.tester.utils.SendMail   : Test Suite TSuite12 executed sucessfully
+		2019-03-10 19:22:18.823  INFO 22132 --- [pool-1-thread-2] c.a.s.assignment.tester.utils.SendMail   : <<< sendEmail <<<
 
-
-Source structure:
---------------------------------------------------------------------
-
-In NTATest folder you will find code folder where there are 4 plugins
-1) com.nashtech.hw.shashwat.parent - This contains pom for packging eclipse plugins used maven tycho.
-2) com.nashtech.hw.shashwat.app - This plugin in the main eclipse plugin of application.
-3) com.nashtech.hw.shashwat.app.test - This plugin is test plugin which has Junit tests.
-4) com.nashtech.hw.shashwat.product - This plugin is having eclipse product file which is used to gererate application.exe
