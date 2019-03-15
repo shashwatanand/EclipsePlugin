@@ -43,7 +43,7 @@ public class CalculatePath {
 			}
 		}
 
-		return solution[A.length - 1][A.length - 1];
+		//return solution[A.length - 1][A.length - 1];
 	}
 
 	private int costOfTerrain(int i, int j) {
@@ -86,11 +86,11 @@ public class CalculatePath {
 	    	answer++; 
 	    }
 	    terrainCells[n - 1][m - 1] = 'V';
-	    answer += solve(values, 0, 0, 0); 
-	    return max(ans, 0); 
+	    //answer += solve(values, 0, 0, 0); 
+	    //return max(ans, 0); 
 	}
 
-	private int solve(int[][][] values, int row1, int col1, int row2) {
+	/*private int solve(int[][][] values, int row1, int col1, int row2) {
 		int col2 = (row1 + col1) - (row2); 
 		  
 	    // If both path reach the bottom right cell 
@@ -137,6 +137,6 @@ public class CalculatePath {
 	  
 	    // Returning the maximum of 4 options. 
 	    return dp[row1][col1][row2] = max({ch1, ch2, ch3, ch4}); 
-	}
+	}*/
 
 }

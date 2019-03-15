@@ -39,7 +39,7 @@ public class DataReader {
 						terrainCells[i][j] = terrainLine.toCharArray()[j];
 					}
 				}
-				CalculatePath calculatePath = new CalculatePath(replyMap, customerHsList, terrainCells)
+				CalculatePath calculatePath = new CalculatePath(replyMap, customerHsList, terrainCells);
 				System.out.println();
 			}
 		} catch (Exception e) {
