@@ -3,10 +3,23 @@
  */
 package de.shashwat.xtext.homeauto.generator;
 
+import com.google.common.base.Objects;
+import com.google.common.collect.Iterables;
+import de.shashwat.xtext.homeauto.ruleDSL.Declaration;
+import de.shashwat.xtext.homeauto.ruleDSL.Device;
+import de.shashwat.xtext.homeauto.ruleDSL.Rule;
+import de.shashwat.xtext.homeauto.ruleDSL.State;
+import java.util.Scanner;
+import org.eclipse.emf.common.util.EList;
+import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.resource.Resource;
+import org.eclipse.xtend2.lib.StringConcatenation;
 import org.eclipse.xtext.generator.AbstractGenerator;
 import org.eclipse.xtext.generator.IFileSystemAccess2;
 import org.eclipse.xtext.generator.IGeneratorContext;
+import org.eclipse.xtext.xbase.lib.Functions.Function1;
+import org.eclipse.xtext.xbase.lib.IterableExtensions;
+import org.eclipse.xtext.xbase.lib.ListExtensions;
 
 /**
  * Generates code from your model files on save.
@@ -17,5 +30,211 @@ import org.eclipse.xtext.generator.IGeneratorContext;
 public class RuleDSLGenerator extends AbstractGenerator {
   @Override
   public void doGenerate(final Resource resource, final IFileSystemAccess2 fsa, final IGeneratorContext context) {
+    final String simpleClassName = resource.getURI().trimFileExtension().lastSegment();
+    EList<EObject> _contents = resource.getContents();
+    EObject _head = null;
+    if (_contents!=null) {
+      _head=IterableExtensions.<EObject>head(_contents);
+    }
+    boolean _equals = Objects.equal(_head, null);
+    if (_equals) {
+      return;
+    }
+    final Iterable<Declaration> delaractions = Iterables.<Declaration>filter(IterableExtensions.<EObject>head(resource.getContents()).eContents(), Declaration.class);
+    StringConcatenation _builder = new StringConcatenation();
+    _builder.append("public static void fire(String event) {");
+    _builder.newLine();
+    {
+      Iterable<Device> _filter = Iterables.<Device>filter(delaractions, Device.class);
+      for(final Device device : _filter) {
+        {
+          EList<State> _states = device.getStates();
+          for(final State state : _states) {
+            _builder.append("\t");
+            _builder.append("if (\"");
+            String _name = state.getName();
+            _builder.append(_name, "\t");
+            _builder.append("\".equals(event)) {");
+            _builder.newLineIfNotEmpty();
+            _builder.append("\t");
+            _builder.append("\t");
+            _builder.append("System.out.println(\"");
+            String _name_1 = device.getName();
+            _builder.append(_name_1, "\t\t");
+            _builder.append(" is now ");
+            String _name_2 = state.getName();
+            _builder.append(_name_2, "\t\t");
+            _builder.append("!\");");
+            _builder.newLineIfNotEmpty();
+            _builder.append("\t");
+            _builder.append("}");
+            _builder.newLine();
+          }
+        }
+      }
+    }
+    {
+      Iterable<Rule> _filter_1 = Iterables.<Rule>filter(delaractions, Rule.class);
+      for(final Rule rule : _filter_1) {
+        _builder.append("\t");
+        _builder.append("if (\"");
+        String _name_3 = rule.getWhen().getName();
+        _builder.append(_name_3, "\t");
+        _builder.append("\".equals(event)) {");
+        _builder.newLineIfNotEmpty();
+        _builder.append("\t");
+        _builder.append("\t");
+        _builder.append("fire(\"");
+        String _name_4 = rule.getThen().getName();
+        _builder.append(_name_4, "\t\t");
+        _builder.append("\");");
+        _builder.newLineIfNotEmpty();
+        _builder.append("\t");
+        _builder.append("}");
+        _builder.newLine();
+      }
+    }
+    _builder.append("\t");
+    _builder.newLine();
+    _builder.append("}");
+    _builder.newLine();
+    _builder.newLine();
+    _builder.append("public static void main String... args) {");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("try (");
+    String _name_5 = Scanner.class.getName();
+    _builder.append(_name_5, "\t");
+    _builder.append(" scanner = new ");
+    String _name_6 = Scanner.class.getName();
+    _builder.append(_name_6, "\t");
+    _builder.append("(System.in)) {");
+    _builder.newLineIfNotEmpty();
+    _builder.append("\t\t");
+    _builder.append("System.out.println(\"Welcome home\");");
+    _builder.newLine();
+    _builder.append("\t\t");
+    _builder.append("System.out.println(\"Available commands : \");");
+    _builder.newLine();
+    {
+      Iterable<Device> _filter_2 = Iterables.<Device>filter(delaractions, Device.class);
+      for(final Device device_1 : _filter_2) {
+        {
+          EList<State> _states_1 = device_1.getStates();
+          for(final State state_1 : _states_1) {
+            _builder.append("\t\t");
+            _builder.append("System.out.println(\"");
+            String _name_7 = device_1.getName();
+            _builder.append(_name_7, "\t\t");
+            _builder.append(" ");
+            String _name_8 = state_1.getName();
+            _builder.append(_name_8, "\t\t");
+            _builder.append("!\");");
+            _builder.newLineIfNotEmpty();
+          }
+        }
+      }
+    }
+    _builder.append("\t\t");
+    _builder.append("System.out.println(\"Have fun\");");
+    _builder.newLine();
+    _builder.append("\t\t");
+    _builder.append("while (true) {");
+    _builder.newLine();
+    _builder.append("\t\t\t");
+    _builder.append("String command = scanner.next();");
+    _builder.newLine();
+    {
+      Iterable<Device> _filter_3 = Iterables.<Device>filter(delaractions, Device.class);
+      for(final Device device_2 : _filter_3) {
+        _builder.append("\t\t\t");
+        _builder.append("if (\"");
+        String _name_9 = device_2.getName();
+        _builder.append(_name_9, "\t\t\t");
+        _builder.append("\".equalsIgnoreCase(command)) {");
+        _builder.newLineIfNotEmpty();
+        _builder.append("\t\t\t");
+        _builder.append("\t");
+        _builder.append("String secondaryCommand = scanner.next();");
+        _builder.newLine();
+        {
+          EList<State> _states_2 = device_2.getStates();
+          for(final State state_2 : _states_2) {
+            _builder.append("\t\t\t");
+            _builder.append("\t");
+            _builder.append("if (\"");
+            String _name_10 = state_2.getName();
+            _builder.append(_name_10, "\t\t\t\t");
+            _builder.append("\".equalsIgnoreCase(secondaryCommand)) {");
+            _builder.newLineIfNotEmpty();
+            _builder.append("\t\t\t");
+            _builder.append("\t");
+            _builder.append("\t");
+            _builder.append("fire(\"");
+            String _name_11 = state_2.getName();
+            _builder.append(_name_11, "\t\t\t\t\t");
+            _builder.append("\");");
+            _builder.newLineIfNotEmpty();
+            _builder.append("\t\t\t");
+            _builder.append("\t");
+            _builder.append("} else");
+            _builder.newLine();
+          }
+        }
+        _builder.append("\t\t\t");
+        _builder.append("\t");
+        _builder.append("{");
+        _builder.newLine();
+        _builder.append("\t\t\t");
+        _builder.append("\t\t");
+        _builder.append("System.out.println(\"");
+        String _name_12 = device_2.getName();
+        _builder.append(_name_12, "\t\t\t\t\t");
+        _builder.append(" can only have the following states: ");
+        final Function1<State, String> _function = (State it) -> {
+          return it.getName();
+        };
+        String _join = IterableExtensions.join(ListExtensions.<State, String>map(device_2.getStates(), _function), ",");
+        _builder.append(_join, "\t\t\t\t\t");
+        _builder.append(".\");");
+        _builder.newLineIfNotEmpty();
+        _builder.append("\t\t\t");
+        _builder.append("\t");
+        _builder.append("}");
+        _builder.newLine();
+        _builder.append("\t\t\t");
+        _builder.append("}");
+        _builder.newLine();
+      }
+    }
+    _builder.append("\t\t\t\t");
+    _builder.append("if (\"bye\".equalIgnoreCase(command)) {");
+    _builder.newLine();
+    _builder.append("\t\t\t\t\t");
+    _builder.append("System.out.println(\"Ciao!\");");
+    _builder.newLine();
+    _builder.append("\t\t\t\t\t");
+    _builder.append("break;");
+    _builder.newLine();
+    _builder.append("\t\t\t\t");
+    _builder.append("}");
+    _builder.newLine();
+    _builder.append("\t\t\t");
+    _builder.append("}");
+    _builder.newLine();
+    _builder.append("\t\t");
+    _builder.append("}");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("}");
+    _builder.newLine();
+    _builder.append("}");
+    _builder.newLine();
+    fsa.generateFile((simpleClassName + ".java"), _builder);
+  }
+  
+  public String ruleMethodName(final Rule device) {
+    String _replaceAll = device.getDescription().replaceAll("\\s", "_");
+    return ("execute" + _replaceAll);
   }
 }

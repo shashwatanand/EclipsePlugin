@@ -7,6 +7,10 @@ import org.eclipse.emf.ecore.resource.Resource
 import org.eclipse.xtext.generator.AbstractGenerator
 import org.eclipse.xtext.generator.IFileSystemAccess2
 import org.eclipse.xtext.generator.IGeneratorContext
+import de.shashwat.xtext.homeauto.ruleDSL.Declaration
+import de.shashwat.xtext.homeauto.ruleDSL.Device
+import de.shashwat.xtext.homeauto.ruleDSL.Rule
+import java.util.Scanner
 
 /**
  * Generates code from your model files on save.
@@ -16,10 +20,65 @@ import org.eclipse.xtext.generator.IGeneratorContext
 class RuleDSLGenerator extends AbstractGenerator {
 
 	override void doGenerate(Resource resource, IFileSystemAccess2 fsa, IGeneratorContext context) {
-//		fsa.generateFile('greetings.txt', 'People to greet: ' + 
-//			resource.allContents
-//				.filter(Greeting)
-//				.map[name]
-//				.join(', '))
+		val simpleClassName = resource.URI.trimFileExtension.lastSegment
+		if (resource.contents?.head == null) {
+			return;
+		}
+		val delaractions = resource.contents.head.eContents.filter(Declaration)
+		fsa.generateFile(simpleClassName + '.java', '''
+			public static void fire(String event) {
+				«FOR device : delaractions.filter(Device)»
+					«FOR state : device.states»
+						if ("«state.name»".equals(event)) {
+							System.out.println("«device.name» is now «state.name»!");
+						}
+					«ENDFOR»
+				«ENDFOR»
+				«FOR rule : delaractions.filter(Rule)»
+					if ("«rule.when.name»".equals(event)) {
+						fire("«rule.then.name»");
+					}
+				«ENDFOR»
+				
+			}
+			
+			public static void main String... args) {
+				try («Scanner.name» scanner = new «Scanner.name»(System.in)) {
+					System.out.println("Welcome home");
+					System.out.println("Available commands : ");
+					«FOR device : delaractions.filter(Device)»
+						«FOR state : device.states»
+							System.out.println("«device.name» «state.name»!");
+						«ENDFOR»
+					«ENDFOR»
+					System.out.println("Have fun");
+					while (true) {
+						String command = scanner.next();
+						«FOR device : delaractions.filter(Device)»
+							if ("«device.name»".equalsIgnoreCase(command)) {
+								String secondaryCommand = scanner.next();
+								«FOR state : device.states»
+									if ("«state.name»".equalsIgnoreCase(secondaryCommand)) {
+										fire("«state.name»");
+									} else
+								«ENDFOR»
+								{
+									System.out.println("«device.name» can only have the following states: «device.states.map[name].join(',')».");
+								}
+							}
+							«ENDFOR»
+							if ("bye".equalIgnoreCase(command)) {
+								System.out.println("Ciao!");
+								break;
+							}
+						}
+					}
+				}
+			}
+		''')
+	}
+	
+	def ruleMethodName(Rule device) {
+		"execute" + device.description.replaceAll("\\s", '_');
 	}
 }

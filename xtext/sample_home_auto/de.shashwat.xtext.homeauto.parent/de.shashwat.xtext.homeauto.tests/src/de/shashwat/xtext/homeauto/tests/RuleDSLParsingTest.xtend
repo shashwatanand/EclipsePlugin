@@ -8,23 +8,82 @@ import de.shashwat.xtext.homeauto.ruleDSL.Model
 import org.eclipse.xtext.testing.InjectWith
 import org.eclipse.xtext.testing.extensions.InjectionExtension
 import org.eclipse.xtext.testing.util.ParseHelper
-import org.junit.jupiter.api.Assertions
+import org.eclipse.xtext.util.EmfFormatter
 import org.junit.jupiter.api.Test
 import org.junit.jupiter.api.^extension.ExtendWith
+import org.eclipse.xtext.testing.validation.ValidationTestHelper
+import org.eclipse.xtext.generator.IGenerator
+import org.eclipse.xtext.generator.InMemoryFileSystemAccess
 
 @ExtendWith(InjectionExtension)
 @InjectWith(RuleDSLInjectorProvider)
 class RuleDSLParsingTest {
 	@Inject
-	ParseHelper<Model> parseHelper
+	extension ParseHelper<Model> parseHelper
+	
+	@Inject
+	ValidationTestHelper validator
+	
+	@Inject
+	IGenerator generator
 	
 	@Test
-	def void loadModel() {
-		val result = parseHelper.parse('''
-			Hello Xtext!
+	def void testParser() {
+		val model = parseHelper.parse('''
+			Device Window can be OPEN, CLOSED
+			Device Heating can be ON, OFF
+			
+			Rule 'Close Window, when heating turned on'
+				when Heating.ON
+				then Window.CLOSED
+			
+			Rule 'Switch off heating, when windows gets opened'
+				when Window.OPEN
+				then Heating.OFF
 		''')
-		Assertions.assertNotNull(result)
-		val errors = result.eResource.errors
-		Assertions.assertTrue(errors.isEmpty, '''Unexpected errors: «errors.join(", ")»''')
+		println(EmfFormatter.objToStr(model))
+	}
+	
+	@Test
+	def void testSimpleFile() {
+		val model = '''
+			Device Window can be OPEN, CLOSED
+			Device Heating can be ON, OFF
+			
+			Rule 'Close Window, when heating turned on'
+				when Heating.ON
+				then Window.CLOSED
+			
+			Rule 'Switch off heating, when windows gets opened'
+				when Window.OPEN
+				then Heating.OFF
+		'''.parse
+		
+		validator.assertNoErrors(model);
+		val fsa = new InMemoryFileSystemAccess
+		generator.doGenerate(model.eResource, fsa)
+		
+		fsa.allFiles.values.head.toString.contains('''
+			public static void fire(String event) {
+				if ("opened".equals(event) {
+					System.out.println("Window is now opened");
+				}
+				if ("closed".equals(event) {
+					System.out.println("Window is now closed");
+				}
+				if ("on".equals(event) {
+					System.out.println("Heating is now on");
+				}
+				if ("off".equals(event) {
+					System.out.println("Heating is now off");
+				}
+				if ("on".equals(event) {
+					fire("closed");
+				}
+				if ("opened".equals(event) {
+					fire("off");
+				}
+			}
+		''')
 	}
 }
