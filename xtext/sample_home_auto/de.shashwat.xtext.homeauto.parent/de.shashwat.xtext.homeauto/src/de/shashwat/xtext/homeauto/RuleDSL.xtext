@@ -1,0 +1,9 @@
+grammar de.shashwat.xtext.homeauto.RuleDSL with org.eclipse.xtext.common.Terminals
+
+generate ruleDSL "http://www.shashwat.de/xtext/homeauto/RuleDSL"
+
+Model:
+	greetings+=Greeting*;
+	
+Greeting:
+	'Hello' name=ID '!';
