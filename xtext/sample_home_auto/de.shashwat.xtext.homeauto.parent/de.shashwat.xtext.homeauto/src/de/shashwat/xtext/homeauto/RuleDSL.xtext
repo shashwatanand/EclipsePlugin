@@ -10,7 +10,7 @@ Declaration:
 
 Device:
 	'Device' name=ID 'can' 'be'
-	(states+=State (',' states+=State)*)?;
+	states+=State (',' states+=State)*;
 
 State:
 	name=ID;

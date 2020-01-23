@@ -3,55 +3,57 @@
  */
 package de.shashwat.xtext.homeauto.ruleDSL.impl;
 
-import de.shashwat.xtext.homeauto.ruleDSL.Declaration;
-import de.shashwat.xtext.homeauto.ruleDSL.Model;
 import de.shashwat.xtext.homeauto.ruleDSL.RuleDSLPackage;
+import de.shashwat.xtext.homeauto.ruleDSL.State;
 
-import java.util.Collection;
-
-import org.eclipse.emf.common.notify.NotificationChain;
-
-import org.eclipse.emf.common.util.EList;
+import org.eclipse.emf.common.notify.Notification;
 
 import org.eclipse.emf.ecore.EClass;
-import org.eclipse.emf.ecore.InternalEObject;
 
+import org.eclipse.emf.ecore.impl.ENotificationImpl;
 import org.eclipse.emf.ecore.impl.MinimalEObjectImpl;
-
-import org.eclipse.emf.ecore.util.EObjectContainmentEList;
-import org.eclipse.emf.ecore.util.InternalEList;
 
 /**
  * <!-- begin-user-doc -->
- * An implementation of the model object '<em><b>Model</b></em>'.
+ * An implementation of the model object '<em><b>State</b></em>'.
  * <!-- end-user-doc -->
  * <p>
  * The following features are implemented:
  * </p>
  * <ul>
- *   <li>{@link de.shashwat.xtext.homeauto.ruleDSL.impl.ModelImpl#getDeclaractions <em>Declaractions</em>}</li>
+ *   <li>{@link de.shashwat.xtext.homeauto.ruleDSL.impl.StateImpl#getName <em>Name</em>}</li>
  * </ul>
  *
  * @generated
  */
-public class ModelImpl extends MinimalEObjectImpl.Container implements Model
+public class StateImpl extends MinimalEObjectImpl.Container implements State
 {
   /**
-   * The cached value of the '{@link #getDeclaractions() <em>Declaractions</em>}' containment reference list.
+   * The default value of the '{@link #getName() <em>Name</em>}' attribute.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @see #getDeclaractions()
+   * @see #getName()
    * @generated
    * @ordered
    */
-  protected EList<Declaration> declaractions;
+  protected static final String NAME_EDEFAULT = null;
+
+  /**
+   * The cached value of the '{@link #getName() <em>Name</em>}' attribute.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @see #getName()
+   * @generated
+   * @ordered
+   */
+  protected String name = NAME_EDEFAULT;
 
   /**
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * @generated
    */
-  protected ModelImpl()
+  protected StateImpl()
   {
     super();
   }
@@ -64,7 +66,7 @@ public class ModelImpl extends MinimalEObjectImpl.Container implements Model
   @Override
   protected EClass eStaticClass()
   {
-    return RuleDSLPackage.Literals.MODEL;
+    return RuleDSLPackage.Literals.STATE;
   }
 
   /**
@@ -73,13 +75,9 @@ public class ModelImpl extends MinimalEObjectImpl.Container implements Model
    * @generated
    */
   @Override
-  public EList<Declaration> getDeclaractions()
+  public String getName()
   {
-    if (declaractions == null)
-    {
-      declaractions = new EObjectContainmentEList<Declaration>(Declaration.class, this, RuleDSLPackage.MODEL__DECLARACTIONS);
-    }
-    return declaractions;
+    return name;
   }
 
   /**
@@ -88,14 +86,12 @@ public class ModelImpl extends MinimalEObjectImpl.Container implements Model
    * @generated
    */
   @Override
-  public NotificationChain eInverseRemove(InternalEObject otherEnd, int featureID, NotificationChain msgs)
+  public void setName(String newName)
   {
-    switch (featureID)
-    {
-      case RuleDSLPackage.MODEL__DECLARACTIONS:
-        return ((InternalEList<?>)getDeclaractions()).basicRemove(otherEnd, msgs);
-    }
-    return super.eInverseRemove(otherEnd, featureID, msgs);
+    String oldName = name;
+    name = newName;
+    if (eNotificationRequired())
+      eNotify(new ENotificationImpl(this, Notification.SET, RuleDSLPackage.STATE__NAME, oldName, name));
   }
 
   /**
@@ -108,8 +104,8 @@ public class ModelImpl extends MinimalEObjectImpl.Container implements Model
   {
     switch (featureID)
     {
-      case RuleDSLPackage.MODEL__DECLARACTIONS:
-        return getDeclaractions();
+      case RuleDSLPackage.STATE__NAME:
+        return getName();
     }
     return super.eGet(featureID, resolve, coreType);
   }
@@ -119,15 +115,13 @@ public class ModelImpl extends MinimalEObjectImpl.Container implements Model
    * <!-- end-user-doc -->
    * @generated
    */
-  @SuppressWarnings("unchecked")
   @Override
   public void eSet(int featureID, Object newValue)
   {
     switch (featureID)
     {
-      case RuleDSLPackage.MODEL__DECLARACTIONS:
-        getDeclaractions().clear();
-        getDeclaractions().addAll((Collection<? extends Declaration>)newValue);
+      case RuleDSLPackage.STATE__NAME:
+        setName((String)newValue);
         return;
     }
     super.eSet(featureID, newValue);
@@ -143,8 +137,8 @@ public class ModelImpl extends MinimalEObjectImpl.Container implements Model
   {
     switch (featureID)
     {
-      case RuleDSLPackage.MODEL__DECLARACTIONS:
-        getDeclaractions().clear();
+      case RuleDSLPackage.STATE__NAME:
+        setName(NAME_EDEFAULT);
         return;
     }
     super.eUnset(featureID);
@@ -160,10 +154,27 @@ public class ModelImpl extends MinimalEObjectImpl.Container implements Model
   {
     switch (featureID)
     {
-      case RuleDSLPackage.MODEL__DECLARACTIONS:
-        return declaractions != null && !declaractions.isEmpty();
+      case RuleDSLPackage.STATE__NAME:
+        return NAME_EDEFAULT == null ? name != null : !NAME_EDEFAULT.equals(name);
     }
     return super.eIsSet(featureID);
   }
 
-} //ModelImpl
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  @Override
+  public String toString()
+  {
+    if (eIsProxy()) return super.toString();
+
+    StringBuilder result = new StringBuilder(super.toString());
+    result.append(" (name: ");
+    result.append(name);
+    result.append(')');
+    return result.toString();
+  }
+
+} //StateImpl

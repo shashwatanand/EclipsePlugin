@@ -66,7 +66,10 @@ public class RuleDSLFactoryImpl extends EFactoryImpl implements RuleDSLFactory
     switch (eClass.getClassifierID())
     {
       case RuleDSLPackage.MODEL: return createModel();
-      case RuleDSLPackage.GREETING: return createGreeting();
+      case RuleDSLPackage.DECLARATION: return createDeclaration();
+      case RuleDSLPackage.DEVICE: return createDevice();
+      case RuleDSLPackage.STATE: return createState();
+      case RuleDSLPackage.RULE: return createRule();
       default:
         throw new IllegalArgumentException("The class '" + eClass.getName() + "' is not a valid classifier");
     }
@@ -90,10 +93,46 @@ public class RuleDSLFactoryImpl extends EFactoryImpl implements RuleDSLFactory
    * @generated
    */
   @Override
-  public Greeting createGreeting()
+  public Declaration createDeclaration()
   {
-    GreetingImpl greeting = new GreetingImpl();
-    return greeting;
+    DeclarationImpl declaration = new DeclarationImpl();
+    return declaration;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  @Override
+  public Device createDevice()
+  {
+    DeviceImpl device = new DeviceImpl();
+    return device;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  @Override
+  public State createState()
+  {
+    StateImpl state = new StateImpl();
+    return state;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  @Override
+  public Rule createRule()
+  {
+    RuleImpl rule = new RuleImpl();
+    return rule;
   }
 
   /**

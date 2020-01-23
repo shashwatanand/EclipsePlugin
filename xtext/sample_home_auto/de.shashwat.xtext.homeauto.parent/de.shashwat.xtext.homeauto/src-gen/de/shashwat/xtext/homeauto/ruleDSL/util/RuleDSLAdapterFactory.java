@@ -81,9 +81,24 @@ public class RuleDSLAdapterFactory extends AdapterFactoryImpl
         return createModelAdapter();
       }
       @Override
-      public Adapter caseGreeting(Greeting object)
+      public Adapter caseDeclaration(Declaration object)
       {
-        return createGreetingAdapter();
+        return createDeclarationAdapter();
+      }
+      @Override
+      public Adapter caseDevice(Device object)
+      {
+        return createDeviceAdapter();
+      }
+      @Override
+      public Adapter caseState(State object)
+      {
+        return createStateAdapter();
+      }
+      @Override
+      public Adapter caseRule(Rule object)
+      {
+        return createRuleAdapter();
       }
       @Override
       public Adapter defaultCase(EObject object)
@@ -123,16 +138,61 @@ public class RuleDSLAdapterFactory extends AdapterFactoryImpl
   }
 
   /**
-   * Creates a new adapter for an object of class '{@link de.shashwat.xtext.homeauto.ruleDSL.Greeting <em>Greeting</em>}'.
+   * Creates a new adapter for an object of class '{@link de.shashwat.xtext.homeauto.ruleDSL.Declaration <em>Declaration</em>}'.
    * <!-- begin-user-doc -->
    * This default implementation returns null so that we can easily ignore cases;
    * it's useful to ignore a case when inheritance will catch all the cases anyway.
    * <!-- end-user-doc -->
    * @return the new adapter.
-   * @see de.shashwat.xtext.homeauto.ruleDSL.Greeting
+   * @see de.shashwat.xtext.homeauto.ruleDSL.Declaration
    * @generated
    */
-  public Adapter createGreetingAdapter()
+  public Adapter createDeclarationAdapter()
+  {
+    return null;
+  }
+
+  /**
+   * Creates a new adapter for an object of class '{@link de.shashwat.xtext.homeauto.ruleDSL.Device <em>Device</em>}'.
+   * <!-- begin-user-doc -->
+   * This default implementation returns null so that we can easily ignore cases;
+   * it's useful to ignore a case when inheritance will catch all the cases anyway.
+   * <!-- end-user-doc -->
+   * @return the new adapter.
+   * @see de.shashwat.xtext.homeauto.ruleDSL.Device
+   * @generated
+   */
+  public Adapter createDeviceAdapter()
+  {
+    return null;
+  }
+
+  /**
+   * Creates a new adapter for an object of class '{@link de.shashwat.xtext.homeauto.ruleDSL.State <em>State</em>}'.
+   * <!-- begin-user-doc -->
+   * This default implementation returns null so that we can easily ignore cases;
+   * it's useful to ignore a case when inheritance will catch all the cases anyway.
+   * <!-- end-user-doc -->
+   * @return the new adapter.
+   * @see de.shashwat.xtext.homeauto.ruleDSL.State
+   * @generated
+   */
+  public Adapter createStateAdapter()
+  {
+    return null;
+  }
+
+  /**
+   * Creates a new adapter for an object of class '{@link de.shashwat.xtext.homeauto.ruleDSL.Rule <em>Rule</em>}'.
+   * <!-- begin-user-doc -->
+   * This default implementation returns null so that we can easily ignore cases;
+   * it's useful to ignore a case when inheritance will catch all the cases anyway.
+   * <!-- end-user-doc -->
+   * @return the new adapter.
+   * @see de.shashwat.xtext.homeauto.ruleDSL.Rule
+   * @generated
+   */
+  public Adapter createRuleAdapter()
   {
     return null;
   }

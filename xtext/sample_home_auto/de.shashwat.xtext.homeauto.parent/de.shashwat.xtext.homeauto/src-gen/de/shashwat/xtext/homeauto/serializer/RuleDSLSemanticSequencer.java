@@ -4,9 +4,11 @@
 package de.shashwat.xtext.homeauto.serializer;
 
 import com.google.inject.Inject;
-import de.shashwat.xtext.homeauto.ruleDSL.Greeting;
+import de.shashwat.xtext.homeauto.ruleDSL.Device;
 import de.shashwat.xtext.homeauto.ruleDSL.Model;
+import de.shashwat.xtext.homeauto.ruleDSL.Rule;
 import de.shashwat.xtext.homeauto.ruleDSL.RuleDSLPackage;
+import de.shashwat.xtext.homeauto.ruleDSL.State;
 import de.shashwat.xtext.homeauto.services.RuleDSLGrammarAccess;
 import java.util.Set;
 import org.eclipse.emf.ecore.EObject;
@@ -33,11 +35,17 @@ public class RuleDSLSemanticSequencer extends AbstractDelegatingSemanticSequence
 		Set<Parameter> parameters = context.getEnabledBooleanParameters();
 		if (epackage == RuleDSLPackage.eINSTANCE)
 			switch (semanticObject.eClass().getClassifierID()) {
-			case RuleDSLPackage.GREETING:
-				sequence_Greeting(context, (Greeting) semanticObject); 
+			case RuleDSLPackage.DEVICE:
+				sequence_Device(context, (Device) semanticObject); 
 				return; 
 			case RuleDSLPackage.MODEL:
 				sequence_Model(context, (Model) semanticObject); 
+				return; 
+			case RuleDSLPackage.RULE:
+				sequence_Rule(context, (Rule) semanticObject); 
+				return; 
+			case RuleDSLPackage.STATE:
+				sequence_State(context, (State) semanticObject); 
 				return; 
 			}
 		if (errorAcceptor != null)
@@ -46,19 +54,14 @@ public class RuleDSLSemanticSequencer extends AbstractDelegatingSemanticSequence
 	
 	/**
 	 * Contexts:
-	 *     Greeting returns Greeting
+	 *     Declaration returns Device
+	 *     Device returns Device
 	 *
 	 * Constraint:
-	 *     name=ID
+	 *     (name=ID states+=State states+=State*)
 	 */
-	protected void sequence_Greeting(ISerializationContext context, Greeting semanticObject) {
-		if (errorAcceptor != null) {
-			if (transientValues.isValueTransient(semanticObject, RuleDSLPackage.Literals.GREETING__NAME) == ValueTransient.YES)
-				errorAcceptor.accept(diagnosticProvider.createFeatureValueMissing(semanticObject, RuleDSLPackage.Literals.GREETING__NAME));
-		}
-		SequenceFeeder feeder = createSequencerFeeder(context, semanticObject);
-		feeder.accept(grammarAccess.getGreetingAccess().getNameIDTerminalRuleCall_1_0(), semanticObject.getName());
-		feeder.finish();
+	protected void sequence_Device(ISerializationContext context, Device semanticObject) {
+		genericSequencer.createSequence(context, semanticObject);
 	}
 	
 	
@@ -67,10 +70,53 @@ public class RuleDSLSemanticSequencer extends AbstractDelegatingSemanticSequence
 	 *     Model returns Model
 	 *
 	 * Constraint:
-	 *     greetings+=Greeting+
+	 *     declaractions+=Declaration+
 	 */
 	protected void sequence_Model(ISerializationContext context, Model semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);
+	}
+	
+	
+	/**
+	 * Contexts:
+	 *     Declaration returns Rule
+	 *     Rule returns Rule
+	 *
+	 * Constraint:
+	 *     (description=STRING when=[State|QualifiedName] then=[State|QualifiedName])
+	 */
+	protected void sequence_Rule(ISerializationContext context, Rule semanticObject) {
+		if (errorAcceptor != null) {
+			if (transientValues.isValueTransient(semanticObject, RuleDSLPackage.Literals.RULE__DESCRIPTION) == ValueTransient.YES)
+				errorAcceptor.accept(diagnosticProvider.createFeatureValueMissing(semanticObject, RuleDSLPackage.Literals.RULE__DESCRIPTION));
+			if (transientValues.isValueTransient(semanticObject, RuleDSLPackage.Literals.RULE__WHEN) == ValueTransient.YES)
+				errorAcceptor.accept(diagnosticProvider.createFeatureValueMissing(semanticObject, RuleDSLPackage.Literals.RULE__WHEN));
+			if (transientValues.isValueTransient(semanticObject, RuleDSLPackage.Literals.RULE__THEN) == ValueTransient.YES)
+				errorAcceptor.accept(diagnosticProvider.createFeatureValueMissing(semanticObject, RuleDSLPackage.Literals.RULE__THEN));
+		}
+		SequenceFeeder feeder = createSequencerFeeder(context, semanticObject);
+		feeder.accept(grammarAccess.getRuleAccess().getDescriptionSTRINGTerminalRuleCall_1_0(), semanticObject.getDescription());
+		feeder.accept(grammarAccess.getRuleAccess().getWhenStateQualifiedNameParserRuleCall_3_0_1(), semanticObject.eGet(RuleDSLPackage.Literals.RULE__WHEN, false));
+		feeder.accept(grammarAccess.getRuleAccess().getThenStateQualifiedNameParserRuleCall_5_0_1(), semanticObject.eGet(RuleDSLPackage.Literals.RULE__THEN, false));
+		feeder.finish();
+	}
+	
+	
+	/**
+	 * Contexts:
+	 *     State returns State
+	 *
+	 * Constraint:
+	 *     name=ID
+	 */
+	protected void sequence_State(ISerializationContext context, State semanticObject) {
+		if (errorAcceptor != null) {
+			if (transientValues.isValueTransient(semanticObject, RuleDSLPackage.Literals.STATE__NAME) == ValueTransient.YES)
+				errorAcceptor.accept(diagnosticProvider.createFeatureValueMissing(semanticObject, RuleDSLPackage.Literals.STATE__NAME));
+		}
+		SequenceFeeder feeder = createSequencerFeeder(context, semanticObject);
+		feeder.accept(grammarAccess.getStateAccess().getNameIDTerminalRuleCall_0(), semanticObject.getName());
+		feeder.finish();
 	}
 	
 	

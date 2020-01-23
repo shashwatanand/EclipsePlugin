@@ -31,9 +31,20 @@ public class RuleDSLParser extends AbstractContentAssistParser {
 		}
 		
 		private static void init(ImmutableMap.Builder<AbstractElement, String> builder, RuleDSLGrammarAccess grammarAccess) {
-			builder.put(grammarAccess.getGreetingAccess().getGroup(), "rule__Greeting__Group__0");
-			builder.put(grammarAccess.getModelAccess().getGreetingsAssignment(), "rule__Model__GreetingsAssignment");
-			builder.put(grammarAccess.getGreetingAccess().getNameAssignment_1(), "rule__Greeting__NameAssignment_1");
+			builder.put(grammarAccess.getDeclarationAccess().getAlternatives(), "rule__Declaration__Alternatives");
+			builder.put(grammarAccess.getDeviceAccess().getGroup(), "rule__Device__Group__0");
+			builder.put(grammarAccess.getDeviceAccess().getGroup_5(), "rule__Device__Group_5__0");
+			builder.put(grammarAccess.getRuleAccess().getGroup(), "rule__Rule__Group__0");
+			builder.put(grammarAccess.getQualifiedNameAccess().getGroup(), "rule__QualifiedName__Group__0");
+			builder.put(grammarAccess.getQualifiedNameAccess().getGroup_1(), "rule__QualifiedName__Group_1__0");
+			builder.put(grammarAccess.getModelAccess().getDeclaractionsAssignment(), "rule__Model__DeclaractionsAssignment");
+			builder.put(grammarAccess.getDeviceAccess().getNameAssignment_1(), "rule__Device__NameAssignment_1");
+			builder.put(grammarAccess.getDeviceAccess().getStatesAssignment_4(), "rule__Device__StatesAssignment_4");
+			builder.put(grammarAccess.getDeviceAccess().getStatesAssignment_5_1(), "rule__Device__StatesAssignment_5_1");
+			builder.put(grammarAccess.getStateAccess().getNameAssignment(), "rule__State__NameAssignment");
+			builder.put(grammarAccess.getRuleAccess().getDescriptionAssignment_1(), "rule__Rule__DescriptionAssignment_1");
+			builder.put(grammarAccess.getRuleAccess().getWhenAssignment_3(), "rule__Rule__WhenAssignment_3");
+			builder.put(grammarAccess.getRuleAccess().getThenAssignment_5(), "rule__Rule__ThenAssignment_5");
 		}
 	}
 	

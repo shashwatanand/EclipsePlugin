@@ -7,10 +7,20 @@
   <genPackages prefix="RuleDSL" basePackage="de.shashwat.xtext.homeauto" disposableProviderFactory="true"
       fileExtensions="rules" ecorePackage="RuleDSL.ecore#/">
     <genClasses ecoreClass="RuleDSL.ecore#//Model">
-      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference RuleDSL.ecore#//Model/greetings"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference RuleDSL.ecore#//Model/declaractions"/>
     </genClasses>
-    <genClasses ecoreClass="RuleDSL.ecore#//Greeting">
-      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute RuleDSL.ecore#//Greeting/name"/>
+    <genClasses ecoreClass="RuleDSL.ecore#//Declaration"/>
+    <genClasses ecoreClass="RuleDSL.ecore#//Device">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute RuleDSL.ecore#//Device/name"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference RuleDSL.ecore#//Device/states"/>
+    </genClasses>
+    <genClasses ecoreClass="RuleDSL.ecore#//State">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute RuleDSL.ecore#//State/name"/>
+    </genClasses>
+    <genClasses ecoreClass="RuleDSL.ecore#//Rule">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute RuleDSL.ecore#//Rule/description"/>
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference RuleDSL.ecore#//Rule/when"/>
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference RuleDSL.ecore#//Rule/then"/>
     </genClasses>
   </genPackages>
 </genmodel:GenModel>

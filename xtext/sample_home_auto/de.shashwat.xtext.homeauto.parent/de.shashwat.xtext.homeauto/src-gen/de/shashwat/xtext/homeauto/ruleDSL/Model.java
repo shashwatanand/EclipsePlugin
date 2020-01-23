@@ -16,7 +16,7 @@ import org.eclipse.emf.ecore.EObject;
  * The following features are supported:
  * </p>
  * <ul>
- *   <li>{@link de.shashwat.xtext.homeauto.ruleDSL.Model#getGreetings <em>Greetings</em>}</li>
+ *   <li>{@link de.shashwat.xtext.homeauto.ruleDSL.Model#getDeclaractions <em>Declaractions</em>}</li>
  * </ul>
  *
  * @see de.shashwat.xtext.homeauto.ruleDSL.RuleDSLPackage#getModel()
@@ -26,15 +26,15 @@ import org.eclipse.emf.ecore.EObject;
 public interface Model extends EObject
 {
   /**
-   * Returns the value of the '<em><b>Greetings</b></em>' containment reference list.
-   * The list contents are of type {@link de.shashwat.xtext.homeauto.ruleDSL.Greeting}.
+   * Returns the value of the '<em><b>Declaractions</b></em>' containment reference list.
+   * The list contents are of type {@link de.shashwat.xtext.homeauto.ruleDSL.Declaration}.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @return the value of the '<em>Greetings</em>' containment reference list.
-   * @see de.shashwat.xtext.homeauto.ruleDSL.RuleDSLPackage#getModel_Greetings()
+   * @return the value of the '<em>Declaractions</em>' containment reference list.
+   * @see de.shashwat.xtext.homeauto.ruleDSL.RuleDSLPackage#getModel_Declaractions()
    * @model containment="true"
    * @generated
    */
-  EList<Greeting> getGreetings();
+  EList<Declaration> getDeclaractions();
 
 } // Model

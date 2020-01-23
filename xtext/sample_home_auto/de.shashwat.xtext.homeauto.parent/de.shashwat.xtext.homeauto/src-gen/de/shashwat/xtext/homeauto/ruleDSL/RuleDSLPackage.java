@@ -68,13 +68,13 @@ public interface RuleDSLPackage extends EPackage
   int MODEL = 0;
 
   /**
-   * The feature id for the '<em><b>Greetings</b></em>' containment reference list.
+   * The feature id for the '<em><b>Declaractions</b></em>' containment reference list.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * @generated
    * @ordered
    */
-  int MODEL__GREETINGS = 0;
+  int MODEL__DECLARACTIONS = 0;
 
   /**
    * The number of structural features of the '<em>Model</em>' class.
@@ -86,14 +86,33 @@ public interface RuleDSLPackage extends EPackage
   int MODEL_FEATURE_COUNT = 1;
 
   /**
-   * The meta object id for the '{@link de.shashwat.xtext.homeauto.ruleDSL.impl.GreetingImpl <em>Greeting</em>}' class.
+   * The meta object id for the '{@link de.shashwat.xtext.homeauto.ruleDSL.impl.DeclarationImpl <em>Declaration</em>}' class.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @see de.shashwat.xtext.homeauto.ruleDSL.impl.GreetingImpl
-   * @see de.shashwat.xtext.homeauto.ruleDSL.impl.RuleDSLPackageImpl#getGreeting()
+   * @see de.shashwat.xtext.homeauto.ruleDSL.impl.DeclarationImpl
+   * @see de.shashwat.xtext.homeauto.ruleDSL.impl.RuleDSLPackageImpl#getDeclaration()
    * @generated
    */
-  int GREETING = 1;
+  int DECLARATION = 1;
+
+  /**
+   * The number of structural features of the '<em>Declaration</em>' class.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int DECLARATION_FEATURE_COUNT = 0;
+
+  /**
+   * The meta object id for the '{@link de.shashwat.xtext.homeauto.ruleDSL.impl.DeviceImpl <em>Device</em>}' class.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @see de.shashwat.xtext.homeauto.ruleDSL.impl.DeviceImpl
+   * @see de.shashwat.xtext.homeauto.ruleDSL.impl.RuleDSLPackageImpl#getDevice()
+   * @generated
+   */
+  int DEVICE = 2;
 
   /**
    * The feature id for the '<em><b>Name</b></em>' attribute.
@@ -102,16 +121,99 @@ public interface RuleDSLPackage extends EPackage
    * @generated
    * @ordered
    */
-  int GREETING__NAME = 0;
+  int DEVICE__NAME = DECLARATION_FEATURE_COUNT + 0;
 
   /**
-   * The number of structural features of the '<em>Greeting</em>' class.
+   * The feature id for the '<em><b>States</b></em>' containment reference list.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * @generated
    * @ordered
    */
-  int GREETING_FEATURE_COUNT = 1;
+  int DEVICE__STATES = DECLARATION_FEATURE_COUNT + 1;
+
+  /**
+   * The number of structural features of the '<em>Device</em>' class.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int DEVICE_FEATURE_COUNT = DECLARATION_FEATURE_COUNT + 2;
+
+  /**
+   * The meta object id for the '{@link de.shashwat.xtext.homeauto.ruleDSL.impl.StateImpl <em>State</em>}' class.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @see de.shashwat.xtext.homeauto.ruleDSL.impl.StateImpl
+   * @see de.shashwat.xtext.homeauto.ruleDSL.impl.RuleDSLPackageImpl#getState()
+   * @generated
+   */
+  int STATE = 3;
+
+  /**
+   * The feature id for the '<em><b>Name</b></em>' attribute.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int STATE__NAME = 0;
+
+  /**
+   * The number of structural features of the '<em>State</em>' class.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int STATE_FEATURE_COUNT = 1;
+
+  /**
+   * The meta object id for the '{@link de.shashwat.xtext.homeauto.ruleDSL.impl.RuleImpl <em>Rule</em>}' class.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @see de.shashwat.xtext.homeauto.ruleDSL.impl.RuleImpl
+   * @see de.shashwat.xtext.homeauto.ruleDSL.impl.RuleDSLPackageImpl#getRule()
+   * @generated
+   */
+  int RULE = 4;
+
+  /**
+   * The feature id for the '<em><b>Description</b></em>' attribute.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int RULE__DESCRIPTION = DECLARATION_FEATURE_COUNT + 0;
+
+  /**
+   * The feature id for the '<em><b>When</b></em>' reference.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int RULE__WHEN = DECLARATION_FEATURE_COUNT + 1;
+
+  /**
+   * The feature id for the '<em><b>Then</b></em>' reference.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int RULE__THEN = DECLARATION_FEATURE_COUNT + 2;
+
+  /**
+   * The number of structural features of the '<em>Rule</em>' class.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int RULE_FEATURE_COUNT = DECLARATION_FEATURE_COUNT + 3;
 
 
   /**
@@ -125,36 +227,121 @@ public interface RuleDSLPackage extends EPackage
   EClass getModel();
 
   /**
-   * Returns the meta object for the containment reference list '{@link de.shashwat.xtext.homeauto.ruleDSL.Model#getGreetings <em>Greetings</em>}'.
+   * Returns the meta object for the containment reference list '{@link de.shashwat.xtext.homeauto.ruleDSL.Model#getDeclaractions <em>Declaractions</em>}'.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @return the meta object for the containment reference list '<em>Greetings</em>'.
-   * @see de.shashwat.xtext.homeauto.ruleDSL.Model#getGreetings()
+   * @return the meta object for the containment reference list '<em>Declaractions</em>'.
+   * @see de.shashwat.xtext.homeauto.ruleDSL.Model#getDeclaractions()
    * @see #getModel()
    * @generated
    */
-  EReference getModel_Greetings();
+  EReference getModel_Declaractions();
 
   /**
-   * Returns the meta object for class '{@link de.shashwat.xtext.homeauto.ruleDSL.Greeting <em>Greeting</em>}'.
+   * Returns the meta object for class '{@link de.shashwat.xtext.homeauto.ruleDSL.Declaration <em>Declaration</em>}'.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @return the meta object for class '<em>Greeting</em>'.
-   * @see de.shashwat.xtext.homeauto.ruleDSL.Greeting
+   * @return the meta object for class '<em>Declaration</em>'.
+   * @see de.shashwat.xtext.homeauto.ruleDSL.Declaration
    * @generated
    */
-  EClass getGreeting();
+  EClass getDeclaration();
 
   /**
-   * Returns the meta object for the attribute '{@link de.shashwat.xtext.homeauto.ruleDSL.Greeting#getName <em>Name</em>}'.
+   * Returns the meta object for class '{@link de.shashwat.xtext.homeauto.ruleDSL.Device <em>Device</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for class '<em>Device</em>'.
+   * @see de.shashwat.xtext.homeauto.ruleDSL.Device
+   * @generated
+   */
+  EClass getDevice();
+
+  /**
+   * Returns the meta object for the attribute '{@link de.shashwat.xtext.homeauto.ruleDSL.Device#getName <em>Name</em>}'.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * @return the meta object for the attribute '<em>Name</em>'.
-   * @see de.shashwat.xtext.homeauto.ruleDSL.Greeting#getName()
-   * @see #getGreeting()
+   * @see de.shashwat.xtext.homeauto.ruleDSL.Device#getName()
+   * @see #getDevice()
    * @generated
    */
-  EAttribute getGreeting_Name();
+  EAttribute getDevice_Name();
+
+  /**
+   * Returns the meta object for the containment reference list '{@link de.shashwat.xtext.homeauto.ruleDSL.Device#getStates <em>States</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for the containment reference list '<em>States</em>'.
+   * @see de.shashwat.xtext.homeauto.ruleDSL.Device#getStates()
+   * @see #getDevice()
+   * @generated
+   */
+  EReference getDevice_States();
+
+  /**
+   * Returns the meta object for class '{@link de.shashwat.xtext.homeauto.ruleDSL.State <em>State</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for class '<em>State</em>'.
+   * @see de.shashwat.xtext.homeauto.ruleDSL.State
+   * @generated
+   */
+  EClass getState();
+
+  /**
+   * Returns the meta object for the attribute '{@link de.shashwat.xtext.homeauto.ruleDSL.State#getName <em>Name</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for the attribute '<em>Name</em>'.
+   * @see de.shashwat.xtext.homeauto.ruleDSL.State#getName()
+   * @see #getState()
+   * @generated
+   */
+  EAttribute getState_Name();
+
+  /**
+   * Returns the meta object for class '{@link de.shashwat.xtext.homeauto.ruleDSL.Rule <em>Rule</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for class '<em>Rule</em>'.
+   * @see de.shashwat.xtext.homeauto.ruleDSL.Rule
+   * @generated
+   */
+  EClass getRule();
+
+  /**
+   * Returns the meta object for the attribute '{@link de.shashwat.xtext.homeauto.ruleDSL.Rule#getDescription <em>Description</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for the attribute '<em>Description</em>'.
+   * @see de.shashwat.xtext.homeauto.ruleDSL.Rule#getDescription()
+   * @see #getRule()
+   * @generated
+   */
+  EAttribute getRule_Description();
+
+  /**
+   * Returns the meta object for the reference '{@link de.shashwat.xtext.homeauto.ruleDSL.Rule#getWhen <em>When</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for the reference '<em>When</em>'.
+   * @see de.shashwat.xtext.homeauto.ruleDSL.Rule#getWhen()
+   * @see #getRule()
+   * @generated
+   */
+  EReference getRule_When();
+
+  /**
+   * Returns the meta object for the reference '{@link de.shashwat.xtext.homeauto.ruleDSL.Rule#getThen <em>Then</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for the reference '<em>Then</em>'.
+   * @see de.shashwat.xtext.homeauto.ruleDSL.Rule#getThen()
+   * @see #getRule()
+   * @generated
+   */
+  EReference getRule_Then();
 
   /**
    * Returns the factory that creates the instances of the model.
@@ -190,22 +377,32 @@ public interface RuleDSLPackage extends EPackage
     EClass MODEL = eINSTANCE.getModel();
 
     /**
-     * The meta object literal for the '<em><b>Greetings</b></em>' containment reference list feature.
+     * The meta object literal for the '<em><b>Declaractions</b></em>' containment reference list feature.
      * <!-- begin-user-doc -->
      * <!-- end-user-doc -->
      * @generated
      */
-    EReference MODEL__GREETINGS = eINSTANCE.getModel_Greetings();
+    EReference MODEL__DECLARACTIONS = eINSTANCE.getModel_Declaractions();
 
     /**
-     * The meta object literal for the '{@link de.shashwat.xtext.homeauto.ruleDSL.impl.GreetingImpl <em>Greeting</em>}' class.
+     * The meta object literal for the '{@link de.shashwat.xtext.homeauto.ruleDSL.impl.DeclarationImpl <em>Declaration</em>}' class.
      * <!-- begin-user-doc -->
      * <!-- end-user-doc -->
-     * @see de.shashwat.xtext.homeauto.ruleDSL.impl.GreetingImpl
-     * @see de.shashwat.xtext.homeauto.ruleDSL.impl.RuleDSLPackageImpl#getGreeting()
+     * @see de.shashwat.xtext.homeauto.ruleDSL.impl.DeclarationImpl
+     * @see de.shashwat.xtext.homeauto.ruleDSL.impl.RuleDSLPackageImpl#getDeclaration()
      * @generated
      */
-    EClass GREETING = eINSTANCE.getGreeting();
+    EClass DECLARATION = eINSTANCE.getDeclaration();
+
+    /**
+     * The meta object literal for the '{@link de.shashwat.xtext.homeauto.ruleDSL.impl.DeviceImpl <em>Device</em>}' class.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @see de.shashwat.xtext.homeauto.ruleDSL.impl.DeviceImpl
+     * @see de.shashwat.xtext.homeauto.ruleDSL.impl.RuleDSLPackageImpl#getDevice()
+     * @generated
+     */
+    EClass DEVICE = eINSTANCE.getDevice();
 
     /**
      * The meta object literal for the '<em><b>Name</b></em>' attribute feature.
@@ -213,7 +410,67 @@ public interface RuleDSLPackage extends EPackage
      * <!-- end-user-doc -->
      * @generated
      */
-    EAttribute GREETING__NAME = eINSTANCE.getGreeting_Name();
+    EAttribute DEVICE__NAME = eINSTANCE.getDevice_Name();
+
+    /**
+     * The meta object literal for the '<em><b>States</b></em>' containment reference list feature.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    EReference DEVICE__STATES = eINSTANCE.getDevice_States();
+
+    /**
+     * The meta object literal for the '{@link de.shashwat.xtext.homeauto.ruleDSL.impl.StateImpl <em>State</em>}' class.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @see de.shashwat.xtext.homeauto.ruleDSL.impl.StateImpl
+     * @see de.shashwat.xtext.homeauto.ruleDSL.impl.RuleDSLPackageImpl#getState()
+     * @generated
+     */
+    EClass STATE = eINSTANCE.getState();
+
+    /**
+     * The meta object literal for the '<em><b>Name</b></em>' attribute feature.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    EAttribute STATE__NAME = eINSTANCE.getState_Name();
+
+    /**
+     * The meta object literal for the '{@link de.shashwat.xtext.homeauto.ruleDSL.impl.RuleImpl <em>Rule</em>}' class.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @see de.shashwat.xtext.homeauto.ruleDSL.impl.RuleImpl
+     * @see de.shashwat.xtext.homeauto.ruleDSL.impl.RuleDSLPackageImpl#getRule()
+     * @generated
+     */
+    EClass RULE = eINSTANCE.getRule();
+
+    /**
+     * The meta object literal for the '<em><b>Description</b></em>' attribute feature.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    EAttribute RULE__DESCRIPTION = eINSTANCE.getRule_Description();
+
+    /**
+     * The meta object literal for the '<em><b>When</b></em>' reference feature.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    EReference RULE__WHEN = eINSTANCE.getRule_When();
+
+    /**
+     * The meta object literal for the '<em><b>Then</b></em>' reference feature.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    EReference RULE__THEN = eINSTANCE.getRule_Then();
 
   }
 
