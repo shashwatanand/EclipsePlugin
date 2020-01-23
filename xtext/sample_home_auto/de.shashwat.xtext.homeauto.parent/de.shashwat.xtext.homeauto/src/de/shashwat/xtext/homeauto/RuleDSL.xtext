@@ -3,7 +3,22 @@ grammar de.shashwat.xtext.homeauto.RuleDSL with org.eclipse.xtext.common.Termina
 generate ruleDSL "http://www.shashwat.de/xtext/homeauto/RuleDSL"
 
 Model:
-	greetings+=Greeting*;
-	
-Greeting:
-	'Hello' name=ID '!';
+	declaractions+=Declaration*;
+
+Declaration:
+	Device | Rule;
+
+Device:
+	'Device' name=ID 'can' 'be'
+	(states+=State (',' states+=State)*)?;
+
+State:
+	name=ID;
+
+Rule:
+	'Rule' description=STRING
+	'when' when=[State|QualifiedName]
+	'then' then=[State|QualifiedName];
+
+QualifiedName:
+	ID ('.' ID)*;
